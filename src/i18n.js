@@ -13,7 +13,8 @@ const messages = {
     TimeSorting:'Time sorting',
     Live:'Live',
     Finished:'Finished',
-    Schedule:'Schedule'
+    Schedule:'Schedule',
+    select_language:'select_language'
   },
   zh: {
     home: '首頁',
@@ -27,7 +28,8 @@ const messages = {
     TimeSorting:'時間排序',
     Live:'進行中',
     Finished:'已結束',
-    Schedule:'賽程'
+    Schedule:'賽程',
+    select_language:'語言選擇'
   }
 }
 

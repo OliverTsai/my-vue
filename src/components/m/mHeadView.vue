@@ -10,8 +10,10 @@
 			</div>
 			<div class="rightBox">
 				<div class="btnBox">
-					<button type="button" class="btn text-light border" @click="setLocale('zh')">中文</button>
-					<button type="button" class="text-light btn border" @click="setLocale('en')">English</button>
+					<svg @click="toggleModal" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+						<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+						<path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
+					</svg>
 				</div>
 			</div>
 		</div>
@@ -33,7 +35,7 @@
 				<div class="routerBox">
 					<div class="routerImg">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-life-preserver" viewBox="0 0 16 16">
-						<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m6.43-5.228a7.03 7.03 0 0 1-3.658 3.658l-1.115-2.788a4 4 0 0 0 1.985-1.985zM5.228 14.43a7.03 7.03 0 0 1-3.658-3.658l2.788-1.115a4 4 0 0 0 1.985 1.985zm9.202-9.202-2.788 1.115a4 4 0 0 0-1.985-1.985l1.115-2.788a7.03 7.03 0 0 1 3.658 3.658m-8.087-.87a4 4 0 0 0-1.985 1.985L1.57 5.228A7.03 7.03 0 0 1 5.228 1.57zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+							<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m6.43-5.228a7.03 7.03 0 0 1-3.658 3.658l-1.115-2.788a4 4 0 0 0 1.985-1.985zM5.228 14.43a7.03 7.03 0 0 1-3.658-3.658l2.788-1.115a4 4 0 0 0 1.985 1.985zm9.202-9.202-2.788 1.115a4 4 0 0 0-1.985-1.985l1.115-2.788a7.03 7.03 0 0 1 3.658 3.658m-8.087-.87a4 4 0 0 0-1.985 1.985L1.57 5.228A7.03 7.03 0 0 1 5.228 1.57zM8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
 						</svg>
 					</div>
 					<p>{{ $t('soccer') }}</p>
@@ -51,14 +53,42 @@
 			</router-link>
 		</div>
 	</header>
+	<!-- 语言切换模态框 -->
+    <div v-if="isModalVisible" class="modalBox">
+      <div class="modal-content">
+        <span class="close " @click="toggleModal">&times;</span>
+        <div class="mb-2">{{ $t('select_language') }}</div>
+		<div class="modalLine"></div>
+        <button class="btn px-0" @click="changeLanguage('en')">English</button>
+        <button class="btn px-0" @click="changeLanguage('zh')">中文</button>
+		<side/>
+      </div>
+    </div>
 </template>
 
 <script>
+	import side from '@/components/sideView.vue'
+
     export default {
+		data() {
+			return {
+				isModalVisible: false,
+			};
+		},
+		components: {
+			side,
+		},
         methods: {
-            setLocale(locale) {
-            this.$i18n.locale = locale;
-            }
+            // setLocale(locale) {
+            // 	this.$i18n.locale = locale;
+            // },
+			toggleModal() {
+				this.isModalVisible = !this.isModalVisible;
+			},
+			changeLanguage(lang) {
+				this.$i18n.locale = lang;
+				this.toggleModal();
+			},
         }
     }
 </script>
@@ -105,7 +135,8 @@
 	}
 
 	.btnBox{
-		color: rgb(0, 0, 0);
+		color: rgb(255, 255, 255);
+		height: 28px;
 	}
 
 	.language{
@@ -137,6 +168,52 @@
 
 	.btn.text-light {
 		color: white;
+	}
+
+	.modalBox {
+		display: block;
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(255, 255, 255);
+	}
+
+	.modal-content {
+		display: flex;
+		flex-direction:column;
+		align-items: flex-start;
+		background-color: #fefefe;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 100%;
+
+		.close{
+			margin-left: 95%;
+		}
+	}
+
+	.modalLine{
+		width: 100%;
+		height: 2px; 
+		background-color: #e0e1e2; 
+	}
+
+	.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 	}
 
 </style>

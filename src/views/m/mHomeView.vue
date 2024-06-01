@@ -13,13 +13,13 @@
       <div class="w-100">
         <div class="mbodyTitle">
           <div class="bodyTitleBox">
-            <button type="button" class="btn">{{$t('AllEvents')}}</button>
-            <button type="button" class="btn">{{$t('Live')}}</button>
-            <button type="button" class="btn">{{$t('Finished')}}</button>
-            <button type="button" class="btn">{{$t('Schedule')}}</button>
+            <button type="button" class="btn btnBox">{{$t('AllEvents')}}</button>
+            <button type="button" class="btn btnBox">{{$t('Live')}}</button>
+            <button type="button" class="btn btnBox">{{$t('Finished')}}</button>
+            <button type="button" class="btn btnBox">{{$t('Schedule')}}</button>
           </div>
           <div class="bodyTitleBox">
-            <div class="bodyTitleTime">
+            <div class="bodyTitleTime px-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
                 <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
@@ -31,8 +31,8 @@
           <div v-for="match in matches" :key="match.matchID">
             <div class="mbodyListTitle">
               <div class="mbodyListTitleLeft">
-                <div class="roundedOne">
-                  <input type="checkbox" value="None" :id="match.matchID" name="check" checked />
+                <div class="">
+                  <input type="checkbox" value="None" :id="match.matchID" name="check" />
                   <label :for="match.matchID"></label>
                 </div>
                 <div class="leftBox">
@@ -56,8 +56,9 @@
               </div>
               <div class="rightBox">
                 <div v-if="match.isLive == true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
-                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4z"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
+                    <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z"/>
+                    <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z"/>
                   </svg>
                 </div>
               </div>
@@ -114,6 +115,11 @@ export default {
 .bodyTitleBox{
   display: flex;
   align-items: center;
+  white-space: nowrap;
+
+  .btnBox{
+    color: #222;
+  }
 
   .bodyTitleTime{
     padding-left: 1rem;
@@ -221,6 +227,7 @@ export default {
     display: flex;
     flex-direction:column;
     align-items: end;
+    justify-content: center;
     color: red;
   }
 
