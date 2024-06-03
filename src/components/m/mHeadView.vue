@@ -59,8 +59,8 @@
         <span class="close " @click="toggleModal">&times;</span>
         <div class="mb-2">{{ $t('select_language') }}</div>
 		<div class="modalLine"></div>
-        <button class="btn px-0 btnBox2" @click="changeLanguage('en')">English</button>
-        <button class="btn px-0 btnBox2" @click="changeLanguage('zh')">中文</button>
+        <button class="btn px-0 text-left btnBox2" @click="changeLanguage('en')">English</button>
+        <button class="btn px-0 text-left btnBox2" @click="changeLanguage('zh')">中文</button>
 		<side/>
       </div>
     </div>
@@ -141,6 +141,8 @@
 
 	.btnBox2{
 		color: #000;
+		width: 100%;
+		text-align: left;
 	}
 
 	.language{
