@@ -44,6 +44,7 @@
       <sideTime/>
     </div>
   </div>
+  <footView/>
 </template>
 
 <script>
@@ -52,6 +53,7 @@ import headView from '@/components/headView.vue'
 import side from '@/components/sideView.vue'
 import matches from '@/matches.json'
 import sideTime from '@/components/sideRightView.vue'
+import footView from '@/components/footView.vue'
 
 export default {
   name: 'HomeView',
@@ -65,7 +67,8 @@ export default {
   components: {
     headView,
     side,
-    sideTime
+    sideTime,
+    footView
   },
   methods: {
     handleCheck(match) {

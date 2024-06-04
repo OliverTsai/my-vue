@@ -69,11 +69,22 @@
         </div>
         <div class="sideLine"></div>
         <!-- 國家迴圈 -->
-        <div v-for="(item, index) in items" :key="index" class="sideBox">
+        <div v-for="(item, index) in topItems" :key="index" class="sideBox">
             <div class="sideImg">
                 <img src="../assets/taiwan.png" class="w-100">
             </div>
             <div class="sideText">{{ item }}</div>
+        </div>
+        <div v-if="items.length > 5" @click="showMore = !showMore" class="sideBox">
+            <div class="sideText">{{ showMore ? '隱藏' : '其他' }}</div>
+        </div>
+        <div v-if="showMore == true">
+            <div v-for="(item, index) in items" :key="'country-' + index" class="sideBox">
+                <div class="sideImg">
+                    <img src="../assets/taiwan.png" class="w-100">
+                </div>
+                <div class="sideText">{{ item }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -82,8 +93,10 @@
 export default {
   data() {
     return {
+      showMore: false,
+      topItems:['英格蘭','意大利','德國','西班牙','法國'],
       items: [
-        '英格蘭','意大利','德國','西班牙','法國', '國際', '歐洲', '美洲', '南美洲', '北美洲', '亞洲', '非洲', '大洋洲', '沙灘', '也門', '千里達及多巴哥', '土耳其', 
+        '國際', '歐洲', '美洲', '南美洲', '北美洲', '亞洲', '非洲', '大洋洲', '沙灘', '也門', '千里達及多巴哥', '土耳其', 
         '土庫曼斯坦', '不丹', '中國', '丹麥', '厄瓜多爾', '巴巴多斯', '巴西', '巴拉圭', '巴林', '巴拿馬', '巴勒斯坦', 
         '巴基斯坦', '日本', '比利時', '毛里塔尼亞', '牙買加', '以色列', '加拿大', '加納', '加蓬', '北馬其頓', '北愛爾蘭', 
         '卡塔爾', '古巴', '尼日利亞', '尼日爾', '尼加拉瓜', '尼泊爾', '布基納法索', '布隆迪', '瓦努阿圖', '白俄羅斯', 
@@ -102,6 +115,11 @@ export default {
         '黎巴嫩', '墨西哥', '澳洲', '盧旺達', '盧森堡', '韓國', '薩爾瓦多', '薩摩亞', '羅馬尼亞', '贊比亞', '蘇丹', 
         '蘇格蘭', '其他']
     };
+  },
+  computed: {
+    displayItems() {
+      return this.showMore ? this.items : this.items.slice(0, 5);
+    }
   }
 }
 </script>
