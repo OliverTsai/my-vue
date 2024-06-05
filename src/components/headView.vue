@@ -53,7 +53,7 @@
 	<div class="headerBd p-3">
 		<div class="headerBox2 two">
           <div class="bodyTitleBox">
-            <button type="button" class="btn btnBox">{{$t('AllEvents')}}</button>
+            <button type="button" class="btn btnBox" @click="selectMatch(null)">{{$t('AllEvents')}}</button>
             <button type="button" class="btn btnBox">{{$t('Live')}}</button>
             <button type="button" class="btn btnBox">{{$t('Finished')}}</button>
             <button type="button" class="btn btnBox">{{$t('Schedule')}}</button>
@@ -70,8 +70,11 @@
     export default {
         methods: {
             setLocale(locale) {
-            this.$i18n.locale = locale;
-            }
+				this.$i18n.locale = locale;
+            },
+			selectMatch(id) {
+				this.$emit('select-match', id);
+			}
         }
     }
 </script>

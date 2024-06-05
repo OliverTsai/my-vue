@@ -36,22 +36,6 @@
                      "image": "img/team.jpg"
                  },
                  "isLive": false
-             },
-             {
-                "matchID": 3,
-                "matchTime": "18:00",
-                "status": "未开始",
-                "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
              }
         ]
   
@@ -77,46 +61,14 @@
                     "image": "img/team.jpg"
                 },
                 "isLive": false
-            },
-            {
-                "matchID": 2,
-                "matchTime": "12:00",
-                "status": "未开始",
-                "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
-                "matchID": 3,
-                "matchTime": "18:00",
-                "status": "未开始",
-                "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+            }
         ]
   
     },
     {
         "matchsID": 3,
         "matchCountry":"歐洲",
-        "matchName": "歐足協歐洲協會聯賽",
+        "matchName": "歐籃協歐洲協會聯賽",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {
@@ -230,7 +182,7 @@
     {
         "matchsID": 5,
         "matchCountry":"西班牙",
-        "matchName": "西班牙足球甲級聯賽",
+        "matchName": "西班牙籃球甲級聯賽",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {
@@ -344,7 +296,7 @@
     {
         "matchsID": 7,
         "matchCountry":"歐洲",
-        "matchName": "歐洲國家盃",
+        "matchName": "籃球歐洲盃",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {
@@ -401,7 +353,7 @@
     {
         "matchsID": 8,
         "matchCountry":"意大利",
-        "matchName": "意大利甲级聯賽",
+        "matchName": "意大利甲级籃球聯賽",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {
@@ -458,7 +410,7 @@
     {
         "matchsID": 9,
         "matchCountry":"法國",
-        "matchName": "法國甲組足球聯賽",
+        "matchName": "法國甲組籃球聯賽",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {
@@ -515,7 +467,7 @@
     {
         "matchsID": 10,
         "matchCountry":"南美洲",
-        "matchName": "南美自由盃",
+        "matchName": "美洲籃球自由盃",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {
@@ -572,7 +524,7 @@
     {
         "matchsID": 11,
         "matchCountry":"南美洲",
-        "matchName": "南美洲球会盃",
+        "matchName": "美洲南子錦標賽",
         "matchImage": "img/sheet.jpg",
         "matchList":[
             {

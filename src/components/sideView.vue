@@ -4,37 +4,45 @@
             <div class="sideText">熱門賽事</div>
         </div>
         <div class="sideLine"></div>
-        <div class="sideBox">
+        <!-- 迴圈顯示資料 -->
+        <div class="sideBox body" v-for="match in matches" :key="match.matchID" @click="selectMatch(match.matchsID)">
+            <div class="sideImg">
+                <img src="../assets/event.png" class="h-100">
+            </div>
+            <div class="sideText">{{ match.matchName }}</div>
+        </div>
+
+        <!-- <div class="sideBox body" @click="selectMatch(1)">
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
             <div class="sideText">歐洲聯賽冠軍盃賽</div>
         </div>
-        <div class="sideBox">
+        <div class="sideBox body" @click="selectMatch(2)">
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
             <div class="sideText">歐霸杯</div>
         </div>
-        <div class="sideBox">
+        <div class="sideBox body" @click="selectMatch(3)">
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
             <div class="sideText">歐足聯歐洲協會聯賽</div>
         </div>
-        <div class="sideBox">
+        <div class="sideBox body" @click="selectMatch(4)">
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
             <div class="sideText">英格蘭超級聯賽</div>
         </div>
-        <div class="sideBox">
+        <div class="sideBox body" @click="selectMatch(5)">
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
             <div class="sideText">西班牙足球甲级聯賽</div>
         </div>
-        <div class="sideBox">
+        <div class="sideBox body" @click="selectMatch(6)">
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
@@ -62,40 +70,69 @@
             <div class="sideImg">
                 <img src="../assets/event.png" class="h-100">
             </div>
-            <div class="sideText">南美洲球会盃</div>
-        </div>
+            <div class="sideText">南美洲球会盃</div> 
+        </div>-->
         <div class="sideBox head">
             <div class="sideText">國家賽事</div>
         </div>
         <div class="sideLine"></div>
-        <!-- 國家迴圈 -->
-        <div v-for="(item, index) in topItems" :key="index" class="sideBox">
+        <!-- 多個國家下拉選單 -->
+        <div v-for="(country, index) in topItems" :key="index" class="dropdown sideBox">
             <div class="sideImg">
                 <img src="../assets/taiwan.png" class="w-100">
             </div>
-            <div class="sideText">{{ item }}</div>
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ country }}
+            </button>
+            <ul class="dropdown-menu" :aria-labelledby="'dropdownMenuButton' + index">
+                <li v-for="match in getMatchesByCountry(country)" :key="match.matchID">
+                    <a class="dropdown-item" href="#" @click="selectMatch(match.matchsID)">{{ match.matchName }}</a>
+                </li>
+            </ul>
         </div>
-        <div v-if="items.length > 5" @click="showMore = !showMore" class="sideBox">
+
+        <div v-if="items.length > 5" @click="showMore = !showMore" class="sideBox body">
             <div class="sideText">{{ showMore ? '隱藏' : '其他' }}</div>
         </div>
         <div v-if="showMore == true">
-            <div v-for="(item, index) in items" :key="'country-' + index" class="sideBox">
-                <div class="sideImg">
-                    <img src="../assets/taiwan.png" class="w-100">
-                </div>
-                <div class="sideText">{{ item }}</div>
+            <div v-for="(country, index) in items" :key="index" class="dropdown sideBox">
+            <div class="sideImg">
+                <img src="../assets/taiwan.png" class="w-100">
             </div>
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ country }}
+            </button>
+            <ul class="dropdown-menu" :aria-labelledby="'dropdownMenuButton' + index">
+                <li v-for="match in getMatchesByCountry(country)" :key="match.matchID">
+                    <a class="dropdown-item" href="#" @click.prevent="selectMatch(match.matchsID)">{{ match.matchName }}</a>
+                </li>
+            </ul>
+        </div>
         </div>
     </div>
 </template>
 
 <script>
+import matchesSoccer from '@/matches.json'
+import matchesBasketball from '@/basketMatches.json'
+
 export default {
   data() {
+    let selectedMatches;
+        if (this.$route.name === 'soccer') {
+            selectedMatches = matchesSoccer;
+        } else if (this.$route.name === 'basketball') {
+            selectedMatches = matchesBasketball;
+        } else if (this.$route.name === 'home') {
+            selectedMatches = matchesSoccer;
+        }
     return {
-      showMore: false,
-      topItems:['英格蘭','意大利','德國','西班牙','法國'],
-      items: [
+        allMatches: selectedMatches,
+        matches: selectedMatches,
+        selectedCountries: [],
+        showMore: false,
+        topItems:['英格蘭','意大利','德國','西班牙','法國'],
+        items: [
         '國際', '歐洲', '美洲', '南美洲', '北美洲', '亞洲', '非洲', '大洋洲', '沙灘', '也門', '千里達及多巴哥', '土耳其', 
         '土庫曼斯坦', '不丹', '中國', '丹麥', '厄瓜多爾', '巴巴多斯', '巴西', '巴拉圭', '巴林', '巴拿馬', '巴勒斯坦', 
         '巴基斯坦', '日本', '比利時', '毛里塔尼亞', '牙買加', '以色列', '加拿大', '加納', '加蓬', '北馬其頓', '北愛爾蘭', 
@@ -106,7 +143,7 @@ export default {
         '法羅群島', '波多黎各', '波黑', '波蘭', '直布羅陀', '肯雅', '芬蘭', '阿美尼亞', '阿根廷', '阿曼', '阿塞拜疆', 
         '阿爾及利亞', '阿爾巴尼亞', '阿魯巴', '阿聯酋', '俄羅斯', '保加利亞', '南非', '哈薩克', '威爾斯', '柬埔寨', 
         '津巴布韋', '洪都拉斯', '玻利維亞', '科威特', '科特迪瓦', '科索沃', '科摩羅', '突尼西亞', '約旦', '美國', 
-         '剛果', '剛果民主共和國', '哥倫比亞', '哥斯達黎加', '埃及', '埃塞俄比亞', '庫拉索', '挪威', '格林納達', 
+            '剛果', '剛果民主共和國', '哥倫比亞', '哥斯達黎加', '埃及', '埃塞俄比亞', '庫拉索', '挪威', '格林納達', 
         '格魯吉亞', '泰國', '海地', '烏干達', '烏克蘭', '烏拉圭', '烏茲別克', '秘魯', '納米比亞', '紐西蘭', '索羅門群島', 
         '馬里', '馬來西亞', '馬拉維', '馬達加斯加', '馬爾他', '馬爾代夫', '捷克', '敘利亞', '荷蘭', '莫桑比克', 
         '莱索托', '博茨瓦納', '喀麥隆', '奥地利', '斐濟', '斯里蘭卡', '斯洛文尼亞', '斯洛伐克', '智利', '菲律賓', '越南', 
@@ -120,6 +157,21 @@ export default {
     displayItems() {
       return this.showMore ? this.items : this.items.slice(0, 5);
     }
+  },
+  methods: {
+    selectMatch(id) {
+        this.$emit('select-match', id);
+    },
+    // filterByCountry(country){
+    //     this.filteredMatches = this.allMatches.filter(match => match.matchCountry === country);
+    // },
+    getMatchesByCountry(country) {
+        return this.allMatches.filter(match => match.matchCountry === country);
+    },
+    filterByCountry(index) {
+      const country = this.topItems[index];
+      this.selectedCountries.splice(index, 1, country);
+    },
   }
 }
 </script>
@@ -139,6 +191,13 @@ export default {
 .sideBox.head{
     margin-top: 2rem;
 }
+.sideBox.body{
+
+}
+.sideBox.body:hover {
+    background-color: #d3d3d3; /* 灰色背景 */
+    cursor: pointer;
+}
 .sideLine{
     width: 100%;
     height: 2px; 
@@ -152,5 +211,16 @@ export default {
 }
 .sideText{
     white-space: nowrap;
+}
+.dropdownContainer {
+    margin-bottom: 1rem;
+}
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+select {
+    width: 100%;
+    padding: 0.5rem;
 }
 </style>
