@@ -61,7 +61,7 @@
 		<div class="modalLine"></div>
         <button class="btn px-0 text-left btnBox2" @click="changeLanguage('en')">English</button>
         <button class="btn px-0 text-left btnBox2" @click="changeLanguage('zh')">中文</button>
-		<side/>
+		<side @select-match="handleSelectMatch" />
       </div>
     </div>
 </template>
@@ -72,6 +72,7 @@
     export default {
 		data() {
 			return {
+				selectedMatchID: null,
 				isModalVisible: false,
 			};
 		},
@@ -89,6 +90,9 @@
 				this.$i18n.locale = lang;
 				this.toggleModal();
 			},
+			handleSelectMatch(id) {
+      			this.selectedMatchID = id;
+    		}
         }
     }
 </script>
