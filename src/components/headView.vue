@@ -1,24 +1,29 @@
 <template>
-    <header class="headerBd p-3">
+    <header class="headerBd header-area1">
 		<div class="headerBox1">
 			<div class="leftBox">
 				<div class="">
 					<div class="imgBox">
-						<img src="../assets/logo1.png" class="h-100">
+						<a href="#"><img src="../assets/3388-logo2.png" class="imgLogo"></a>
 					</div>
 				</div>
 			</div>
 			<div class="rightBox">
 				<div class="btnBox">
-					<button type="button" class="btn text-light border" @click="setLocale('zh')">中文</button>
-					<button type="button" class="text-light btn border" @click="setLocale('en')">English</button>
+					<div class="input-group input-search">
+						<input type="text" class="form-control input-text" placeholder="查找" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="searchTerm">
+						<button class="btn btn-search" type="button" id="button-addon2" @click="performSearch">搜尋</button>
+					</div>
+					<button type="button" class="btn area_btn text-light border" @click="setLocale('zh_cn')">简体中文</button>
+					<button type="button" class="btn area_btn text-light border" @click="setLocale('zh_hk')">繁體中文</button>
+					<button type="button" class="btn area_btn text-light border" @click="setLocale('en')">English</button>
 				</div>
 			</div>
 		</div>
 	</header>
 	<header class="headerBd p-3">
 		<div class="headerBox2">
-			<router-link to="/" :class="{ active: $route.name === 'home' }">
+			<!-- <router-link to="/" :class="{ active: isActive('/') }" class="router-link">
 				<div class="pcRouterBox">
 					<div class="pcRouterImg">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
@@ -27,8 +32,8 @@
 					</div>
 					<div class="textBox">{{ $t('home') }}</div>
 				</div>
-			</router-link>
-			<router-link to="/soccer" :class="{ active: $route.name === 'soccer' }">
+			</router-link> -->
+			<router-link to="/soccer" :class="{ active: isActive('/soccer') }" class="router-link">
 				<div class="pcRouterBox">
 					<div class="pcRouterImg">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-life-preserver" viewBox="0 0 16 16">
@@ -38,7 +43,7 @@
 					<div class="textBox">{{ $t('soccer') }}</div>
 				</div>
 			</router-link>
-			<router-link to="/basketball" :class="{ active: $route.name === 'basketball' }">
+			<router-link to="/basketball" :class="{ active: isActive('/basketball') }" class="router-link">
 				<div class="pcRouterBox">
 					<div class="pcRouterImg">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dribbble" viewBox="0 0 16 16">
@@ -50,11 +55,11 @@
 			</router-link>
 		</div>
 	</header>
-	<div class="headerBd p-3">
+	<!-- <div class="headerBd p-3">
 		<div class="headerBox2 two">
           <div class="bodyTitleBox">
             <button type="button" class="btn btnBox" @click="selectMatch(null)">{{$t('AllEvents')}}</button>
-            <button type="button" class="btn btnBox">{{$t('Live')}}</button>
+            <button type="button" class="btn btnBox" @click="liveSelectMatch(true)">{{$t('Live')}}</button>
             <button type="button" class="btn btnBox">{{$t('Finished')}}</button>
             <button type="button" class="btn btnBox">{{$t('Schedule')}}</button>
           </div>
@@ -63,27 +68,64 @@
             <div class="m-2">{{$t('TimeSorting')}}</div>
           </div>
         </div>
-	</div>
+	</div> -->
 </template>
 
 <script>
+	import matchesSoccer from '@/matches.json';
+
     export default {
+		name: 'HeadView',
+		emits: ['select-match'],
+		data(){
+			return{
+				searchTerm:"",
+				searchResults :[],
+			}
+		},
+		watch: {
+			searchTerm(newTerm) {
+				console.log(this.filterMatches(newTerm))
+				this.searchResults = this.filterMatches(newTerm);
+			}
+		},
         methods: {
+			selectMatch(id) {
+				this.$emit('select-match', id);
+			},
             setLocale(locale) {
 				this.$i18n.locale = locale;
             },
-			selectMatch(id) {
-				this.$emit('select-match', id);
+			isActive(route) {
+				return this.$route.path === route;
+			},
+			filterMatches(term) {
+				return matchesSoccer.filter(match => {
+					const matchName = match.matchName || "";
+					const matchNameEn = match.matchNameEn || "";
+					return matchName.includes(term) || matchNameEn.includes(term);
+				});
+			},
+			performSearch() {
+				this.searchResults = this.filterMatches(this.searchTerm);
 			}
-        }
+			// selectMatch(id) {
+			// 	this.$emit('select-match', id);
+			// },
+			// liveSelectMatch(value){
+			// 	this.isLive = value;
+			// 	this.selectedMatchID = null;
+			// }
+        },
+		
     }
 </script>
 
 <style lang="scss">
 
 	header{
-		height: 60px;
-		background: #0f80da;
+		height: 40px; /*K*/
+		background: #0b998d;  /* fallback for old browsers */
 		background-size: contain;
 	}
 
@@ -105,19 +147,23 @@
 
 		.pcRouterBox{
 			display: flex;
-			color: #ffffff;
+			// color: #ffffff;
 			align-items: flex-start;
-			gap:5px;
+			gap: 5px;
+			
 
 			.textBox{
 				display: flex;
 				align-items: flex-end;
-				font-size: 19px;
+				font-size: 0.9rem;
+				text-decoration: none;
+				margin: 5px 5px 0px 5px;
 			}
 
 			.pcRouterImg{
-				width: 20px;
-				height: 20px;
+				width: 17px;
+				height: 17px;
+				margin: 3px -5px 0px 0px;
 			}
 		}
 	}
@@ -127,7 +173,16 @@
 	}
 
 	.btnBox{
+		display: flex;
+		flex-direction:row;
+		height: 100%;
 		color: rgb(0, 0, 0);
+		
+		.btn{
+			white-space: nowrap;
+			height: 2rem;
+			padding: 2px 15px 2px 15px;
+		}
 	}
 
 	.language{
@@ -140,25 +195,43 @@
 
 	
 	.router-link {
+		color: #FFF;
 		text-decoration: none;
-		padding: 10px 15px;
-		border-radius: 5px;
-		color: white; /* 默认文字颜色 */
+		margin: 0px 10px 0px 10px;
+		// padding: 10px 15px;
+		// border-radius: 5px;
+		// color: white; /* 默认文字颜色 */
 	}
 
-	.router-link.active .btn {
-		background-color: #ffffff; /* 活动项背景颜色 */
-		color: rgb(0, 0, 0); /* 活动项文字颜色 */
+	.router-link.active {
+		// background-color: black; /* 活动项背景颜色 */
+		color: #0b998d;
+		background-color: #f5f5f5;
+		border-radius: 5px 5px 0px 0px;
+		padding: 4px 8px 12px 8px;
+		font-size: 0.9rem;
+		text-decoration: none;
+		margin: 10px 10px 0px 10px;
 	}
 
 	.btn {
 		background: none;
 		border: none;
 		color: white;
+		border-color: #ffffff;
 	}
 
 	.btn.text-light {
 		color: white;
 	}
+
+	.textbtn {
+		background: none;
+		border: none;
+		font-size: 0.9rem;
+	}
+
+
+
 
 </style>

@@ -1,88 +1,156 @@
 [
     {
         "matchsID": 1,
-        "matchCountry":"歐洲",
-        "matchName": "歐洲聯賽冠軍盃賽",
+        "matchCountry": "阿根廷",
+        "matchCountryEn": "Argentina",
+        "matchName": "阿根廷籃球聯賽",
+        "matchNameEn": "argentine basketball league",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "直播中",
+                "statusEn": "Live",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
-                "isLive": false
+                "isLive": true
             },
             {
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
-        ]
-  
-    },
-    {
-        "matchsID": 2,
-        "matchCountry":"歐洲",
-        "matchName": "歐霸盃",
-        "matchImage": "img/sheet.jpg",
-        "matchList":[
-            {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "歐足",
-                    "score":"2",
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "溢美",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
             }
         ]
-  
+    },
+    {
+        "matchsID": 2,
+        "matchCountry": "哥倫比亞",
+        "matchCountryEn": "Colombia",
+        "matchName": "哥倫比亞Liga",
+        "matchNameEn": "ColombiaLiga",
+        "matchImage": "img/sheet.jpg",
+        "matchList": [
+            {
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
+        ]
     },
     {
         "matchsID": 3,
-        "matchCountry":"歐洲",
-        "matchName": "歐籃協歐洲協會聯賽",
+        "matchCountry": "美國",
+        "matchCountryEn": "USA",
+        "matchName": "美國女子職業籃球聯賽",
+        "matchNameEn": "Women's National Basketball League",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -91,112 +159,210 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 4,
-        "matchCountry":"英格蘭",
-        "matchName": "英格蘭超級聯賽",
+        "matchCountry": "菲律賓",
+        "matchCountryEn": "Philippines",
+        "matchName": "菲籃盃",
+        "matchNameEn": "Philippine Basketball Cup",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "直播中",
+                "statusEn": "Live",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
-                "isLive": false
+                "isLive": true
             },
             {
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 5,
-        "matchCountry":"西班牙",
-        "matchName": "西班牙籃球甲級聯賽",
+        "matchCountry": "立陶宛",
+        "matchCountryEn": "Lithuania",
+        "matchName": "立陶宛籃球甲級聯賽",
+        "matchNameEn": "Lithuanian Basketball League",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -205,55 +371,104 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 6,
-        "matchCountry":"德國",
-        "matchName": "德國甲級聯賽",
+        "matchCountry": "紐西蘭",
+        "matchCountryEn": "New Zealand",
+        "matchName": "紐西蘭國家聯賽",
+        "matchNameEn": "new zealand national league",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -262,55 +477,104 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 7,
-        "matchCountry":"歐洲",
-        "matchName": "籃球歐洲盃",
+        "matchCountry": "亚洲",
+        "matchCountryEn": "Asia",
+        "matchName": "亚洲篮球冠军联赛",
+        "matchNameEn": "Asian Basketball Champions League",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -319,55 +583,104 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 8,
-        "matchCountry":"意大利",
-        "matchName": "意大利甲级籃球聯賽",
+        "matchCountry": "波多黎各",
+        "matchCountryEn": "Puerto Rico",
+        "matchName": "波多黎各Superior Nacional",
+        "matchNameEn": "Puerto RicoSuperior Nacional",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -376,55 +689,104 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 9,
-        "matchCountry":"法國",
-        "matchName": "法國甲組籃球聯賽",
+        "matchCountry": "委內瑞拉",
+        "matchCountryEn": "Venezuela",
+        "matchName": "委內聯",
+        "matchNameEn": "Venezuela",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -433,55 +795,104 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 10,
-        "matchCountry":"南美洲",
-        "matchName": "美洲籃球自由盃",
+        "matchCountry": "烏拉圭",
+        "matchCountryEn": "Uruguay",
+        "matchName": "烏拉圭聯賽",
+        "matchNameEn": "Uruguay League",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -490,55 +901,104 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     },
     {
         "matchsID": 11,
-        "matchCountry":"南美洲",
-        "matchName": "美洲南子錦標賽",
+        "matchCountry": "意大利",
+        "matchCountryEn": "Italian",
+        "matchName": "意大利籃球甲級聯賽",
+        "matchNameEn": "Italian Basketball League",
         "matchImage": "img/sheet.jpg",
-        "matchList":[
+        "matchList": [
             {
-               "matchID": 1,
-               "matchTime": "10:00",
-               "status": "已結束",
-               "team1": {
-                    "name": "國足",
-                    "score":"2",
+                "matchID": 1,
+                "matchTime": "10:00",
+                "status": "已結束",
+                "statusEn": "Finished",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
+                "team1": {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "team2": {
-                    "name": "美足",
-                    "score":"2",
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
                     "image": "img/team.jpg"
                 },
                 "isLive": false
@@ -547,36 +1007,66 @@
                 "matchID": 2,
                 "matchTime": "12:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍77",
-                     "score":"1",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍55",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             },
-             {
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            },
+            {
                 "matchID": 3,
                 "matchTime": "18:00",
                 "status": "未开始",
+                "statusEn": "Schedule",
+                "win": "2.00",
+                "handicap": "1.83",
+                "handicapVar": "+1.5",
+                "total": "1.83",
+                "totalVar": "U 151.5",
                 "team1": {
-                     "name": "队伍135",
-                     "score":"2",
-                     "image": "img/team.jpg"
-                 },
-                 "team2": {
-                     "name": "队伍2",
-                     "score":"4",
-                     "image": "img/team.jpg"
-                 },
-                 "isLive": false
-             }
+                    "name": "澳門黑熊",
+                    "nameEn": "Macao black bear",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "team2": {
+                    "name": "瑞加塔斯",
+                    "nameEn": "Regatas de Corrientes",
+                    "scoreAll": "88",
+                    "score1": "18",
+                    "score2": "28",
+                    "score3": "21",
+                    "score4": "21",
+                    "image": "img/team.jpg"
+                },
+                "isLive": false
+            }
         ]
-  
     }
-    
 ]

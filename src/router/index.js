@@ -1,10 +1,10 @@
 // import { createRouter, createWebHistory } from 'vue-router'
-import { createRouter,createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { store } from '@/store';
 
 import HomeView from '@/views/HomeView.vue';
 import mHomeView from '@/views/m/mHomeView.vue';
-import AboutView from '@/views/AboutView.vue';
+import AboutView from '@/views/m/AboutView.vue';
 import SoccerView from '@/views/SoccerView.vue';
 import mSoccerView from '@/views/m/mSoccerView.vue';
 import BasketballView from '@/views/BasketballView.vue';

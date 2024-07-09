@@ -1,12 +1,32 @@
 <template>
   <div class="timeBd">
     <div class="timeBox">
-      <div class="timeText title">完場比分</div>
-      <div class="timeText" v-for="(date, index) in previousDates" :key="'prev-' + index">{{ date }}</div>
+      <!--<div class="timeText title">完場比分</div>-->
+      <!-- Title UI ver1-->
+      <!-- <div class="sideBox"><div class="sideText">{{ $t('Completed') }}</div></div> -->
+       
+      <!-- Title UI ver2-->
+      <div class="timeBox">
+            <div class="timeText">{{ $t('Completed') }}</div>
+        </div>
+      <div class="sideLine"></div>
+      <!-- 迴圈顯示資料 UI ver1-->
+      <div class="timeText" v-for="(date, index) in previousDates" :key="'prev-' + index">
+            <div class="sideText"> {{ date }}</div>
+      </div>
+      <!-- 迴圈顯示資料 UI ver2-->
+      <!-- <div class="timeText" v-for="(date, index) in previousDates" :key="'prev-' + index">{{ date }}</div> -->
     </div>
     <div class="timeBox mt-3">
-      <div class="timeText title">下周賽程</div>
-      <div class="timeText" v-for="(date, index) in nextDates" :key="'next-' + index">{{ date }}</div>
+      <!--<div class="timeText title">下周賽程</div>-->
+      <div class="sideBox head"><div class="sideText">{{ $t('Next') }}</div></div>
+      <div class="sideLine"></div>
+      <!-- 迴圈顯示資料 UI ver1-->
+      <div class="timeText" v-for="(date, index) in nextDates" :key="'next-' + index">
+            <div class="sideText"> {{ date }}</div>
+      </div>
+      <!-- 迴圈顯示資料 UI ver2-->
+      <!-- <div class="timeText" v-for="(date, index) in nextDates" :key="'next-' + index">{{ date }}</div> -->
     </div>
   </div>
 </template>
@@ -45,33 +65,12 @@ export default {
 };
 </script>
   
-  <style lang="scss">
-  .timeBd {
-    padding: 1rem 0 1rem 1rem;
-  
-    .timeBox {
-      display: flex;
-      flex-direction: column;
-  
-      .timeText {
-        text-align: start;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        padding: 0.5rem;
-      }
-  
-      .timeText.title {
-        background: #F2F2F2;
-      }
-    }
-  }
-  </style>
-
 
 <style lang="scss">
 
 .timeBd{
-  padding: 1rem 0 1rem 1rem;
+  padding: 0rem 0 1rem 1rem;
+  width: 15%;
 
   .timeBox{
     display: flex;
@@ -81,6 +80,7 @@ export default {
       text-align: start;
       white-space: nowrap;
       text-overflow: ellipsis;
+      font-size: 0.9rem; /*K*/
     }
 
     .timeText.title{

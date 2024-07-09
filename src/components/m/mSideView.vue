@@ -1,75 +1,56 @@
 <template>
-    <div class="sisdeBd">
-        <div class="sideBox">
-            <div class="sideText"> {{ $t('Popular') }} </div>
+    <div class="msisdeBd">
+        <div class="msideBox head">
+            <div class="mb-2"> {{ $t('Popular') }} </div>
         </div>
         <div class="sideLine"></div>
         <!-- 迴圈顯示熱門賽事資料 -->
-        <div class="sideBox body" v-for="match in matches.slice(0, 10)" :key="match.matchID" @click="selectMatch(match.matchsID)">
+        <div class="msideBox body mbtnTM .msideBox.body:hover" v-for="match in matches.slice(0, 10)" :key="match.matchID" @click="selectMatch(match.matchsID)">
             <div class="sideImg">
-                <img v-if="this.$route.name === 'soccer'" :src="require(`../assets/event_soccer/${match.matchsID}.png`)" class="h-100">
-                <img v-if="this.$route.name === 'basketball'" :src="require(`../assets/event_basket/${match.matchsID}.png`)" class="w-100">
-                <img v-if="this.$route.name === 'home'" :src="require(`../assets/event_soccer/${match.matchsID}.png`)" class="h-100">
+                <img v-if="this.$route.name === 'soccer'" :src="require(`../../assets/event_soccer/${match.matchsID}.png`)" class="h-100">
+                <img v-if="this.$route.name === 'basketball'" :src="require(`../../assets/event_basket/${match.matchsID}.png`)" class="w-100">
+                <img v-if="this.$route.name === 'home'" :src="require(`../../assets/event_soccer/${match.matchsID}.png`)" class="h-100">
             </div>
             <div v-if="this.$i18n.locale === 'en'" class="sideText">{{ match.matchNameEn }}</div>
             <div v-else class="sideText">{{ match.matchName }}</div>
         </div>
         <!-- 迴圈顯示國家資料 -->
-        <div class="sideBox head">
-            <div class="sideText"> {{ $t('National') }}</div>
+        <div class="msideBox head">
+            <div class="mb-2"> {{ $t('National') }}</div>
         </div>
         <div class="sideLine"></div>
         <!-- 熱門國家下拉選單 -->
         <div v-for="(country, index) in topItems" :key="index" class="countryBox">
-            <div class="sideBox body" @click="popularCountry(index)">
+            <div class="msideBox mbtnTM body" @click="popularCountry(index)">
                 <div class="sideImg">
-                    <img :src="require(`../assets/nation/${country.en}.svg`)" class="w-100">
+                    <img :src="require(`../../assets/nation/${country.en}.svg`)" class="w-100">
                 </div>
                 <div v-if="this.$i18n.locale === 'zh_hk'" class="sideText">{{ country.zh_hk }}</div>
                 <div v-if="this.$i18n.locale === 'en'" class="sideText">{{ country.en }}</div>
                 <div v-if="this.$i18n.locale === 'zh_cn'" class="sideText">{{ country.zh_cn }}</div>
             </div>
-            <div v-show="popularSelectedCountries.includes(index)" class="matchList">
+            <div v-show="popularSelectedCountries.includes(index)" class="matchList mbtnTM">
                 <div v-for="match in getMatchesByCountry(country.zh_hk)" :key="match.matchID">
                     <a class="K-dropdown-item text-start" href="#" @click.prevent="selectMatch(match.matchsID)">{{ match.matchName }}</a>
                 </div>
             </div>
-            <!-- <div class="sideImg">
-                <img :src="require(`../assets/nation/${country.en}.svg`)" class="w-100">
-            </div> -->
-            <!-- 這邊是不同語言顯示在國家 -->
-            
-            <!-- <button v-if="this.$i18n.locale === 'zh_hk'" class="textbtn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ country.zh_hk }}
-            </button> -->
-            <!-- <button v-if="this.$i18n.locale === 'en'" class="textbtn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ country.en }}
-            </button>
-            <button v-if="this.$i18n.locale === 'zh_cn'" class="textbtn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ country.zh_cn }}
-            </button>
-            <ul class="dropdown-menu" :aria-labelledby="'dropdownMenuButton' + index">
-                <li v-for="match in getMatchesByCountry(country.zh_hk)" :key="match.matchID">
-                    <a class="K-dropdown-item" href="#" @click="selectMatch(match.matchsID)">{{ match.matchName }}</a>
-                </li>
-            </ul> -->
         </div>
 
-        <div v-if="items.length > 5" @click="showMore = !showMore" class="sideBox body">
+        <div v-if="items.length > 5" @click="showMore = !showMore" class="msideBox body">
             <div class="sideText">{{ showMore ? '隱藏' : '其他' }}</div>
         </div>
         <!-- 其他國家 -->
         <div v-if="showMore == true">
             <div v-for="(country, index) in items" :key="index" class="countryBox">
-                <div class="sideBox body" @click="toggleCountry(index)">
+                <div class="msideBox body mbtnTM" @click="toggleCountry(index)">
                     <div class="sideImg">
-                        <img src="../assets/flag.png" class="w-100">
+                        <img src="../../assets/flag.png" class="w-100">
                     </div>
                     <div v-if="this.$i18n.locale === 'zh_hk'" class="sideText">{{ country }}</div>
                     <div v-if="this.$i18n.locale === 'en'" class="sideText">{{ country }}</div>
                     <div v-if="this.$i18n.locale === 'zh_cn'" class="sideText">{{ country }}</div>
                 </div>
-                <div v-show="selectedCountries.includes(index)" class="matchList">
+                <div v-show="selectedCountries.includes(index)" class="matchList mbtnTM">
                     <div v-for="match in getMatchesByCountry(country)" :key="match.matchID">
                         <a class="K-dropdown-item text-start" href="#" @click.prevent="selectMatch(match.matchsID)">{{ match.matchName }}</a>
                     </div>
@@ -93,6 +74,7 @@
 <script>
 import matchesSoccer from '@/matches.json'
 import matchesBasketball from '@/basketMatches.json'
+import matchesAbout from '@/mathList.json'
 
 export default {
   data() {
@@ -103,6 +85,8 @@ export default {
             selectedMatches = matchesBasketball;
         } else if (this.$route.name === 'home') {
             selectedMatches = matchesSoccer;
+        } else if (this.$route.name === 'about') {
+            selectedMatches = matchesAbout.matchList;
         }
     return {
         allMatches: selectedMatches,
@@ -177,57 +161,116 @@ export default {
 </script>
 
 <style lang="scss">
-.sisdeBd{
+// .sisdeBd{
+//     display: flex;
+//     flex-direction:column;
+//     gap:0.3rem;
+//     padding: 0rem 1rem 0rem 0rem; /*K*/
+//     width: 22%; /*K*/
+// }
+// .sideBox{
+//     display: flex;
+//     gap:0.3rem;
+//     align-items: center;
+//     height: 1.3rem; /*K*/
+// }
+// .sideBox.head{
+//     margin-top: 2rem;
+// }
+// .sideBox.body{
+
+// }
+// .sideBox.body:hover {
+//     background-color: #d3d3d3; /* 灰色背景 */
+//     cursor: pointer;
+// }
+// .sideBox.up{
+//     flex-direction:column;
+//     align-items:start;
+// }
+// .sideLine{
+//     width: 100%;
+//     height: 1px; 
+//     background-color: #e0e1e2; 
+//     margin: 3px 0 3px 0; /*K*/
+// }
+// .sideImg{
+//     display: flex;
+//     align-items: center;
+//     width: 20px;
+//     height: 20px;
+// }
+// .sideTitle{
+//     white-space: nowrap;
+//     font-size: 0.9rem; /*K*/
+//     font-weight: bold; /*K*/
+//     padding: 2px 0px 2px 0px; /*K*/
+// }
+
+// .sideText{
+//     white-space: nowrap;
+//     font-size: 0.9rem; /*K*/
+//     padding: 2px 0px 2px 0px; /*K*/
+// }
+
+
+.msisdeBd{
     display: flex;
     flex-direction:column;
-    gap:0.3rem;
-    padding: 0rem 1rem 0rem 0rem; /*K*/
-    width: 22%; /*K*/
+    // gap:0.3rem;
+    padding: 0rem 0rem 0rem 0rem; /*K*/
+    width: 100%; /*K*/
 }
-.sideBox{
+.msideBox{
     display: flex;
     gap:0.3rem;
     align-items: center;
-    height: 1.3rem; /*K*/
+    // height: 1.3rem; /*K*/
 }
-.sideBox.head{
+.msideBox.head{
     margin-top: 2rem;
 }
-.sideBox.body{
+.msideBox.body{
 
 }
-.sideBox.body:hover {
-    background-color: #d3d3d3; /* 灰色背景 */
+.msideBox.body:hover {
+    // background-color: #d3d3d3; /* 灰色背景 */
     cursor: pointer;
 }
-.sideBox.up{
+.msideBox.up{
     flex-direction:column;
     align-items:start;
 }
-.sideLine{
+.msideLine{
     width: 100%;
     height: 1px; 
     background-color: #e0e1e2; 
     margin: 3px 0 3px 0; /*K*/
 }
-.sideImg{
+.msideImg{
     display: flex;
     align-items: center;
     width: 20px;
     height: 20px;
 }
-.sideTitle{
+.msideTitle{
     white-space: nowrap;
     font-size: 0.9rem; /*K*/
     font-weight: bold; /*K*/
     padding: 2px 0px 2px 0px; /*K*/
 }
 
-.sideText{
+.msideText{
     white-space: nowrap;
-    font-size: 0.8rem; /*K*/
-    padding: 2px 0px 2px 0px; /*K*/
+    font-size: 0.9rem; /*K*/
+    // padding: 2px 0px 2px 0px; /*K*/
+    text-decoration:none; /*K*/
+    background-color: #ffffff;
+    border: 0px #ffffff;
 }
+
+
+
 
 .dropdownContainer {
     margin-bottom: 1rem;
