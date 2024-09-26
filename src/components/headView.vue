@@ -11,12 +11,13 @@
 			<div class="rightBox">
 				<div class="btnBox">
 					<div class="input-group input-search">
-						<input type="text" class="form-control input-text" placeholder="查找" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="searchTerm">
-						<button class="btn btn-search" type="button" id="button-addon2" @click="performSearch">搜尋</button>
+						<input type="text" class="form-control input-text" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="searchTerm">
+						<button class="btn btn-search" type="button" id="button-addon2" @click="performSearch">{{ $t('select') }}</button>
 					</div>
 					<button type="button" class="btn area_btn text-light border" @click="setLocale('zh_cn')">简体中文</button>
 					<button type="button" class="btn area_btn text-light border" @click="setLocale('zh_hk')">繁體中文</button>
 					<button type="button" class="btn area_btn text-light border" @click="setLocale('en')">English</button>
+					<button type="button" class="btn area_btn text-light border" @click="setLocale('thai')">แบบไทย</button>
 				</div>
 			</div>
 		</div>
