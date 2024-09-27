@@ -67,7 +67,7 @@ export default {
 
     const dateUrl = async() => {
       try {
-        const response = await fetch(`https://92.205.237.68:5000/api/get-pro/${matchId.value}`);
+        const response = await fetch(`https://befenscore.net/api/get-pro/${matchId.value}`);
         const data = await response.json();  // 确保将响应转换为JSON
         posts.value = { matchList: [] };
         const matchIdNum = Number(matchId.value);

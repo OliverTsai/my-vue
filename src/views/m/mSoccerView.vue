@@ -126,7 +126,7 @@ export default {
     const matchProTime = ref(new Date());
     const selectedMatchID = ref(null);
 
-    const urlMatch = ref('https://92.205.237.68:5000/api/get-data')
+    const urlMatch = ref('https://befenscore.net/api/get-data')
 
 
     // 資料排列的整理
@@ -135,13 +135,13 @@ export default {
     selectButtonValue.value = button;
 
       if (button === 'live') {
-        urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+        urlMatch.value = "https://befenscore.net/api/get-data"
         const data = await fetchPosts(urlMatch.value);
         posts.value = data
         timeList(posts.value)
 
       }else{
-        urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+        urlMatch.value = "https://befenscore.net/api/get-data"
         const data = await fetchAllPosts(urlMatch.value, selectButtonValue.value);
         posts.value = data;
       }
@@ -184,7 +184,7 @@ export default {
     // const getCount = async () =>{
 
     //   try {
-    //     const response = await  fetch(`https://92.205.237.68:5000/api/get-country`);
+    //     const response = await  fetch(`https://befenscore.net/api/get-country`);
     //     const leagueData = await response.json(); // 确保将响应转换为JSON
 
     //     const leaguesMap = new Map();
@@ -214,12 +214,12 @@ export default {
 
     // 第一次連接
     onMounted(async () => {
-      urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+      urlMatch.value = "https://befenscore.net/api/get-data"
       const data = await fetchPosts(urlMatch.value);
       posts.value = data
       timeList(posts.value)
       setInterval(() => {
-        urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+        urlMatch.value = "https://befenscore.net/api/get-data"
         fetchPosts(urlMatch.value);
       },30000)
     });
@@ -287,7 +287,7 @@ export default {
       selectedDates.setMonth(parts[0] - 1);
       selectedDates.setDate(parts[1].split(' ')[0]);
       const formattedDate = selectmatDate(selectedDates);
-      urlMatch.value = `https://92.205.237.68:5000/api/get-days/${formattedDate}`;
+      urlMatch.value = `https://befenscore.net/api/get-days/${formattedDate}`;
       // urlMatch.value = `/api/football/schedule.aspx?date=${formattedDate}&key=4F85B2B3E6B54006`;
       const data = await fetchPosts(urlMatch.value);
       posts.value = data

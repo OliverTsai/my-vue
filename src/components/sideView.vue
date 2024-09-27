@@ -102,7 +102,7 @@ export default {
 
         const matchList = async() =>{
             try{
-                const data = await fetchPosts(`https://92.205.237.68:5000/api/get-data`);
+                const data = await fetchPosts(`https://befenscore.net/api/get-data`);
                 matchData.value = data.matchList
 
                 for (const raw of data.matchList) {
@@ -119,7 +119,7 @@ export default {
         // 賽事搜尋
         const leaguesList = async() =>{
             try{
-                const data = await fetchPosts(`https://92.205.237.68:5000/api/league-data`);
+                const data = await fetchPosts(`https://befenscore.net/api/league-data`);
                 countriesData.value = data.leagueList
 
                 if (data && data.leagueList) {

@@ -70,7 +70,7 @@ export default {
         // 賽事搜尋
         const leaguesList = async() =>{
             try{
-                const response = await fetch(`https://92.205.237.68:5000/api/get-data`);
+                const response = await fetch(`https://befenscore.net/api/get-data`);
                 const data = await response.json();
 
                 if (data && data.matchList) {

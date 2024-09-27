@@ -140,7 +140,7 @@ export default {
     let leagueIds  = ref([]);
     const leagueCache = ref(null);
 
-    const urlMatch = ref('https://92.205.237.68:5000/api/get-data');
+    const urlMatch = ref('https://befenscore.net/api/get-data');
 
     const newTime = ref('')
 
@@ -198,7 +198,7 @@ export default {
       selectButtonValue.value = button;
 
       if (button === 'live') {
-        urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+        urlMatch.value = "https://befenscore.net/api/get-data"
         const data = await fetchPosts(urlMatch.value);
         posts.value = data
         timeList(posts.value)
@@ -209,7 +209,7 @@ export default {
         console.log("有哪些 leagueIds: ", leagueIds);
 
       }else{
-        urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+        urlMatch.value = "https://befenscore.net/api/get-data"
         const data = await fetchAllPosts(urlMatch.value, selectButtonValue.value);
         posts.value = data;
         newTime.value = formatDate2(new Date())
@@ -222,8 +222,8 @@ export default {
 
     // 第一次連接
     onMounted(async () => {
-      leagueCache.value = await fetchPosts('https://92.205.237.68:5000/api/league-data')
-      urlMatch.value = "https://92.205.237.68:5000/api/get-data"
+      leagueCache.value = await fetchPosts('https://befenscore.net/api/league-data')
+      urlMatch.value = "https://befenscore.net/api/get-data"
       const data = await fetchPosts(urlMatch.value);
       posts.value = data
       timeList(posts.value)
@@ -309,7 +309,7 @@ export default {
       selectedDates.setMonth(parts[1] - 1);
       selectedDates.setDate(parts[2]);
       const formattedDate = selectmatDate(selectedDates);
-      urlMatch.value = `https://92.205.237.68:5000/api/get-days/${formattedDate}`;
+      urlMatch.value = `https://befenscore.net/api/get-days/${formattedDate}`;
       const data = await fetchPosts(urlMatch.value);
       posts.value = data
       selectedDate.value = selectedDates;
