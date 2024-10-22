@@ -17,6 +17,15 @@ export function getImageCountry(countryId) {
     }
 }
 
+// 抓賽事圖片
+export function getImageLeague(leagueId) {
+    try {
+        return require(`../assets/league_logos/${leagueId}.png`);
+    } catch (error) {
+        return require(`../assets/league_logos/1.png`);
+    }
+}
+
 // export function mGetImageTeam(teamId) {
 //     try {
 //         return require(`../../assets/team_logos/${teamId}.png`);

@@ -29,7 +29,7 @@ const isActive = (path) => {
 .bodyBd{
   display: flex;
 	justify-content: center;
-  padding: 10px 10px 0px 10px;
+  padding: 20px 10px 0px 10px;
 }
 
 .bodyBox{
@@ -48,6 +48,7 @@ const isActive = (path) => {
   align-items: center;
   white-space: nowrap;
   font-size: 0.9rem;
+  margin: 5px 0px 5px 0px;
 
   .btnBox{
     color: #222;
@@ -148,7 +149,7 @@ const isActive = (path) => {
 }
 
 .mbodyListLine{
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #efefef;
   // margin: 0px 0px 5px 0px;
 }
 
@@ -196,7 +197,7 @@ const isActive = (path) => {
   }
   .mColumnW62{
     width: 62%;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   .mColumnW72{
     width: 72%;

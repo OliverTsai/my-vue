@@ -122,7 +122,11 @@
         </div>
       </div>
     </div>
+
+    
   </div>
+<div id="footer"> Copyright @ 2024 BeFun Score </div>
+    
 </template>
 
 <script>
@@ -383,11 +387,13 @@ export default {
 .teamBd{
   display: flex;
   gap:0.5rem;
+  padding: .1rem 0;
 }
 
 .teamImgBox{
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  margin: -.2rem 0px 0px 0px;
 }
 
 

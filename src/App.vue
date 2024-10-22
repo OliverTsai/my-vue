@@ -156,12 +156,13 @@ nav .mMenu-link{
 }
 
 .imgLogo{
-  width: 130px;
-  text-align: left;
+  width: 180px;
+  /* text-align: left; */
+  margin: 4px 0px 0px 0px;
 }
 
 .mimgLogo{
-    width: 170px;
+    width: 13rem;
     text-align: left;
     // vertical-align: middle;
     display: block;
@@ -189,5 +190,32 @@ nav .mMenu-link{
 
 
 
+
+/************ Kdesign START ************/
+
+
+
+
+#footer{
+  text-align: center;
+  color: #ffffff;
+  background: #199b9b;
+  padding: 30px 5px 5px 5px;
+  height: 80px;
+  font-size: 0.8rem;
+}
+
+
+/************ Kdesign END ************/
+
+
+.mbodyListLine{
+  border-bottom: 1px solid #efefef;
+  // margin: 0px 0px 5px 0px;
+}
+
+.mbodyListLine:last-child {
+  border-bottom: none;
+}
 
 </style>

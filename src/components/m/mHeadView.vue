@@ -4,7 +4,7 @@
 			<div class="leftBox">
 				<div class="">
 					<div class="imgBox">
-						<a href="#"><img src="../../assets/3388-logo2.png" class="mimgLogo"></a>
+						<a href="https://befunscore.com/"><img src="../../assets/befunscore_logo_white.svg" class="mimgLogo"></a>
 					</div>
 				</div>
 			</div>
@@ -43,12 +43,68 @@
 			</router-link>
 			<router-link to="/basketball" :class="{ active: isActive('/basketball') }" class="mRouter-link mNavWidth">
 				<div class="routerBox mMenu-link">
-						<div class="routerImg">
+					<div class="routerImg">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dribbble" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M8 0C3.584 0 0 3.584 0 8s3.584 8 8 8c4.408 0 8-3.584 8-8s-3.592-8-8-8m5.284 3.688a6.8 6.8 0 0 1 1.545 4.251c-.226-.043-2.482-.503-4.755-.217-.052-.112-.096-.234-.148-.355-.139-.33-.295-.668-.451-.99 2.516-1.023 3.662-2.498 3.81-2.69zM8 1.18c1.735 0 3.323.65 4.53 1.718-.122.174-1.155 1.553-3.584 2.464-1.12-2.056-2.36-3.74-2.551-4A7 7 0 0 1 8 1.18m-2.907.642A43 43 0 0 1 7.627 5.77c-3.193.85-6.013.833-6.317.833a6.87 6.87 0 0 1 3.783-4.78zM1.163 8.01V7.8c.295.01 3.61.053 7.02-.971.199.381.381.772.555 1.162l-.27.078c-3.522 1.137-5.396 4.243-5.553 4.504a6.82 6.82 0 0 1-1.752-4.564zM8 14.837a6.8 6.8 0 0 1-4.19-1.44c.12-.252 1.509-2.924 5.361-4.269.018-.009.026-.009.044-.017a28.3 28.3 0 0 1 1.457 5.18A6.7 6.7 0 0 1 8 14.837m3.81-1.171c-.07-.417-.435-2.412-1.328-4.868 2.143-.338 4.017.217 4.251.295a6.77 6.77 0 0 1-2.924 4.573z"/>
 						</svg>
 					</div>
 					<p>{{ $t('basketball') }}</p>
+					<!-- <button type="button" class="btn text-light">{{ $t('basketball') }}</button> -->
+				</div>
+			</router-link>
+
+			<router-link to="/league/36" :class="{ active: isActive('/league/36') }" class="mRouter-link mNavWidth">
+				<div class="routerBox mMenu-link">
+					<div class="routerImg">
+						<!--<img src="../../assets/title/icon_PL.svg" class="header_icon">-->
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+						<path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z"/>
+						<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+						</svg>
+					</div>
+					<p>{{ $t('EPL') }}</p>
+					<!-- <button type="button" class="btn text-light">{{ $t('basketball') }}</button> -->
+				</div>
+			</router-link>
+
+			<router-link to="/league/31" :class="{ active: isActive('/league/31') }" class="mRouter-link mNavWidth">
+				<div class="routerBox mMenu-link">
+					<div class="routerImg">
+						<!--<img src="../../assets/title/icon_LaLiga.svg" class="header_icon">-->
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+						<path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z"/>
+						<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+						</svg>
+					</div>
+					<p>{{ $t('La_liga') }}</p>
+					<!-- <button type="button" class="btn text-light">{{ $t('basketball') }}</button> -->
+				</div>
+			</router-link>
+
+			<router-link to="/league/8" :class="{ active: isActive('/league/8') }" class="mRouter-link mNavWidth">
+				<div class="routerBox mMenu-link">
+					<div class="routerImg">
+						<!--<img src="../../assets/title/icon_ LIGA.svg" class="header_icon">-->
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+						<path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z"/>
+						<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+						</svg>
+					</div>
+					<p>{{ $t('Bundesliga') }}</p>
+					<!-- <button type="button" class="btn text-light">{{ $t('basketball') }}</button> -->
+				</div>
+			</router-link>
+
+			<router-link to="/league/1145" :class="{ active: isActive('/league/1145') }" class="mRouter-link mNavWidth">
+				<div class="routerBox mMenu-link">
+					<div class="routerImg">
+						<!--<img src="../../assets/title/icon_MLS.svg" class="header_icon">-->
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+						<path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.18.18 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.18.18 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.18.18 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.18.18 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.18.18 0 0 0 .134-.098z"/>
+						<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+						</svg>
+					</div>
+					<p>{{ $t('MLS') }}</p>
 					<!-- <button type="button" class="btn text-light">{{ $t('basketball') }}</button> -->
 				</div>
 			</router-link>
@@ -65,57 +121,37 @@
 			<div class="modalLine"></div>
 		<div class="countryBox msisdeBd">
 			<div class="msideBox mbtnTM body">
-					<div class="sideImg"><img :src="require(`../../assets/flag/flag_uk.png`)" class="w-100"></div>
-					<button class="msideText" @click="changeLanguage('en')">English</button>
+				<div class="sideImg"><img :src="require(`../../assets/flag/flag_uk.png`)" class="w-100"></div>
+				<button class="msideText" @click="changeLanguage('en')">English</button>
 			</div>
 			<div class="msideBox mbtnTM body">
-					<div class="sideImg"><img :src="require(`../../assets/flag/flag_cn.png`)" class="w-100"></div>
-					<button class="msideText" @click="changeLanguage('zh_cn')">简体中文</button>
+				<div class="sideImg"><img :src="require(`../../assets/flag/flag_cn.png`)" class="w-100"></div>
+				<button class="msideText" @click="changeLanguage('zh_cn')">简体中文</button>
 			</div>
 			<div class="msideBox mbtnTM body">
-					<div class="sideImg"><img :src="require(`../../assets/flag/flag_hk.png`)" class="w-100"></div>
-					<button class="msideText" @click="changeLanguage('zh_hk')">繁體中文</button>
+				<div class="sideImg"><img :src="require(`../../assets/flag/flag_hk.png`)" class="w-100"></div>
+				<button class="msideText" @click="changeLanguage('zh_hk')">繁體中文</button>
+			</div>
+			<div class="msideBox mbtnTM body">
+				<div class="sideImg"><img :src="require(`../../assets/flag/flag_thai.png`)" class="w-100"></div>
+				<button class="msideText" @click="changeLanguage('thai')">แบบไทย</button>
 			</div>
 		</div>
-		<!-- <div class="w-100">
-			<span class="mclose " @click="toggleModal">&times;</span>
-			<div class="mb-2">{{ $t('select_language') }}</div>
-			<div class="modalLine"></div>
-			<button class="btn px-0 text-left mbtnTM" @click="changeLanguage('en')">English</button>
-			<button class="btn px-0 text-left mbtnTM" @click="changeLanguage('zh_cn')">简体中文</button>
-			<button class="btn px-0 text-left mbtnTM" @click="changeLanguage('zh_hk')">繁體中文</button>
-		</div> -->
-        
-		<!-- <div class="sideImg"><img src="../../assets/flag_cn.png" class="w-100"><button class="btn px-0 text-left" @click="changeLanguage('en')">English</button></div>
-		<div class="sideImg"><img src="../../assets/flag_hk.png" class="w-100"><button class="btn px-0 text-left" @click="changeLanguage('zh_cn')">简体中文</button></div>
-        <div class="sideImg"><img src="../../assets/flag_uk.png" class="w-100"><button class="btn px-0 text-left" @click="changeLanguage('zh_hk')">繁體中文</button></div> -->
 		<mside @select-match="handleSelectMatch" />
       </div>
     </div>
-
-
-
-    <!-- <div v-if="isModalVisible" class="modalBox">
-      <div class="mmodal-content">
-        <span class="mclose " @click="toggleModal">&times;</span>
-        <div class="mb-2">{{ $t('select_language') }}</div>
-		<div class="modalLine"></div>
-        <button class="btn px-0 text-left btnBox2" @click="changeLanguage('en')">English</button>
-		<button class="btn px-0 text-left btnBox2" @click="changeLanguage('zh_cn')">简体中文</button>
-        <button class="btn px-0 text-left btnBox2" @click="changeLanguage('zh_hk')">繁體中文</button>
-		<mside @select-match="handleSelectMatch" />
-      </div>
-    </div> -->
 </template>
 
 <script>
 	import mside from '@/components/m/mSideView.vue';
+	import { getImageLeague } from '@/composables/useImage.js';
 
     export default {
 		data() {
 			return {
 				selectedMatchID: null,
 				isModalVisible: false,
+				getImageLeague,
 			};
 		},
 		components: {
@@ -185,6 +221,12 @@
 			font-size: 0.8rem;
 		}
 	}
+
+	.header_icon{
+		height: 20px;
+		width: 100%;
+	}
+
 	.mbtnBox{
 		color: rgb(255, 255, 255);
 		padding: 5px 5px 5px 5px;
@@ -206,10 +248,11 @@
 	}
 
 	.imgBox{
-		height: 30px;
+		height: 2.4rem !important;
 	}
 
 	
+
 	.mRouter-link {
 		text-decoration: none;
 		padding: 4px 8px 12px 8px;
@@ -222,10 +265,20 @@
 		width: 50%;
 		padding: 5px 0px 0px 0px;
 	}
-	
 	.mRouter-link.active {
 		color: rgb(255, 255, 255); /* 活动项文字颜色 */
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	.btn {
 		background: none;
@@ -327,7 +380,6 @@
 	padding: 5px;
 	margin: 0px 5px 0px 5px;
 	}
-
 
 
 

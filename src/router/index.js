@@ -13,6 +13,15 @@ import mBasketballView from '@/views/m/mBasketballView.vue';
 import mLeagueView from '@/views/m/mLeagueView.vue';
 import LeagueView from '@/views/LeagueView.vue';
 
+import LineUp from '@/components/Soccer_LineUpView.vue';
+import mLineUp from '@/components/m/mSoccer_LineUpView.vue';
+
+import Overview from '@/components/Soccer_OverviewView.vue';
+import mOverview from '@/components/m/mSoccer_OverviewView.vue';
+
+import Technical from '@/components/Soccer_TechnicalStatisticsView.vue';
+import mTechnical from '@/components/m/mSoccer_TechnicalStatisticsView.vue';
+
 const routes = [
   // 電腦網頁
   {
@@ -21,7 +30,7 @@ const routes = [
     component: store.isMobile ? mHomeView : HomeView,
   },
   {
-    path: '/live/:id',
+    path: '/live/:date/:id',
     name: 'live',
     component: store.isMobile ? mLiveView : LiveView,
   },
@@ -39,6 +48,21 @@ const routes = [
     path: '/league/:id',
     name: 'league',
     component: store.isMobile ? mLeagueView : LeagueView,
+  },
+  {
+    path: '/LineUp',
+    name: 'LineUp',
+    component: store.isMobile ? mLineUp : LineUp,
+  },
+  {
+    path: '/Overview',
+    name: 'Overview',
+    component: store.isMobile ? mOverview : Overview,
+  },
+  {
+    path: '/Technical',
+    name: 'Technical',
+    component: store.isMobile ? mTechnical : Technical,
   },
 
 ]

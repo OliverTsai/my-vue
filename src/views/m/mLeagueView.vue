@@ -1,100 +1,174 @@
 <template>
-    <div class="">
-        <button @click="goBack">上一頁</button>
+    <headView @select-match="handleSelectMatch"/>
+    <div v-if="isLoading" class="loading-box p-3">
+        <div class="spinner"></div>
+        <p>Loading...</p>
     </div>
-    <div>
+    <div v-else class="bodyBd">
+        <div class="w-100">
+            <div class="bannerBox" data-v-d4c6fef0="">
+                <img src="../../assets/banner/scoreBanner_01s_990x102.jpg" class="banner" data-v-d4c6fef0=""><i class="iconfont icon-guanbi close" data-v-d4c6fef0=""></i>
+            </div>
+            <div class="area_score">
+                
+                <!--- Start 賽事 filter | copy code from mSoccer page --->
+                <!--<div class="w-100">
+                    <div class="mbodyTitle">
+                    <div class="bodyTitleBox">
+                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'allEvents' }" @click="selectPost('allEvents')">{{$t('AllEvents')}}</button>
+                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'live' }" @click="selectPost('live')">{{$t('Live')}}</button>
+                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'finished' }" @click="selectPost('finished')">{{$t('Finished')}}</button>
+                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'schedule' }" @click="selectPost('schedule')">{{$t('Schedule')}}</button>
+                    </div>
+                    <div class="bodyTitleBox">
+                        <div v-if="selectButtonValue === 'allEvents'" class="btn-group">
+                        <button type="button" class="btn btnBox" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ formatDate(selectedDate) }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li v-for="date in selectableDates" :key="date" @click="handleDateChange(date)">
+                            <a class="dropdown-item">{{ date }}</a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>-->    
+                <!--- End 賽事 filter | copy code from mSoccer page --->
+
+
+                <div v-if="leagues.length === 0">
+                    <div class="NoValueFrame">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg><br>
+                        <div>{{ $t('no_data') }}</div>
+                    </div>
+                </div>
+
+                <div v-else>
+                    <div class="p-3 LeagueNameTitle">聯賽今日賽事</div>
+                    <div v-for="league in leagues" :key="league.leagueId" class="mbodyListBox mbodyListLine">
+                        <router-link :to="{ name: 'live', params: { date:'2024-10-18',id: league.matchId } }" class="bodyRouterBox w-100">
+                            <div class="mbodyListBox mbodyListLine">
+                                <div class="mColumnW18">
+                                    <div>{{ formatTime(league.matchTime) }}</div>
+                                    <div>{{ $t(getMatchState(league.state)) }}</div>
+                                    </div>
+                                <div class="mColumnW62 leftBox">
+                                    <div class="teamBd">
+                                        <div class="teamImgBox">
+                                            <img :src="getImageTeam(league.homeId)" class="w-100">
+                                        </div>
+                                        <div v-if="this.$i18n.locale === 'zh_hk'">{{ league.homeCht }}</div>
+                                        <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ league.homeChs }}</div>
+                                        <div v-else>{{ league.homeEn }}</div>
+                                    </div>
+                                    <div class="teamBd">
+                                        <div class="teamImgBox">
+                                            <img :src="getImageTeam(league.awayId)" class="w-100">
+                                        </div>
+                                        <div v-if="this.$i18n.locale === 'zh_hk'">{{ league.awayCht }}</div>
+                                        <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ league.awayChs }}</div>
+                                        <div v-else>{{ league.awayEn }}</div>
+                                    </div>
+                                </div>
+                                <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(league.state)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
+                                    <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
+                                    <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
+                                    </svg>
+                                </div>
+                                <div class="mColumnW10 rightBox" v-else></div>
+                                <div class="mColumnW10 mrightBox">
+                                    <div>{{ league.homeScore }}</div>
+                                    <div>{{ league.awayScore }}</div>
+                                </div>
+                            </div>
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
     </div>
-    <div v-for="league in leagues" :key="league.leagueId">
-        <div class="mbodyListBox mbodyListLine">
-            <div class="mColumnW18">
-                <div>{{ formatTime(league.matchTime) }}</div>
-                <div v-if="league.state === 0">{{ $t('Schedule') }}</div>
-                <div v-if="league.state === 1">{{ $t('first_half') }}</div>
-                <div v-if="league.state === 2">{{ $t('midfield') }}</div>
-                <div v-if="league.state === 3">{{ $t('second_half') }}</div>
-                <div v-if="league.state === 4">{{ $t('overtime') }}</div>
-                <div v-if="league.state === 5">{{ $t('penalty_kick') }}</div>
-                <div v-if="league.state === -10">{{ $t('cancel') }}</div>
-                <div v-if="league.state === -11">{{ $t('tbd') }}</div>
-                <div v-if="league.state === -12">{{ $t('cut_in_half') }}</div>
-                <div v-if="league.state === -13">{{ $t('discontinue') }}</div>
-                <div v-if="league.state === -14">{{ $t('postpone') }}</div>
-                <div v-if="league.state === -1">{{ $t('Finished') }}</div>
-                </div>
-            <div class="mColumnW62 leftBox">
-                <div class="teamBd">
-                    <div class="teamImgBox">
-                        <img :src="getImageUrl(league.homeId)" class="w-100">
-                    </div>
-                    <div v-if="this.$i18n.locale === 'zh_hk'">{{ league.homeCht }}</div>
-                    <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ league.homeChs }}</div>
-                    <div v-else>{{ league.homeEn }}</div>
-                </div>
-                <div class="teamBd">
-                    <div class="teamImgBox">
-                        <img :src="getImageUrl(league.awayId)" class="w-100">
-                    </div>
-                    <div v-if="this.$i18n.locale === 'zh_hk'">{{ league.awayCht }}</div>
-                    <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ league.awayChs }}</div>
-                    <div v-else>{{ league.awayEn }}</div>
-                </div>
-            </div>
-            <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(league.state)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
-                <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
-                <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
-                </svg>
-            </div>
-            <div class="mColumnW10 rightBox" v-else></div>
-            <div class="mColumnW10 mrightBox">
-                <div>{{ league.homeScore }}</div>
-                <div>{{ league.awayScore }}</div>
-            </div>
-            </div>
-    </div>
+    <div id="footer"> Copyright @ 2024 BeFun Score </div>
+    
 </template>
 
 <script>
-import { ref, onMounted  } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router';
+import headView from '@/components/m/mHeadView.vue';
+import { getImageTeam } from '@/composables/useImage.js';
+import { fetchPosts } from '@/composables/useApi.js';
 
 export default {
     name:'mleagueView',
+    components: {
+        headView
+    },
     setup(){
         const route = useRoute();
         const leagueId = ref(String(route.params.id));
 
+        const matchData = ref(null)
+
         const leagues = ref([]);
+
+        const isLoading = ref(true);
 
         // 賽事搜尋
         const leaguesList = async() =>{
             try{
-                const response = await fetch(`https://befenscore.net/api/get-data`);
-                const data = await response.json();
+                isLoading.value = true;
+                matchData.value = await fetchPosts('https://befenscore.net/api/get-data')
 
-                if (data && data.matchList) {
+                if (matchData.value && matchData.value.matchList) {
                     // 確保篩選時的類型一致
-                    leagues.value = data.matchList.filter(league => leagueId.value.includes(Number(league.leagueId)));
+                    leagues.value = matchData.value.matchList.filter(league => leagueId.value.includes(Number(league.leagueId)));
                     console.log('Filtered Leagues:', leagues.value);
                 } else {
-                    console.error('Invalid data format:', data);
+                    console.error('Invalid data format:', matchData.value);
                 }
+                isLoading.value = false;
                 // console.log(data)
             }catch(error){
                 console.error('Error fetching leagues:', error);
+                isLoading.value = false;
             }
         }
 
         // 顯示時間
         const formatTime = (datetime) =>{
             const date = new Date(datetime);
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
+            // const month = String(date.getMonth() + 1).padStart(2, '0');
+            // const day = String(date.getDate()).padStart(2, '0');
             const hour = String(date.getHours()).padStart(2, '0');
             const minute = String(date.getMinutes()).padStart(2, '0');
-            return `${month}/${day} ${hour}:${minute}`;
+            return `${hour}:${minute}`;
         }
+
+        // 比賽狀態
+        const stateMap = {
+            0: 'Schedule',
+            1: 'first_half',
+            2: 'midfield',
+            3: 'second_half',
+            4: 'overtime',
+            5: 'penalty_kick',
+            '-10': 'cancel',
+            '-11': 'tbd',
+            '-12': 'cut_in_half',
+            '-13': 'discontinue',
+            '-14': 'postpone',
+            '-1': 'Finished'
+        };
+
+        const getMatchState = (state) => {
+            return stateMap[state] || 'Unknown';  // 默認顯示 'Unknown'，如果 state 不在映射表中
+        };
 
         // 圖片位置
         const getImageUrl = (teamId) =>{
@@ -105,9 +179,11 @@ export default {
         }
         }
 
-        const goBack = () => {
-            window.history.back(); // 回到上一頁
-        };
+        // 監聽 leagueId 變化
+        watch(() => route.params.id, (newId) => {
+            leagueId.value = String(newId);  // 更新 leagueId
+            leaguesList();  // 重新篩選資料
+        });
         
         onMounted(() => {
             leaguesList()
@@ -118,7 +194,9 @@ export default {
             leagues,
             formatTime,
             getImageUrl,
-            goBack
+            getImageTeam,
+            isLoading,
+            getMatchState,
         }
     },
 }
@@ -129,6 +207,7 @@ export default {
 .mbodyListBox {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .mColumnW18, .mColumnW62, .mColumnW10 {
@@ -151,11 +230,38 @@ export default {
 .teamBd{
   display: flex;
   gap:0.5rem;
+  padding: .1rem 0;
 }
 
 .teamImgBox{
-  width: 20px;
-  height: 20px;
+    width: 18px;
+    height: 18px;
+    margin: 0rem 0px 0px 0px;
 }
+
+.LeagueNameTitle{
+    background: #ffffff;
+    border-bottom: 1px solid #cccccc;
+}
+
+.NoValueFrame{
+  padding: 50px;
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  align-items: center;
+  display: inline-block;
+  vertical-align: middle;
+  /***background-image: linear-gradient(to top, rgb(255 255 255) 0%, rgb(196, 196, 196) 50%, #5e5e5e 100%);***/
+}
+
+.NoValueFrame svg{
+  color: #999999;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+}
+
+
 
 </style>

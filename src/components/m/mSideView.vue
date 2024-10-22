@@ -112,7 +112,7 @@ export default {
         // 賽事搜尋
         const leaguesList = async() =>{
             try{
-                const response = await fetch(`https://befenscore.net/api/get-country`);
+                const response = await fetch(`https://befenscore.net/api/league-data`);
                 const data = await response.json();
 
                 if (data && data.leagueList) {
@@ -131,7 +131,7 @@ export default {
         // 國家搜尋
         const selectCountryasync = async(countryId) =>{
             try{
-                const response = await fetch(`https://befenscore.net/api/get-country`);
+                const response = await fetch(`https://befenscore.net/api/league-data`);
                 const data = await response.json();
                 console.log(leaguesId)
                 console.log(data.leagueList)
