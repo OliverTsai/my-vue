@@ -286,7 +286,7 @@
               </div>
             </div>
             <div v-if="distinguish(data.teamID) == 3">
-              {{ data.content }}11
+              {{ data.content }}
             </div>
           </div>
       </div>
@@ -508,6 +508,9 @@ export default {
         beforeTXT.value = response.list.sort((a, b) => b.id - a.id).filter(data=> Number(data.state) == 1);
         afterTXT.value = response.list.sort((a, b) => b.id - a.id).filter(data=> Number(data.state) == 3);
         console.log(response)
+        console.log('123')
+        console.log(beforeTXT)
+        console.log(afterTXT)
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
