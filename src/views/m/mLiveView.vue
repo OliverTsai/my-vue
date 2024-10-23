@@ -47,16 +47,7 @@
     </div>
   </div>
 
-  <!--<div class="p-3">
-    <button @click="pag = 0">{{ $t('overview') }}</button> ｜ 
-    <button @click="pag = 1">{{ $t('chat') }}</button> ｜ 
-    <button @click="pag = 2">{{ $t('analysis') }}</button> ｜ 
-    <button @click="pag = 3">{{ $t('line') }}</button> ｜
-    <button @click="pag = 4">{{ $t('text_live') }}</button>
-  </div>-->
-  <!-- Nav menu button - Start -->
-
-
+<!-- 分頁 CODE START -->
   <div class="w100 contentBox">
 	<div itemscope="itemscope" itemtype="http://schema.org/SportsEvent" class="innerMatchInfo">
 		<div>
@@ -95,8 +86,7 @@
 		</div>
 	</div>
 </div>
-
-  <!-- Nav menu button - End -->
+<!-- 分頁 CODE End -->
 
 
   <!--聊天室-->
@@ -285,9 +275,16 @@
                 <div style="clear: both;"></div>
               </div>
             </div>
+            <!-- 比賽開始 start -->
             <div v-if="distinguish(data.teamID) == 3">
-              {{ data.content }}
+              <!--{{ data.content }}-->
+              <svg data-v-509583f2="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16" style="color: #79c32c;">
+                <path data-v-509583f2="" d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"></path>
+              </svg>
+              <br>
+              比赛开始
             </div>
+            <!-- 比賽開始 end -->
           </div>
       </div>
     </div>
@@ -508,9 +505,6 @@ export default {
         beforeTXT.value = response.list.sort((a, b) => b.id - a.id).filter(data=> Number(data.state) == 1);
         afterTXT.value = response.list.sort((a, b) => b.id - a.id).filter(data=> Number(data.state) == 3);
         console.log(response)
-        console.log('123')
-        console.log(beforeTXT)
-        console.log(afterTXT)
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -910,9 +904,10 @@ export default {
   padding: .2rem .5rem .2rem .5rem;
 }
 .LiveTitleTHFT{
-    color: rgb(0, 0, 0);
+    color: rgb(121, 195, 44);
+    font-size: 1.2rem;
+    font-weight: bold;
     text-decoration:none;
-    font-size: 2rem;
     margin: .5rem;
 }
 
@@ -946,7 +941,7 @@ export default {
   color: #3a7ed3;
   text-align: left;
   float:left;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 5px 0px 0px;
   line-height: .9rem;
   font-size: .9rem;
 }
@@ -961,7 +956,7 @@ export default {
   color: #f3b140;
   text-align: right;
   float:right;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 5px;
   line-height: .9rem;
   font-size: .9rem;
 }

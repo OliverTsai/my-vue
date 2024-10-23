@@ -1,7 +1,8 @@
 <template>
     <headView />
     <div class="liveBd">
-      <div class="liveTitleBox p-3">
+      <div class="flex VSmain MainBg">
+        <div class="liveTitleBox KDp-3">
         <div class="">{{ posts?.leagueChtShort }}{{ posts?.subLeagueCht }}</div>
         <div class="straight-line mt-3"></div>
         <div class="liveTitleScore">
@@ -30,26 +31,66 @@
         </div>
         <div class="straight-line mt-3"></div>
       </div>
+      </div>
+
+
+      <!--1st frame-->
+      <div class="flex">
+        <div class="live left-box">
+          <div class="">
+              <div style="width: 100%; height: 500px;" class="">
+                <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+              </div>
+          </div>
+        </div>
+        
+        <div class="live right-box">
+            <div class="">
+              
+              <div  class="">
+                
+                <div data-v-d37f9274="" class="VSOptionTitle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                  <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                </svg>&nbsp;聊天室</div>
+                  
+                <iframe src="https://befunscore.com/livemessage/message.html" width="100%" height="450px" frameborder="0" scrolling="no">
+                </iframe>
+              </div>
+            </div>
+
+            <!----><!----><!----><!----><!---->
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clear"></div>
+
+
+      <!--聊天室-->
+      <!--
+      
       <div class="liveBox p-2 mt-3">
-        <div style="width: 667px; height: 500px;" class="mt-5">
+        <div style="width: 100%; height: 500px;" class="mt-5">
           <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 100%;"></iframe>
         </div>
         <div  class="mt-5 w-50">
-          <!--聊天室-->
+          
           <div data-v-d37f9274="" class="VSOptionTitle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
             <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
           </svg>&nbsp;聊天室</div>
-          <!-- 聊天室 標題 Title End -->
             
-          <!-- 聊天室 iframe Start -->
           <iframe src="https://befunscore.com/livemessage/message.html" width="100%" height="450px" frameborder="0" scrolling="no">
           </iframe>
         </div>
       </div>
+      -->
 
       <!-- 技術資料 -->
-      <div v-if="detail_date.length == 0">
-        <div id="">
+      <div v-if="detail_date.length == 0" class="liveTitleBox KDp-3">
+        <div id="" class="w-100">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
               <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
@@ -60,7 +101,7 @@
             <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
             <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
-          <div class="" style="clear: both;"></div>
+          <div class="clear"></div>
         </div>
 
         <div class="NoValueFrame">
@@ -69,9 +110,9 @@
           </svg><br>尚無技術資料
         </div>
       </div>
-      <div v-else>
+      <div v-else class="liveTitleBox KDp-3">
         
-        <div id="">
+        <div id="w-100">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
               <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
@@ -82,7 +123,7 @@
             <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
             <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
-          <div class="" style="clear: both;"></div>
+          <div class="clear"></div>
         </div>
 
         <div v-for="(data,index) in detail_date" :key="index">
@@ -99,8 +140,8 @@
       </div>
 
       <!-- 比賽資料 -->
-      <div v-if="beforeTXT.length == 0">
-        <div id="">
+      <div v-if="beforeTXT.length == 0" class="liveTitleBox KDp-3">
+        <div id="" class="w-100">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
               <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
@@ -111,7 +152,7 @@
             <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
             <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
-          <div class="" style="clear: both;"></div>
+          <div class="clear"></div>
         </div>
 
         <div class="NoValueFrame">
@@ -120,9 +161,9 @@
           </svg><br>尚無比賽資料
         </div>
       </div>
-      <div v-else>
+      <div v-else class="liveTitleBox KDp-3">
         
-        <div id="">
+        <div id="" class="w-100">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
               <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
@@ -133,7 +174,7 @@
             <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
             <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
-          <div class="" style="clear: both;"></div>
+          <div class="clear"></div>
         </div>
 
         <div class="LiveTextFrame">
@@ -223,8 +264,8 @@
       </div>
 
       <!-- 陣容資料 -->
-      <div v-if="dataLine.length == 0">
-        <div id="">
+      <div v-if="dataLine.length == 0" class="liveTitleBox KDp-3">
+        <div id="" class="w-100">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
               <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0"/>
@@ -234,7 +275,7 @@
             <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
             <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
-          <div class="" style="clear: both;"></div>
+          <div class="clear"></div>
         </div>
 
         <div class="NoValueFrame">
@@ -244,9 +285,9 @@
         </div>
       </div>
       
-      <div v-else>
+      <div v-else class="liveTitleBox KDp-3">
 
-        <div id="">
+        <div id="" class="w-100">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
               <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0"/>
@@ -256,7 +297,7 @@
             <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
             <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
-          <div class="" style="clear: both;"></div>
+          <div class="clear"></div>
         </div>
 
 
@@ -639,7 +680,12 @@
   </script>
   
   <style lang="scss">
+
+
+
+
   .liveBd{
+    background: #f5f5f5;
     display: flex;
     align-items:center;
     flex-direction:column;
@@ -649,7 +695,7 @@
   .liveTitleBox{
     display: flex;
     flex-direction:column;
-    width: 1200px; 
+    width: 1200px;
     justify-content: space-between;
   }
 
@@ -679,7 +725,7 @@
 
   .liveBox{
     display: flex;
-    width: 1200px; 
+    width: 100%; 
     gap:1rem;       
   }
   .btnBox.active {
@@ -737,10 +783,6 @@
     padding: .1rem 0;
   }
 
-  .titleImgBox{
-    width: 5rem;
-    height: 5rem;
-  }
   
   .teamImgBox{
     width: 18px;
@@ -800,5 +842,356 @@
 }
 
 
-  
+
+
+/********** New K design start ***********/
+.clear{
+  clear: both;
+}
+
+.MainBg{
+    background: #ffffff;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+    border-radius: .3rem;
+    margin-top: 13px;
+}
+
+.flex {
+    margin: 0 auto;
+    display: flex;
+}
+.flex .VSmain {
+    display: flex;
+    padding-top: 13px;
+}
+.live {
+    display: flex;
+    padding-top: 13px;
+}
+.live .left-box {
+    position: relative;
+    margin-right: 13px;
+    flex: 1;
+}
+.left-box {
+    position: relative;
+    margin-right: 13px;
+    flex: 1;
+}
+.right-box {
+    width: 400px;
+    padding-bottom: 2px;
+}
+.border-box {
+    box-sizing: border-box;
+}
+
+
+.straight-line{
+    width: 100%;
+    height: 2px;
+    background-color: #EEEEEE;
+}
+
+.innerMatchInfo .matchTop {
+    width: 100%;
+    padding: .3rem .64rem 0rem .64rem;
+    height: 4.92rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.innerMatchInfo .matchInfo .teamName {
+    font-size: .32rem;
+    font-family: Roboto;
+    font-weight: 400;
+    color: #333333;
+    max-width: 2.5rem;
+    margin-top: .3rem;
+    text-align: center;
+}
+
+.titleImgBox{
+    width: 5rem;
+    height: 5rem;
+}
+
+.titleImgBox img{
+    width: 5rem;
+    padding: 6px 7px 0px 7px;
+}
+.titleImgBox a{
+    margin: -5px 0 0 0;
+    text-decoration:none;
+    color: #333333;
+}
+
+.mGameTitleName{
+    background: #ddefee;
+    padding: .1rem 0;
+}
+.liveTitleScore{
+    /*display: flex;
+    justify-content: space-around;
+    align-items: center;*/
+    color: #555555 !important;
+}
+.scoreBox .textBox {
+    /*font-weight: 700;*/
+    font-size: 3.5rem !important;
+}
+
+.vs_{
+    font-size: 2rem;
+}
+
+
+
+
+
+.HomeNameTitle{
+  color: 333333 !important;
+	border-left: 5px solid #3a7ed3;
+  padding: .5rem 0 .5rem .5rem;
+  /*margin: .5rem 0 .5rem 0;*/
+	background-color: #ffffff;
+	text-align: left;
+	width: 50%;
+	float: left;
+  background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+}
+	
+.AwayNameTitle{
+  color: 333333 !important;
+  border-right: 5px solid #f3b140;
+  padding: .5rem .5rem .5rem 0rem;
+  /*margin: .5rem 0 .5rem 0;*/
+	background-color: #ffffff;
+	text-align: right;
+	width: 50%;
+	float: left;
+  background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+}
+	
+.LiveTimeHome{
+  border-radius: 8px;
+  padding: 5px;
+  margin: 4px;
+}
+
+.LiveTimeAway{
+  border-radius: 8px;
+  padding: 5px;
+  margin: 4px;
+}
+
+.LiveTextFrame{
+  padding: .2rem .5rem .2rem .5rem;
+}
+.LiveTitleTHFT{
+    color: rgb(0, 0, 0);
+    text-decoration:none;
+    font-size: 2rem;
+    margin: .5rem;
+}
+
+
+
+.TimeAnimation {
+    color: rgb(88, 88, 88);
+    text-decoration:none;
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes TimeAnimation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.LineupFrame{
+  /*padding: .2rem .5rem .2rem .5rem;*/
+}
+
+
+
+.divFloatL1{
+  color: #3a7ed3;
+  text-align: left;
+  float:left;
+  margin: 0px 0px 0px 0px;
+  line-height: .9rem;
+  font-size: .9rem;
+}
+.divFloatL2{
+  text-align: left;
+  float:left;
+  margin: 0px 0px 0px 0px;
+  line-height: .9rem;
+  font-size: .9rem;
+}
+.divFloatR1{
+  color: #f3b140;
+  text-align: right;
+  float:right;
+  margin: 0px 0px 0px 0px;
+  line-height: .9rem;
+  font-size: .9rem;
+}
+.divFloatR2{
+  text-align: right;
+  float:right;
+  margin: 0px 0px 0px 0px;
+  line-height: .9rem;
+  font-size: .9rem;
+}
+
+
+.TimeAnimationColorHome{
+  color: #3a7ed3 !important;
+}
+.TimeAnimationColorAway{
+  color: #f3b140 !important;
+}
+
+.ColorHome{
+  color: #3a7ed3;
+  margin: 0 0 0 16px;
+}
+
+
+.ColorAway{
+  color: #f3b140;
+  margin: 0 0 0 16px;
+}
+
+
+.ColorHomeSub{
+  color: #81aee6;
+  margin: 0 0 0 16px;
+}
+
+
+.ColorAwaySub{
+  color: #f1d9af;
+  margin: 0 0 0 16px;
+}
+
+
+.LineupPlayerFInfo{
+	text-align: left;
+  padding: .5rem;
+  border: 1px solid #dbdbdb;
+  font-size: .5rem;
+  background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+}
+.LineupPlayerFInfo a{
+  color: #333333;
+  text-decoration:none;
+  font-size: .9rem;
+	text-align: left;
+}
+
+.NoValueFrame{
+  padding: 50px;
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  align-items: center;
+  display: inline-block;
+  vertical-align: middle;
+  /***background-image: linear-gradient(to top, rgb(255 255 255) 0%, rgb(196, 196, 196) 50%, #5e5e5e 100%);***/
+}
+
+.NoValueFrame svg{
+  color: #999999;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+}
+
+
+.VSOptionTitle{
+  color: #ffffff;
+  background-color: #0b998d;
+  margin: .2rem 0 0 0;
+  padding: .3rem;
+  font-size: 1rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+
+.VSLineup1st-Title{
+  font-size: small;
+  text-align: center;
+  color: #333333;
+  padding: .2rem;
+  background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(233, 233, 233) 50%, #e6e6e6 100%);
+}
+.VSLineup1st-TitleSub{
+  font-size: small;
+  text-align: left;
+  color: #333333;
+  padding: .2rem;
+  background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(233, 233, 233) 50%, #e6e6e6 100%);
+}
+
+.VSLineup1st-col{
+  font-size: small !important;
+  padding: .3rem 0rem .3rem 0rem;
+  text-align: left;
+  color: #333333;
+  font-size: .5rem;
+  width: 100%;
+  border-bottom: 1px solid #dddddd;
+}
+/*
+.VSLineup1st-col:last-child{
+  border-bottom: none;
+}
+*/
+
+
+.NumberBgHome{
+  color: #ffffff;
+  text-decoration:none;
+  text-align: center;
+  font-size: .8rem;
+  width: 1rem;
+  height: 1rem;
+  background: #3a7ed3;
+  border-radius: 50%;
+  margin: 0 0 0 5px;
+  position: absolute;
+}
+.NumberBgAway{
+  color: #333333;
+  text-decoration:none;
+  text-align: center;
+  font-size: .8rem;
+  width: 1rem;
+  height: 1rem;
+  background: #f3b140;
+  border-radius: 50%;
+  margin: 0 0 0 5px;
+  position: absolute;
+}
+
+.LineupPlayerFNumber{
+  width: 20px;
+}
+
+
+/********** New K design end ***********/
+
+
+
   </style>
