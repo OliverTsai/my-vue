@@ -39,21 +39,65 @@
       </div>
     </div>
   </div>
-  <div style="height: 100%;" class="mt-5">
+  <div style="height: 100%;" class="LiveMTop">
     <div style="margin-top: 0px;">
-      <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 356px;">
+      <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 280px;">
         
       </iframe>
     </div>
   </div>
 
-  <div class="p-3">
+  <!--<div class="p-3">
     <button @click="pag = 0">{{ $t('overview') }}</button> ｜ 
     <button @click="pag = 1">{{ $t('chat') }}</button> ｜ 
     <button @click="pag = 2">{{ $t('analysis') }}</button> ｜ 
     <button @click="pag = 3">{{ $t('line') }}</button> ｜
     <button @click="pag = 4">{{ $t('text_live') }}</button>
-  </div>
+  </div>-->
+  <!-- Nav menu button - Start -->
+
+
+  <div class="w100 contentBox">
+	<div itemscope="itemscope" itemtype="http://schema.org/SportsEvent" class="innerMatchInfo">
+		<div>
+		<div class="van-sticky">
+			<div class="van-tabs van-tabs--line">
+				<div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
+					<div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color:#0F80DA;background:#FFFFFF;">
+						<div role="tab" class="van-tab van-tab--active van-tab--complete" style="color: rgb(15, 128, 218);" aria-selected="true">
+							<span class="van-tab__text Navbutton" @click="pag = 0">{{ $t('overview') }}</span>
+						</div>
+						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+              <span class="van-tab__text Navbutton" @click="pag = 1">{{ $t('chat') }}</span>
+						</div>
+						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+							<span class="van-tab__text Navbutton" @click="pag = 2">{{ $t('analysis') }}</span>
+						</div>
+						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+							<span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
+						</div>
+						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+							<span class="van-tab__text Navbutton" @click="pag = 4">{{ $t('text_live') }}</span>
+						</div>
+						<!--<div class="van-tabs__line" style="">
+							<div role="tabpanel" class="van-tab__pane" style=""></div>
+							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+
+  <!-- Nav menu button - End -->
+
 
   <!--聊天室-->
   <div v-if="pag == 0 || pag == 1">
@@ -108,11 +152,11 @@
 
       <div v-for="(data,index) in detail_date" :key="index">
         <div class="detailBox">
-          <div style="width: 33%; text-align: left; text-decoration:none;">
+          <div style="width: 20%; text-align: left; text-decoration:none;">
             <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': data.homeValue > data.awayValue }">{{ data.homeValue }}</a>
           </div>
-          <div style="width: 34%; text-align: center; text-decoration:none;">{{ $t(data.parameter) }}</div>
-          <div style="width: 33%; text-align: right; text-decoration:none;">
+          <div style="width: 60%; text-align: center; text-decoration:none;">{{ $t(data.parameter) }}</div>
+          <div style="width: 20%; text-align: right; text-decoration:none;">
             <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': data.awayValue > data.homeValue }">{{ data.awayValue }}</a>
           </div>
         </div>
@@ -162,7 +206,7 @@
       <div class="LiveTextFrame">
           <div><a class="LiveTitleTHFT">FT</a><div class="textBox">{{ posts?.homeScore }} - {{ posts?.awayScore }}</div></div>
           <div v-for="data in afterTXT" :key="data.id">
-            <div v-if="!distinguish(data.teamID)" class="homeFlex">
+            <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
               <div class="teamBox">
                 
                 <div class="LiveTimeHome divFloatL2">
@@ -180,7 +224,7 @@
                 <div style="clear: both;"></div>
               </div>
             </div>
-            <div v-if="distinguish(data.teamID)" class="awayFlex">
+            <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
               <div class="teamBox">
                   <div class="LiveTimeAway divFloatR2">{{ data.content }}&nbsp;
 
@@ -203,7 +247,7 @@
           </div>
           <div><a class="LiveTitleTHFT">HT</a></div>
           <div v-for="data in beforeTXT" :key="data.id">
-            <div v-if="!distinguish(data.teamID)" class="homeFlex">
+            <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
               <div class="teamBox">
                 
                 <div class="LiveTimeHome divFloatL2">{{ data.content }}
@@ -221,7 +265,7 @@
                 <div style="clear: both;"></div>
               </div>
             </div>
-            <div v-if="distinguish(data.teamID)" class="awayFlex">
+            <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
               <div class="teamBox">
                 <div class="LiveTimeAway divFloatR2">
                   <div class="divFloatR1">
@@ -240,6 +284,9 @@
 
                 <div style="clear: both;"></div>
               </div>
+            </div>
+            <div v-if="distinguish(data.teamID) == 3">
+              {{ data.content }}11
             </div>
           </div>
       </div>
@@ -579,10 +626,13 @@ export default {
     const distinguish = (teamId) =>{
       const team = Number(teamId)
       if(team == awayId.value){
-        return true
+        return 1
       }
       if(team == homeId.value){
-        return false
+        return 2
+      }
+      if(team == "0"){
+        return 3
       }
     }
 
@@ -708,7 +758,52 @@ export default {
 
 
 
+.detailBox{
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #dddddd;
+  height: 2.4rem;
+  padding: 5px .8rem;
+}
+
+/* 比對資料 */
+.highlight_blue {
+  color: #ffffff !important;
+  background-color: #3a7ed3;
+  padding: 2px 5px;
+  border-radius: .2rem;
+  text-decoration:none;
+}
+
+.highlight_yellow {
+  color: #333333 !important;
+  background-color: #f3b140;
+  padding: 2px 5px;
+  border-radius: .2rem;
+  text-decoration:none;
+}
+
+.homeFlex{
+  display: flex;
+  flex-direction:row;
+}
+
+.awayFlex{
+  display: flex;
+  flex-direction:row-reverse;
+}
+
+.teamBox{
+  display: flex;
+  flex-direction:column;
+}
+
+
 /********** New K design start ***********/
+
+.LiveMTop{
+  margin-top: 2rem !important;
+}
 
 .straight-line{
     width: 100%;
@@ -766,49 +861,6 @@ export default {
 
 .vs_{
     font-size: 2rem;
-}
-
-
-/********** New K design end ***********/
-
-.detailBox{
-  display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid #dddddd;
-  height: 2.4rem;
-  padding: 5px .8rem;
-}
-
-/* 比對資料 */
-.highlight_blue {
-  color: #ffffff !important;
-  background-color: #3a7ed3;
-  padding: 2px 5px;
-  border-radius: .2rem;
-  text-decoration:none;
-}
-
-.highlight_yellow {
-  color: #333333 !important;
-  background-color: #f3b140;
-  padding: 2px 5px;
-  border-radius: .2rem;
-  text-decoration:none;
-}
-
-.homeFlex{
-  display: flex;
-  flex-direction:row;
-}
-
-.awayFlex{
-  display: flex;
-  flex-direction:row-reverse;
-}
-
-.teamBox{
-  display: flex;
-  flex-direction:column;
 }
 
 
@@ -994,19 +1046,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .VSLineup1st-Title{
   font-size: small;
   text-align: center;
@@ -1066,6 +1105,168 @@ export default {
 .LineupPlayerFNumber{
   width: 20px;
 }
+
+.clear{
+  clear: both;
+}
+/********** New K design end ***********/
+
+
+/***********  Nav menu button - Start  ************/	
+.w100 {
+    width: 100%;
+}
+.van-tab__text-wrapper, .van-tabs {
+    position: relative;
+}
+.van-tabs--line .van-tabs__wrap {
+    height: 1.1rem !important;
+    box-shadow: 0 5px 10px -5px #d6d6d6;
+}
+
+.van-tabs--line .van-tabs__wrap {
+  height: 35px !important;
+  line-height: 35px !important;
+}
+.van-tabs__wrap {
+    overflow: hidden;
+}
+.van-tabs__wrap--scrollable .van-tabs__nav {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+.van-tabs__nav--line {
+    box-sizing: content-box !important;
+}
+.van-tabs__nav--line {
+    box-sizing: content-box;
+    height: 100%;
+    padding-bottom: 15px;
+}
+.van-tabs__nav {
+    position: relative;
+    display: flex;
+    background-color: #fff;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.van-tabs__wrap--scrollable .van-tab {
+    padding: 0 .5rem;
+}
+.van-tabs__wrap--scrollable .van-tab--complete {
+    flex: 1 0 auto;
+}
+.van-tabs__wrap--scrollable .van-tab {
+    flex: 0 0 20%; /*Nav menu WIDTH*/
+}
+.van-tab {
+    line-height: .96rem;
+    font-family: Roboto-Regular, Roboto;
+    font-weight: 500;
+    color: #333;
+}
+.van-tab {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 4px;
+    color: #646566;
+    cursor: pointer;
+}	
+.van-tab {
+    line-height: .96rem;
+    font-family: Roboto-Regular, Roboto;
+    font-weight: 500;
+    color: #333;
+}
+
+.van-tab {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 4px;
+    color: #646566;
+    cursor: pointer;
+}
+	
+.van-tab__text{
+	font-size: .85rem !important;
+  padding: 8px 0;
+  display: flex;
+  height: 35px;
+  align-items: center;
+}
+
+.van-tabs__line{
+	background-color: rgb(15, 128, 218);
+	width: 37.5px;
+	transform: translateX(37.5px) translateX(-50%);
+	height: 2px;
+	border-radius: 2px;
+	transition-duration: 0.3s;
+}
+
+
+.van-sticky{}
+
+.Navbutton{
+  font-size: 1.1rem;
+  color: #333333;
+  height: 30px;
+  padding: 1px 0;
+}
+
+.Navbutton:hover{
+  color: #009bb6;
+  border-bottom: 2px solid #009bb6;
+}
+
+.Navbutton:active{
+  color: #1476c5;
+}
+
+.Navbutton::before{
+  content:'';
+  position: absolute;
+  width: 100%;
+  height: 0%;
+  background-color: #ff8891;
+  left: 0;
+  top: 0;
+  border-radius: 0 0 50% 50%;
+  z-index: -1;
+  transition: .5s;
+}
+
+.Navbutton:hover:before{
+  
+}
+
+
+
+/***********  Nav menu button - End  ************/	
+
+	
+
+
+
+
+
+
+
+
+
+
+
 
 
 
