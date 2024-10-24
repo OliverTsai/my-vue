@@ -1,20 +1,24 @@
 <template>
   <headView @select-match="handleSelectMatch"/>
-  <div class="bodyBd">
+  <div v-if="loading" class="loading-box">
+    <div class="spinner"></div> <!-- 這裡可以用自訂的 spinner 或文字 -->
+    <p>Loading...</p>
+  </div>
+  <div v-else class="bodyBd">
     <div class="bodyBox">
-      <div class="">
+      <div class="w-100">
         <div class="bannerBox" data-v-d4c6fef0=""><img src="../../assets/banner/scoreBanner_01s_990x102.jpg" class="banner" data-v-d4c6fef0=""><i class="iconfont icon-guanbi close" data-v-d4c6fef0=""></i></div>
         <div class="area_score">
           <div class="w-100">
             <div class="mbodyTitle">
               <div class="bodyTitleBox">
-                <button type="button" class="btn btnBox" :class="{ active: selectedButton === 'allEvents' }" @click="selectButton('allEvents')">{{$t('AllEvents')}}</button>
-                <button type="button" class="btn btnBox" :class="{ active: selectedButton === 'live' }" @click="selectButton('live')">{{$t('Live')}}</button>
-                <button type="button" class="btn btnBox" :class="{ active: selectedButton === 'finished' }" @click="selectButton('finished')">{{$t('Finished')}}</button>
-                <button type="button" class="btn btnBox" :class="{ active: selectedButton === 'schedule' }" @click="selectButton('schedule')">{{$t('Schedule')}}</button>
+                <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'allEvents' }" @click="selectPost('allEvents')">{{$t('AllEvents')}}</button>
+                <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'live' }" @click="selectPost('live')">{{$t('Live')}}</button>
+                <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'finished' }" @click="selectPost('finished')">{{$t('Finished')}}</button>
+                <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'schedule' }" @click="selectPost('schedule')">{{$t('Schedule')}}</button>
               </div>
               <div class="bodyTitleBox">
-                <div v-if="this.selectedButton === 'allEvents'" class="btn-group">
+                <div v-if="selectButtonValue === 'allEvents'" class="btn-group">
                   <button type="button" class="btn btnBox" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ formatDate(selectedDate) }}
                   </button>
@@ -28,313 +32,477 @@
             </div>
           </div>
           <div class="mbodyList">
-            <div v-for="post in posts.matchList" :key="post.matchId">
-              <div class="bodyListTitle">
-                {{ post.leagueChtShort }}{{ post.subLeagueCht }}
-              </div>
-              <div class="mbodyListBox mbodyListLine">
-                <div class="mColumnW18">
-                  <div>{{ forTeamTime(post.matchTime) }}</div>
-                  <div v-if="post.state === 0">{{ $t('Schedule') }}</div>
-                  <div v-if="post.state === 1">{{ '上半場' }}</div>
-                  <div v-if="post.state === 2">{{ '中場' }}</div>
-                  <div v-if="post.state === 3">{{ '下半場' }}</div>
-                  <div v-if="post.state === 4">{{ '加時' }}</div>
-                  <div v-if="post.state === 5">{{ '點球' }}</div>
-                  <div v-if="post.state === -10">{{ '取消' }}</div>
-                  <div v-if="post.state === -11">{{ '待定' }}</div>
-                  <div v-if="post.state === -12">{{ '腰斬' }}</div>
-                  <div v-if="post.state === -13">{{ '中斷' }}</div>
-                  <div v-if="post.state === -14">{{ '推遲' }}</div>
-                  <div v-if="post.state === -1">{{ $t('Finished') }}</div>
-                </div>
-                <div class="mColumnW62 leftBox">
-                  <div class="teamBd">
-                    <div class="teamImgBox">
-                      <img :src="getImageUrl(post.homeId)" class="w-100">
+            <div v-if="!posts.matchList || posts.matchList.length === 0">
+                    <div class="NoValueFrame">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg><br>
+                        <div>無正在進行的賽事</div>
                     </div>
-                    <div>{{ post.homeCht }}</div>
-                  </div>
-                  <div class="teamBd">
-                    <div class="teamImgBox">
-                      <img :src="getImageUrl(post.awayId)" class="w-100">
-                    </div>
-                    <div>{{ post.awayCht }}</div>
-                  </div>
-                </div>
-                <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(post.state)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
-                    <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
-                    <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
-                  </svg>
-                </div>
-                <div class="mColumnW10 rightBox" v-else></div>
-                <div class="mColumnW10 mrightBox">
-                  <div>{{ post.homeScore }}</div>
-                  <div>{{ post.awayScore }}</div>
-                </div>
-              </div>
             </div>
-            <!-- <div v-for="(matches, league) in groupedMatches" :key="league">
-              <div class="bodyListTitle">
-                <div v-if="this.$i18n.locale === 'en'">{{ league }}</div>
-                <div v-if="this.$i18n.locale === 'zh_hk'">{{ matches[0].leagueChtShort }}{{ matches[0].subLeagueCht }}</div>
-                <div v-if="this.$i18n.locale === 'zh_cn'">{{ matches[0].leagueChsShort }}{{ matches[0].subLeagueChs }}</div>
+            <div v-else>
+              <div v-for="league in leagues" :key="league.leagueId">
+                <div class="mbodyLiveTitle">
+                  <div class="teamImgBox">
+                    <img :src="getImageCountry(league.countryId)" class="rounded-circle w-100 h-100">
+                  </div>
+                  <router-link :to="{ name: 'league', params: { id: league.leagueId } }" class="bodyRouterBox nowrap">
+                    <div class="ColumnW52 bodyListTitle-fontSize ms-2">{{ getLeagueName(league,'name') }}</div>
+                  </router-link>
+                </div>
+                <div v-if="matchesByLeague[league.leagueId]">
+                  <div v-for="post in matchesByLeague[league.leagueId]" :key="post.matchId" class="mbodyListBox mbodyListLine">
+                    <router-link :to="{ name: 'live', params: { date:newTime,id: post.matchId } }" class="bodyRouterBox w-100">
+                      <div class="bodyListBox w-100">
+                        <div v-if="selectButtonValue === 'live'" class="mColumnW18">
+                          <div>{{ formatTime(post.matchTime) }}</div>
+                          <div v-if="post.state === 3" class="text-danger">{{ proTime(post.startTime)+45 }}<span class="blinking">'</span></div>
+                          <div v-else-if="post.state === 2">{{ $t('halftime') }}</div>
+                          <div v-else class="text-danger">{{ proTime(post.startTime) }}<span class="blinking">'</span></div>
+                        </div>
+                        <div v-else class="mColumnW18">
+                          <div>{{ formatTime(post.matchTime) }}</div>
+                          <div>{{ $t(getMatchState(post.state)) }}</div>
+                        </div>
+                        <div class="mColumnW62 leftBox">
+                          <div class="teamBd">
+                            <div class="teamImgBox">
+                              <img :src="getImageTeam(post.homeId)" class="w-100">
+                            </div>
+                            <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.homeCht }}</div>
+                            <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.homeChs }}</div>
+                            <div v-else>{{ post.homeEn }}</div>
+                          </div>
+                          <div class="teamBd">
+                            <div class="teamImgBox">
+                              <img :src="getImageTeam(post.awayId)" class="w-100">
+                            </div>
+                            <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.awayCht }}</div>
+                            <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.awayChs }}</div>
+                            <div v-else>{{ post.awayEn }}</div>
+                          </div>
+                        </div>
+                        <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(post.state)">
+                          <div class="bodyRouterBox rightBox">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
+                              <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
+                              <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="mColumnW10 rightBox" v-else></div>
+                        <div class="mColumnW10 mrightBox">
+                          <div>{{ post.homeScore }}</div>
+                          <div>{{ post.awayScore }}</div>
+                        </div>
+                      </div>
+                    </router-link>
+                  </div>
+                </div>
               </div>
-              <div v-for="match in matches" :key="match.matchId" class="mbodyListBox mbodyListLine">
-                <div class="mColumnW18">
-                  <div>{{ formatTime(match.matchTime) }}</div>
-                  <div v-if="match.state === 0">{{ $t('Schedule') }}</div>
-                  <div v-if="match.state === 1">{{ '上半場' }}</div>
-                  <div v-if="match.state === 2">{{ '中場' }}</div>
-                  <div v-if="match.state === 3">{{ '下半場' }}</div>
-                  <div v-if="match.state === 4">{{ '加時' }}</div>
-                  <div v-if="match.state === 5">{{ '點球' }}</div>
-                  <div v-if="match.state === -10">{{ '取消' }}</div>
-                  <div v-if="match.state === -11">{{ '待定' }}</div>
-                  <div v-if="match.state === -12">{{ '腰斬' }}</div>
-                  <div v-if="match.state === -13">{{ '中斷' }}</div>
-                  <div v-if="match.state === -14">{{ '推遲' }}</div>
-                  <div v-if="match.state === -1">{{ $t('Finished') }}</div>
+              <!-- <div v-for="post in posts.matchList" :key="post.matchId">
+                <div class="mbodyLiveTitle">
+                  <div class="teamImgBox">
+                    <img :src="getImageCountry(post.countryId)" class="rounded-circle w-100 h-100">
+                  </div>
+                  <div v-if="this.$i18n.locale === 'zh_hk'" class="ml-2">{{ post.leagueNameCht }}</div>
+                  <div v-if="this.$i18n.locale === 'zh_cn'" class="ml-2">{{ post.leagueNameChs }}</div>
+                  <div v-if="this.$i18n.locale === 'en'" class="ml-2">{{ post.leagueNameEn }}</div>
                 </div>
-                <div class="mColumnW62 leftBox">
-                  <div v-if="this.$i18n.locale === 'en'">{{ match.homeEn }}</div>
-                  <div v-if="this.$i18n.locale === 'zh_hk'">{{ match.homeCht }}</div>
-                  <div v-if="this.$i18n.locale === 'zh_cn'">{{ match.homeChs }}</div>
-                  <div v-if="this.$i18n.locale === 'en'">{{ match.awayEn }}</div>
-                  <div v-if="this.$i18n.locale === 'zh_hk'">{{ match.awayCht }}</div>
-                  <div v-if="this.$i18n.locale === 'zh_cn'">{{ match.awayChs }}</div>
-                </div>
-                <div class="mColumnW10 rightBox" v-if="match.state === 0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
-                    <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
-                    <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
-                  </svg>
-                </div>
-                <div class="mColumnW10 rightBox" v-else></div>
-                <div class="mColumnW10 mrightBox">
-                  <div>{{ match.homeScore }}</div>
-                  <div>{{ match.awayScore }}</div>
-                </div>
-              </div>
-            </div> -->
+                <router-link :to="{ name: 'live', params: { id: post.matchId } }" class="bodyRouterBox">
+                  <div class="mbodyListBox mbodyListLine">
+                    <div class="mColumnW18">
+                      <div v-if="selectButtonValue === 'live'">
+                        <div>{{ formatTime(post.matchTime) }}</div>
+                        <div v-if="post.state === 3">{{ proTime(post.startTime)+45 }}</div>
+                        <div v-else-if="post.state === 2">{{ $t('halftime') }}</div>
+                        <div v-else>{{ proTime(post.startTime) }}</div>
+                      </div>
+                      <div v-else>
+                        <div>{{ formatTime(post.matchTime) }}</div>
+                        <div v-if="post.state === 0">{{ $t('Schedule') }}</div>
+                        <div v-if="post.state === 1">{{ $t('first_half') }}</div>
+                        <div v-if="post.state === 2">{{ $t('midfield') }}</div>
+                        <div v-if="post.state === 3">{{ $t('second_half') }}</div>
+                        <div v-if="post.state === 4">{{ $t('overtime') }}</div>
+                        <div v-if="post.state === 5">{{ $t('penalty_kick') }}</div>
+                        <div v-if="post.state === -10">{{ $t('cancel') }}</div>
+                        <div v-if="post.state === -11">{{ $t('tbd') }}</div>
+                        <div v-if="post.state === -12">{{ $t('cut_in_half') }}</div>
+                        <div v-if="post.state === -13">{{ $t('discontinue') }}</div>
+                        <div v-if="post.state === -14">{{ $t('postpone') }}</div>
+                        <div v-if="post.state === -1">{{ $t('Finished') }}</div>
+                      </div>
+                      
+                    </div>
+                    <div class="mColumnW62 leftBox">
+                      <div class="teamBd">
+                        <div class="teamImgBox">
+                          <img :src="getImageTeam(post.homeId)" class="w-100">
+                        </div>
+                        <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.homeCht }}</div>
+                        <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.homeChs }}</div>
+                        <div v-else>{{ post.homeEn }}</div>
+                      </div>
+                      <div class="teamBd">
+                        <div class="teamImgBox">
+                          <img :src="getImageTeam(post.awayId)" class="w-100">
+                        </div>
+                        <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.awayCht }}</div>
+                        <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.awayChs }}</div>
+                        <div v-else>{{ post.awayEn }}</div>
+                      </div>
+                    </div>
+                    <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(post.state)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
+                        <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
+                        <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
+                      </svg>
+                    </div>
+                    <div class="mColumnW10 rightBox" v-else></div>
+                    <div class="mColumnW10 mrightBox">
+                      <div>{{ post.homeScore }}</div>
+                      <div>{{ post.awayScore }}</div>
+                    </div>
+                  </div>
+                </router-link>
+              </div> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     
+    
   </div>
-<div id="footer"> Copyright @ 2024 BeFun Score </div>
+
+  <div id="footer"> Copyright @ 2024 BeFun Score </div>
     
 </template>
 
 <script>
 // @ is an alias to /src
-import headView from '@/components/m/mHeadView.vue'
-import matchesData from '@/mathList.json'
-import { ref, onMounted } from 'vue'
+import headView from '@/components/m/mHeadView.vue';
+// import { ref, onMounted ,watch ,computed, reactive } from 'vue'
+import { ref, onMounted ,watch ,computed } from 'vue';
+import { getImageTeam,getImageCountry  } from '@/composables/useImage.js';
+import { fetchPosts ,fetchAllPosts } from '@/composables/useApi.js';
+import { useI18n } from 'vue-i18n';
 // import axios from 'axios';
 
 export default {
   name: 'mSoccerView',
   setup() {
-    const posts = ref([]);
+    let posts = ref([]);
+    let leagues = ref(null);
+    const timeButton = ref(1);
+    const selectedDate = ref(new Date());
+    const selectButtonValue = ref('live');
+    const matchProTime = ref(new Date());
+    const selectedMatchID = ref(null);
+    let leagueIds  = ref([]);
+    const leagueCache = ref(null);
 
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch('/api/football/today.aspx?key=4F85B2B3E6B54006');
-        const data = await response.json();  // 確保將響應轉換為JSON
+    const urlMatch = ref('https://befenscore.net/api/get-data')
+
+    const newTime = ref('');
+
+    let loading = ref(true);
+
+    const { locale } = useI18n();
+
+    const matchesByLeague = ref({}); //照聯賽區分的數據
+
+    // 翻譯
+    const getLeagueName = (post, fieldName) => {
+      const langMap = {
+        en: 'En',
+        zh_cn: 'Chs',
+        zh_hk: 'Cht'
+      };
+      const langSuffix = langMap[locale.value] || 'En'; // 默認英文
+      const key = `${fieldName}${langSuffix}`;  // 動態生成鍵名，例如 leagueNameEn, homeEn, awayEn
+      const fallbackKey = `${fieldName}En`; 
+
+      return post[key] || post[fallbackKey];
+    };
+
+    // 比賽狀態
+    const stateMap = {
+      0: 'Schedule',
+      1: 'first_half',
+      2: 'midfield',
+      3: 'second_half',
+      4: 'overtime',
+      5: 'penalty_kick',
+      '-10': 'cancel',
+      '-11': 'tbd',
+      '-12': 'cut_in_half',
+      '-13': 'discontinue',
+      '-14': 'postpone',
+      '-1': 'Finished'
+    };
+
+    const getMatchState = (state) => {
+      return stateMap[state] || 'Unknown';  // 默認顯示 'Unknown'，如果 state 不在映射表中
+    };
+
+
+    // 資料排列的整理
+    const selectPost = async (button) =>{
+
+    selectButtonValue.value = button;
+
+      if (button === 'live') {
+
+        loading.value = true;
+
+        urlMatch.value = "https://befenscore.net/api/get-data"
+        const data = await fetchPosts(urlMatch.value);
+        posts.value = data
+        timeList(posts.value)
+        newTime.value = formatDate(new Date())
+
+        leagueIds.value = [...new Set(posts.value.matchList.map(match => match.leagueId))];
+        filterLeaguesById(leagueIds.value)
+        processMatches()
+
+        loading.value = false;
+
+      }else{
+
+        loading.value = true;
+
+        urlMatch.value = "https://befenscore.net/api/get-data"
+        const data = await fetchAllPosts(urlMatch.value, selectButtonValue.value);
         posts.value = data;
-        console.log(posts)
-      } catch (error) {
-        console.error('Error fetching posts:', error);
+        posts.value.matchList.sort((a, b) => new Date(a.matchTime) - new Date(b.matchTime));
+        newTime.value = formatDate(new Date())
+
+        leagueIds.value = [...new Set(posts.value.matchList.map(match => match.leagueId))];
+        filterLeaguesById(leagueIds.value)
+        processMatches()
+
+        loading.value = false;
+
       }
     };
 
-    onMounted(() => {
-      fetchPosts();
+    //篩選出今日賽事的聯賽
+    const filterLeaguesById = async (leagueIds) => {
+      leagues.value = leagueCache.value.leagueList.filter(league => leagueIds.includes(league.leagueId));
+    }
+
+    // 在获取数据后，处理比赛分组
+    const processMatches = () => {
+      matchesByLeague.value = {};
+      if (posts.value.matchList) {
+        posts.value.matchList.forEach(match => {
+          const leagueId = match.leagueId;
+          if (!matchesByLeague.value[leagueId]) {
+            matchesByLeague.value[leagueId] = [];
+          }
+          matchesByLeague.value[leagueId].push(match);
+        });
+      }
+    };
+
+    // 第一次連接
+    onMounted(async () => {
+      loading.value = true;
+
+      leagueCache.value = await fetchPosts('https://befenscore.net/api/league-data')
+      urlMatch.value = "https://befenscore.net/api/get-data"
+      const data = await fetchPosts(urlMatch.value);
+      posts.value = data
+      newTime.value = formatDate(new Date());
+      console.log(newTime.value)
+      timeList(posts.value)
+      leagueIds.value = [...new Set(posts.value.matchList.map(match => match.leagueId))];
+      filterLeaguesById(leagueIds.value)
+      processMatches()
+
+      loading.value = false;
+
+      setInterval(() => {
+        if(selectButtonValue.value =='live'){
+          autoUpdate();
+        }
+      },30000)
     });
 
-    return {
-      posts
-    };
-  },
-  data() {
-    return {
-      selectedMatchID: null,
-      isLive: false,
-      isCheck: false,
-      selectedButton: 'live',
-      matches: matchesData.matchList.map(match => ({ ...match, checked: false })),
-      selectedMatches: [],
-      // selectedDate: null,
-      selectedDate: new Date(),
-      showDatePicker: false,
-      imageCache: {},
-    }
-  },
-  computed: {
-    filteredMatches() {
-      let filtered = this.matches;
+    // 自動更新函數
+    const autoUpdate = async () => {
+      try {
+        // 不改變 loading 狀態，避免顯示載入畫面
+        const data = await fetchPosts(urlMatch.value);
+        posts.value = data;
+        timeList(posts.value);
+        newTime.value = formatDate(new Date());
 
-      if (this.selectedButton === 'allEvents') {
-        return filtered;
+        leagueIds.value = [...new Set(posts.value.matchList.map(match => match.leagueId))];
+        await filterLeaguesById(leagueIds.value);
+        processMatches();
+      } catch (error) {
+        console.error("自動更新錯誤：", error);
       }
-      if (this.selectedDate) {
-        const selectedDateString = this.formatDate(this.selectedDate);
-        filtered = filtered.filter((match) => match.matchTime.startsWith(selectedDateString));
+    };
+
+    // 預設監聽分類
+    const sortPosts = () => {
+      if (timeButton.value === 1) {
+        posts.value.sort((a, b) => new Date(a.time) - new Date(b.time)); // 假設每個比賽有一個 time 屬性
+      } else if (timeButton.value === 2) {
+        posts.value.sort((a, b) => new Date(a.date) - new Date(b.date)); // 假設每個比賽有一個 date 屬性
       }
-      if (this.selectedMatchID) {
-        filtered = filtered.filter(match => match.matchId === this.selectedMatchID);
-      }
-      if (this.selectedButton === 'live') {
-        // filtered = filtered.filter(match => match.state === 0);
-        const today = new Date();
-        const todayString = `${today.getFullYear()}/${String(today.getMonth() + 1)}/${String(today.getDate())}`;
-        console.log(todayString);
-        filtered = this.matches.filter(match => match.matchTime.startsWith(todayString));
-        filtered.sort((a, b) => {
-          const now = new Date();
-          const timeA = new Date(a.matchTime);
-          const timeB = new Date(b.matchTime);
-          return Math.abs(timeA - now) - Math.abs(timeB - now);
-        }); 
-      }
-      if (this.selectedButton === 'finished') {
-        filtered = filtered.filter(match => match.state === 1);
-      }
-      if (this.selectedButton === 'schedule') {
-        filtered = filtered.filter(match => match.state === -1);
-      }
-      return filtered;
-    },
-    // 按照聯賽排列
-    groupedMatches() {
-      return this.filteredMatches.reduce((acc, match) => {
-        if (!acc[match.leagueEn]) {
-          acc[match.leagueEn] = [];
-        }
-        acc[match.leagueEn].push(match);
-        return acc;
-      }, {});
-    },
-    selectableDates() {
+    };
+
+    // 下拉日期選單的排列方式
+    const selectableDates = computed(() =>{
       const dates = [];
       const today = new Date();
       for (let i = -5; i <= 5; i++) {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
-        const formattedDate = this.formatDateForDropdown(date);
+        const formattedDate = formatDateMenu(date);
         dates.push(formattedDate);
       }
       return dates;
-    }
-  },
-  components: {
-    headView
-  },
-  methods: {
-    getImageUrl(teamId) {
-      try{
-        return require(`../../assets/team_logos/${teamId}.png`);
-      } catch (error) {
-        return require(`../../assets/team_logos/0.png`);
-      }
-      
-    },
-    handleSelectMatch(id) {
-      this.selectedMatchID = id;
-      this.isLive = false;
-      // this.selectedDate = null;
-      this.selectedButton = 'allEvents';
-    },
-    liveSelectMatch(value) {
-      this.isLive = value;
-      this.selectedMatchID = null;
-      this.selectedButton = 'live';
-    },
-    selectButton(button) {
-      this.selectedButton = button;
-      if (button === 'allEvents') {
-        this.handleSelectMatch(null);
-      } else if (button === 'live') {
-        this.liveSelectMatch(true);
-      } else {
-        this.isLive = false;
-        this.selectedMatchID = null;
-      }
-    },
-    handleDateChange(dateString) {
-      this.selectedMatchID = null;
-      this.selectedButton = 'Date';
-      this.showDatePicker = false;
-      let parts = dateString.split('/');
-      let selectedDates = new Date();
-      selectedDates.setMonth(parts[0]-1);
-      parts = parts[1].split(' ');
-      selectedDates.setDate(parts[0]);
-      console.log(selectedDates)
-      this.selectedDate = selectedDates;
-    },
-    // handleDateChange(value) {
-    //   this.selectedMatchID = null;
-    //   this.selectedButton = 'Date';
-    //   this.selectedDate = value;
-    //   this.showDatePicker = false;
-    // },
-    disabledDate(time) {
-      const now = new Date();
-      const fiveDaysBefore = new Date();
-      fiveDaysBefore.setDate(now.getDate() - 6);
-      const fiveDaysAfter = new Date();
-      fiveDaysAfter.setDate(now.getDate() + 5);
-      return time < fiveDaysBefore || time > fiveDaysAfter;
-    },
-    formatTime(datetime) {
-      const date = new Date(datetime);
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const hour = String(date.getHours()).padStart(2, '0');
-      const minute = String(date.getMinutes()).padStart(2, '0');
-      return `${month}/${day} ${hour}:${minute}`;
-    },
-    forTeamTime(datetime) {
-      const date = new Date(datetime);
-      const hour = String(date.getHours()).padStart(2, '0');
-      const minute = String(date.getMinutes()).padStart(2, '0');
-      return `${hour}:${minute}`;
-    },
-    // 這邊是日期篩選跟時間按鈕共同使用
-    formatDate(date) {
-      const year = date.getFullYear();
-      // const month = String(date.getMonth() + 1).padStart(2, '0');
-      // const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1);
-      const day = String(date.getDate());
-      return `${year}/${month}/${day}`;
-    },
-    openDatePicker() {
-      this.showDatePicker = true;
-      this.$nextTick(() => {
-        const datePickerComponent = this.$refs.datePicker;
-        if (datePickerComponent && datePickerComponent.focus) {
-          datePickerComponent.focus();
-        }
-      });
-    },
-    formatDateForDropdown(date) {
+    });
+
+    const formatDateMenu = (date) => {
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       const weekday = weekdays[date.getDay()];
       return `${month}/${day} ${weekday}`;
-    },
-  }
+    }
+
+    // 處理顯示的日期
+    const formatDate = (date) =>{
+      const year = date.getFullYear();
+      // const month = String(date.getMonth() + 1).padStart(2, '0');
+      // const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1);
+      const day = String(date.getDate());
+      return `${year}-${month}-${day}`;
+    }
+
+    // 抓出有在比賽的排列
+    const timeList = (data) =>{
+      posts.value.matchList = data.matchList.filter(match => match.state >= 1 && match.state <= 5);
+    }
+
+    // 按照聯賽排列
+    const groupedMatch = () =>{
+      posts.value.matchList.reduce((acc, match) => {
+        if (!acc[match.leagueEn]) {
+          acc[match.leagueEn] = [];
+        }
+        acc[match.leagueEn].push(match);
+        return acc;
+      }, {})
+    }
+
+    // 根據日期連接資料
+    const handleDateChange = async (dateString) => {
+
+      loading.value = true;
+
+      const parts = dateString.split('/');
+      const selectedDates = new Date();
+      selectedDates.setMonth(parts[0] - 1);
+      selectedDates.setDate(parts[1].split(' ')[0]);
+      const formattedDate = selectmatDate(selectedDates);
+      newTime.value = formattedDate
+      urlMatch.value = `https://befenscore.net/api/get-days/${formattedDate}`;
+      // urlMatch.value = `/api/football/schedule.aspx?date=${formattedDate}&key=4F85B2B3E6B54006`;
+      posts.value = await fetchPosts(urlMatch.value);
+
+      leagueIds.value = [...new Set(posts.value.matchList.map(match => match.leagueId))];
+      filterLeaguesById(leagueIds.value)
+      
+      if (posts.value && posts.value.matchList) {
+        processMatches(); // 將資料進行處理
+      }
+
+      selectedDate.value = selectedDates;
+
+      loading.value = false;
+
+    };
+
+    // 提供給日期連接資料的方法
+    const selectmatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    // 轉時間戳成相應格式
+    const formatTime = (datetime) => {
+      const date = new Date(datetime);
+      // const month = String(date.getMonth() + 1).padStart(2, '0');
+      // const day = String(date.getDate()).padStart(2, '0');
+      const hour = String(date.getHours()).padStart(2, '0');
+      const minute = String(date.getMinutes()).padStart(2, '0');
+      return `${hour}:${minute}`;
+    };
+
+    // 比賽進行時間
+    const proTime = (time) =>{
+      const newDay = new Date();
+      const differentTime = newDay - new Date(time);
+      const matchMinutes = Math.floor(differentTime / 60000);
+      return matchMinutes;
+    }
+
+    // 監聽 timeButton 的變化，並根據新的值對 posts 進行排序
+    watch(timeButton, () => {
+      sortPosts();
+      selectPost();
+    });
+
+    // 先轉移過來 聯賽選擇會用
+    const handleSelectMatch = (id) =>{
+      selectedMatchID.value = id;
+    }
+
+    return {
+      posts,
+      leagues,
+      timeButton,
+      sortPosts,
+      loading,
+      fetchPosts,
+      handleDateChange,
+      selectableDates,
+      formatDate,
+      selectButtonValue,
+      selectPost,
+      matchProTime,
+      proTime,
+      groupedMatch,
+      getImageCountry,
+      handleSelectMatch,
+      formatTime,
+      selectedDate,
+      matchesByLeague,
+      getLeagueName,
+      getMatchState,
+      newTime,
+      getImageTeam
+    };
+  },
+  components: {
+    headView
+  },
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .btnBox.active {
   background-color: #007bff;
   color: white;
@@ -384,6 +552,13 @@ export default {
   cursor: pointer;
 }
 
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
 .teamBd{
   display: flex;
   gap:0.5rem;
@@ -394,6 +569,66 @@ export default {
   width: 18px;
   height: 18px;
   margin: -.2rem 0px 0px 0px;
+}
+
+.bodyRouterBox{
+  color: #2c3e50;
+  text-decoration:none;
+}
+
+.rounded-circle {
+  border-radius: 50%; /* 將寬度和高度的一半設為圓角半徑 */
+  background-color: #000; /* 圓形的背景顏色 */
+}
+
+.mbodyLiveTitle{
+  display: flex;
+  background: #f1f1f1;
+  gap:0.8rem;
+  border-radius: 4px;
+  padding: 1px 0px 1px 5px;
+}
+
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* 可以根據實際需要調整 */
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.NoValueFrame{
+  padding: 50px;
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  align-items: center;
+  display: inline-block;
+  vertical-align: middle;
+  /***background-image: linear-gradient(to top, rgb(255 255 255) 0%, rgb(196, 196, 196) 50%, #5e5e5e 100%);***/
+}
+
+.NoValueFrame svg{
+  color: #999999;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
 }
 
 
