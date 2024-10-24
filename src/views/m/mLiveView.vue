@@ -277,14 +277,14 @@
             </div>
             <!-- 比賽開始 start -->
             <div v-if="distinguish(data.teamID) == 3">
-              <!--{{ data.content }}-->
               <svg data-v-509583f2="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16" style="color: #79c32c;">
                 <path data-v-509583f2="" d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"></path>
               </svg>
               <br>
-              比赛开始
+              <!--比赛开始-->
+              <div class="divCenter">{{ data.content }}</div>
+              <!-- 比賽開始 end -->
             </div>
-            <!-- 比賽開始 end -->
           </div>
       </div>
     </div>
@@ -942,30 +942,36 @@ export default {
   text-align: left;
   float:left;
   margin: 0px 5px 0px 0px;
-  line-height: .9rem;
-  font-size: .9rem;
+  line-height: .82rem;
+  font-size: .82rem;
 }
 .divFloatL2{
   text-align: left;
   float:left;
   margin: 0px 0px 0px 0px;
-  line-height: .9rem;
-  font-size: .9rem;
+  line-height: .82rem;
+  font-size: .82rem;
 }
 .divFloatR1{
   color: #f3b140;
   text-align: right;
   float:right;
   margin: 0px 0px 0px 5px;
-  line-height: .9rem;
-  font-size: .9rem;
+  line-height: .82rem;
+  font-size: .82rem;
 }
 .divFloatR2{
   text-align: right;
   float:right;
   margin: 0px 0px 0px 0px;
-  line-height: .9rem;
-  font-size: .9rem;
+  line-height: .82rem;
+  font-size: .82rem;
+}
+.divCenter{
+  text-align: center;
+  margin: 5px 0px 5px 0px;
+  line-height: .82rem;
+  font-size: .82rem;
 }
 
 
@@ -1064,7 +1070,7 @@ export default {
   padding: .3rem 0rem .3rem 0rem;
   text-align: left;
   color: #333333;
-  font-size: .5rem;
+  font-size: .74rem !important;
   width: 100%;
   border-bottom: 1px solid #dddddd;
 }
