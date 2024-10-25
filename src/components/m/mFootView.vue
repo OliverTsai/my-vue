@@ -1,10 +1,10 @@
 <template>
-  <div class="counter mt-5 mb-3">
+  <div id="footer">
     <div>
       <!--<span class="warning">
         <div>注意:网上有诈骗.所有在本站刊登广告的网站和内容，一概与本站无关，请各位网友密切注意</div>
       </span>-->
-      <div>Copyright &copy; 2024 <a href="https://befunscore.com" target="_self" style="text-decoration: none; color: #333333;">BeFun Score</a>. All rights reserved.</div>
+      <div>Copyright &copy; 2024 <a href="https://befunscore.com" target="_self" style="text-decoration: none; color: #FFFFFF;">BeFun Score</a>. All rights reserved.</div>
     </div>
   </div>
 </template>
