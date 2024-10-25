@@ -189,11 +189,16 @@ import { ref, onMounted ,watch ,computed } from 'vue';
 import { getImageTeam,getImageCountry  } from '@/composables/useImage.js';
 import { fetchPosts ,fetchAllPosts } from '@/composables/useApi.js';
 import { useI18n } from 'vue-i18n';
+import { useDataStore } from '@/store/dataStore'
 // import axios from 'axios';
 
 export default {
   name: 'mSoccerView',
   setup() {
+
+    const dataStore = useDataStore()
+    const leagueData = computed(() => dataStore.leagueData || { leagueList: [] })
+    
     let posts = ref([]);
     let leagues = ref(null);
     const timeButton = ref(1);
@@ -291,7 +296,7 @@ export default {
 
     //篩選出今日賽事的聯賽
     const filterLeaguesById = async (leagueIds) => {
-      leagues.value = leagueCache.value.leagueList.filter(league => leagueIds.includes(league.leagueId));
+        leagues.value = leagueData.value.leagueList.filter(league => leagueIds.includes(league.leagueId));
     }
 
     // 在获取数据后，处理比赛分组
@@ -312,7 +317,7 @@ export default {
     onMounted(async () => {
       loading.value = true;
 
-      leagueCache.value = await fetchPosts('https://befenscore.net/api/league-data')
+      leagueCache.value = leagueData.value;
       urlMatch.value = "https://befenscore.net/api/get-data"
       const data = await fetchPosts(urlMatch.value);
       posts.value = data

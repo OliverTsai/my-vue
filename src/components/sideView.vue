@@ -72,13 +72,17 @@
 
 <script>
 import countList from '@/countryList.json'
-import { ref, onMounted  } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router';
 import { getImageCountry ,getImageLeague } from '@/composables/useImage.js';
 import { fetchPosts } from '@/composables/useApi.js';
+import { useDataStore } from '@/store/dataStore'
 
 export default {
     setup(){
+
+        const dataStore = useDataStore()
+        const leagueData = computed(() => dataStore.leagueData)
 
         const leaguesId = ref([]);
         const leagues = ref([]);
@@ -103,10 +107,7 @@ export default {
         const fetchData = async () => {
             try {
                 // 使用 Promise.all 並行請求
-                const [matchDataResponse, leagueDataResponse] = await Promise.all([
-                    fetchPosts(`https://befenscore.net/api/get-data`),
-                    fetchPosts(`https://befenscore.net/api/league-data`)
-                ]);
+                const matchDataResponse = await fetchPosts(`https://befenscore.net/api/get-data`);
 
                 // matchList 的處理
                 matchData.value = matchDataResponse.matchList;
@@ -119,15 +120,15 @@ export default {
 
                 // leaguesList 的處理
                 if (!countriesData.value || countriesData.value.length === 0) {
-                    countriesData.value = leagueDataResponse.leagueList;
+                    countriesData.value = leagueData.value.leagueList;
 
-                    if (leagueDataResponse && leagueDataResponse.leagueList) {
-                        leagues.value = leagueDataResponse.leagueList
+                    if (leagueData.value && leagueData.value.leagueList) {
+                        leagues.value = leagueData.value.leagueList
                             .filter(league => leaguesId.value.includes(Number(league.leagueId)))
                             .slice(0, 10); // 限制為前 10 條聯賽資料
                         console.log('Filtered Leagues:', leagues.value);
                     } else {
-                        console.error('Invalid data format:', leagueDataResponse);
+                        console.error('Invalid data format:', leagueData.value);
                     }
                 }
 
@@ -135,44 +136,6 @@ export default {
                 console.error('Error fetching data:', error);
             }
         };
-
-        // const matchList = async() =>{
-        //     try{
-        //         const data = await fetchPosts(`https://befenscore.net/api/get-data`);
-        //         matchData.value = data.matchList
-
-        //         for (const raw of data.matchList) {
-        //             const leagueId = Number(raw.leagueId);
-        //             if (!leaguesId.value.includes(leagueId)) {
-        //                 leaguesId.value.push(leagueId);
-        //             }
-        //         }
-        //     }catch(error){
-        //         console.error('Error fetching today:', error);
-        //     }
-        // }
-
-        // // 賽事搜尋
-        // const leaguesList = async() =>{
-        //     try{
-        //         if (!countriesData.value || countriesData.value.length === 0) {
-
-        //             const data = await fetchPosts(`https://befenscore.net/api/league-data`);
-        //             countriesData.value = data.leagueList
-
-        //             if (data && data.leagueList) {
-        //                 // 確保篩選時的類型一致
-        //                 leagues.value = data.leagueList.filter(league => leaguesId.value.includes(Number(league.leagueId))).slice(0, 10);
-        //                 console.log('Filtered Leagues:', leagues.value);
-        //             } else {
-        //                 console.error('Invalid data format:', data);
-        //             }
-        //         }
-                
-        //     }catch(error){
-        //         console.error('Error fetching leagues:', error);
-        //     }
-        // }
 
         // 國家搜尋
         const selectCountryasync = async(countryId) =>{

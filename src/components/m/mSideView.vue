@@ -67,11 +67,15 @@
 
 <script>
 import countList from '@/countryList.json'
-import { ref, onMounted  } from 'vue'
+import { ref, onMounted, computed  } from 'vue'
 import { useRouter } from 'vue-router';
+import { useDataStore } from '@/store/dataStore'
 
 export default {
     setup(){
+
+        const dataStore = useDataStore()
+        const leagueData = computed(() => dataStore.leagueData)
 
         const leaguesId = ref([]);
         const leagues = ref([]);
@@ -112,8 +116,7 @@ export default {
         // 賽事搜尋
         const leaguesList = async() =>{
             try{
-                const response = await fetch(`https://befenscore.net/api/league-data`);
-                const data = await response.json();
+                const data = leagueData.value;
 
                 if (data && data.leagueList) {
                     // 確保篩選時的類型一致
@@ -131,8 +134,7 @@ export default {
         // 國家搜尋
         const selectCountryasync = async(countryId) =>{
             try{
-                const response = await fetch(`https://befenscore.net/api/league-data`);
-                const data = await response.json();
+                const data = leagueData.value;
                 console.log(leaguesId)
                 console.log(data.leagueList)
                 if (data && data.leagueList) {

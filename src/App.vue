@@ -10,6 +10,7 @@
 <script>
 import { provide, onMounted, onBeforeUnmount } from 'vue';
 import { store } from './store';
+import { useDataStore } from '@/store/dataStore'
 
 export default {
   name: 'App',
@@ -17,12 +18,16 @@ export default {
     
   },
   setup() {
+
+    const dataStore = useDataStore();
+
     const handleResize = () => {
       store.value = window.innerWidth <= 768;
     };
 
-    onMounted(() => {
+    onMounted(async() => {
       window.addEventListener('resize', handleResize);
+      await dataStore.fetchLeagueData();
     });
 
     onBeforeUnmount(() => {
@@ -30,6 +35,10 @@ export default {
     });
 
     provide('store', store);
+
+    return {
+      dataStore,
+    };
     
   }
 };

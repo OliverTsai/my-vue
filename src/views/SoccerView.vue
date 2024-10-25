@@ -126,12 +126,13 @@
 // @ is an alias to /src
 import headView from '@/components/headView.vue'
 import side from '@/components/sideView.vue'
-import { ref, onMounted ,watch } from 'vue'
+import { ref, onMounted ,watch ,computed } from 'vue'
 import sideTime from '@/components/sideRightView.vue'
 import footView from '@/components/footView.vue'
 import { getImageTeam,getImageCountry  } from '@/composables/useImage.js';
 import { fetchPosts ,fetchAllPosts } from '@/composables/useApi.js';
 import { useI18n } from 'vue-i18n';
+import { useDataStore } from '@/store/dataStore'
 
 export default {
   name: 'SoccerView',
@@ -161,6 +162,9 @@ export default {
     const { locale } = useI18n();
 
     const matchesByLeague = ref({}); //照聯賽區分的數據
+
+    const dataStore = useDataStore()
+    const leagueData = computed(() => dataStore.leagueData)
 
     // 右側傳來訊息
     const handleValue = async(receivedValue) => {
@@ -205,7 +209,7 @@ export default {
 
     //篩選出今日賽事的聯賽
     const filterLeaguesById = async (leagueIds) => {
-      leagues.value = leagueCache.value.leagueList.filter(league => leagueIds.includes(league.leagueId));
+      leagues.value = leagueData.value.leagueList.filter(league => leagueIds.includes(league.leagueId));
     }
 
     // 資料排列的整理
@@ -266,7 +270,7 @@ export default {
 
       loading.value = true;
 
-      leagueCache.value = await fetchPosts('https://befenscore.net/api/league-data')
+      leagueCache.value = leagueData.value;
       urlMatch.value = "https://befenscore.net/api/get-data"
       const data = await fetchPosts(urlMatch.value);
       posts.value = data

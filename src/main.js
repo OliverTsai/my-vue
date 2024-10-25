@@ -11,4 +11,9 @@ import i18n from './i18n'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-createApp(App).use(router).use(BootstrapVue3).use(i18n).use(ElementPlus).mount('#app')
+import { createPinia } from 'pinia'
+
+const app = createApp(App);
+const pinia = createPinia();
+
+app.use(router).use(BootstrapVue3).use(i18n).use(ElementPlus).use(pinia).mount('#app')

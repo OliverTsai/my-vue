@@ -89,9 +89,10 @@
 
 <script>
 import headView from '@/components/headView.vue'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import { useRoute } from 'vue-router';
 import { fetchPosts } from '@/composables/useApi.js';
+import { useDataStore } from '@/store/dataStore'
 
 export default {
     name:'mleagueView',
@@ -99,11 +100,14 @@ export default {
         headView,
     },
     setup(){
+
+        const dataStore = useDataStore()
+        const leagueData = computed(() => dataStore.leagueData)
+
         const route = useRoute();
         const leagueId = ref(String(route.params.id));
 
         const matchData = ref(null);
-        const leagueData = ref(null);
 
         const leagues = ref([]);
         const leagueContent = ref({});
@@ -116,7 +120,6 @@ export default {
                 isLoading.value = true;
 
                 matchData.value = await fetchPosts('https://befenscore.net/api/get-data')
-                leagueData.value = await fetchPosts('https://befenscore.net/api/league-data')
 
                 isLoading.value = false;
             }catch(error){
