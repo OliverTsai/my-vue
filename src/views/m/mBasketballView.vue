@@ -209,7 +209,7 @@ export default {
     let leagueIds  = ref([]);
     const leagueCache = ref(null);
 
-    const urlMatch = ref('http://127.0.0.1:4999/bk/get-data')
+    const urlMatch = ref('https://befenscore.net/bk/get-data')
 
     const newTime = ref('');
 
@@ -265,7 +265,7 @@ export default {
 
         loading.value = true;
 
-        urlMatch.value = "http://127.0.0.1:4999/bk/get-data"
+        urlMatch.value = "https://befenscore.net/bk/get-data"
         const data = await fetchPosts(urlMatch.value);
         posts.value = data
         timeList(posts.value)
@@ -281,7 +281,7 @@ export default {
 
         loading.value = true;
 
-        urlMatch.value = "http://127.0.0.1:4999/bk/get-data"
+        urlMatch.value = "https://befenscore.net/bk/get-data"
         const data = await fetchAllPosts(urlMatch.value, selectButtonValue.value);
         posts.value = data;
         posts.value.matchList.sort((a, b) => new Date(a.matchTime) - new Date(b.matchTime));
@@ -320,7 +320,7 @@ export default {
       loading.value = true;
 
       leagueCache.value = leagueData.value;
-      urlMatch.value = "http://127.0.0.1:4999/bk/get-data";
+      urlMatch.value = "https://befenscore.net/bk/get-data";
       posts.value = await fetchPosts(urlMatch.value);
       newTime.value = formatDate(new Date());
       console.log(newTime.value)
@@ -430,7 +430,7 @@ export default {
       selectedDates.setDate(parts[1].split(' ')[0]);
       const formattedDate = selectmatDate(selectedDates);
       newTime.value = formattedDate
-      urlMatch.value = `http://127.0.0.1:4999/bk/get-days/${formattedDate}`;
+      urlMatch.value = `https://befenscore.net/bk/get-days/${formattedDate}`;
       // urlMatch.value = `/api/football/schedule.aspx?date=${formattedDate}&key=4F85B2B3E6B54006`;
       posts.value = await fetchPosts(urlMatch.value);
 

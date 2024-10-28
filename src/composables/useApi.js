@@ -17,9 +17,9 @@ export const fetchAllPosts = async (url, selectButtonValue) => {
         let filteredData = data;
 
         if (selectButtonValue === 'schedule') {
-            filteredData.matchList = data.matchList.filter(post => post.state === 0);
+            filteredData.matchList = data.matchList.filter(post => post.matchState === 0);
         } else if (selectButtonValue === 'finished') {
-            filteredData.matchList = data.matchList.filter(post => post.state === -1);
+            filteredData.matchList = data.matchList.filter(post => post.matchState === -1);
         }
         return filteredData;
     } catch (error) {

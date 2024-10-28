@@ -19,7 +19,7 @@ export const useDataStore = defineStore('dataStore', {
         async bkLeagueData() {
             if (!this.bkleagueData) {  // 檢查快取中是否已有數據
                 try {
-                    this.bkleagueData = await fetchPosts('http://127.0.0.1:4999/bk/league-data')
+                    this.bkleagueData = await fetchPosts('https://befenscore.net/bk/league-data')
                 } catch (error) {
                     console.error('Failed to fetch league data:', error)
                 }
