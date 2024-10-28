@@ -28,6 +28,7 @@ export default {
     onMounted(async() => {
       window.addEventListener('resize', handleResize);
       await dataStore.fetchLeagueData();
+      await dataStore.bkLeagueData();
     });
 
     onBeforeUnmount(() => {

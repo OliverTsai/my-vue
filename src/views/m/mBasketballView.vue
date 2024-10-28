@@ -33,12 +33,12 @@
           </div>
           <div class="mbodyList">
             <div v-if="!posts.matchList || posts.matchList.length === 0">
-                    <div class="NoValueFrame">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
-                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg><br>
-                        <div>無正在進行的賽事</div>
-                    </div>
+                <div class="NoValueFrame">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+                        <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg><br>
+                    <div>無正在進行的賽事</div>
+                </div>
             </div>
             <div v-else>
               <div v-for="league in leagues" :key="league.leagueId">
@@ -56,33 +56,33 @@
                       <div class="bodyListBox w-100">
                         <div v-if="selectButtonValue === 'live'" class="mColumnW18">
                           <div>{{ formatTime(post.matchTime) }}</div>
-                          <div v-if="post.state === 3" class="text-danger">{{ proTime(post.startTime)+45 }}<span class="blinking">'</span></div>
-                          <div v-else-if="post.state === 2">{{ $t('halftime') }}</div>
+                          <div v-if="post.matchState === 3" class="text-danger">{{ proTime(post.startTime)+45 }}<span class="blinking">'</span></div>
+                          <div v-else-if="post.matchState === 2">{{ $t('halftime') }}</div>
                           <div v-else class="text-danger">{{ proTime(post.startTime) }}<span class="blinking">'</span></div>
                         </div>
                         <div v-else class="mColumnW18">
                           <div>{{ formatTime(post.matchTime) }}</div>
-                          <div>{{ $t(getMatchState(post.state)) }}</div>
+                          <div>{{ $t(getMatchState(post.matchState)) }}</div>
                         </div>
                         <div class="mColumnW62 leftBox">
                           <div class="teamBd">
                             <div class="teamImgBox">
-                              <img :src="getImageTeam(post.homeId)" class="w-100">
+                              <img :src="getImageTeam(post.homeTeamId)" class="w-100">
                             </div>
-                            <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.homeCht }}</div>
-                            <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.homeChs }}</div>
-                            <div v-else>{{ post.homeEn }}</div>
+                            <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.homeTeamCht }}</div>
+                            <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.homeTeamChs }}</div>
+                            <div v-else>{{ post.homeTeamEn }}</div>
                           </div>
                           <div class="teamBd">
                             <div class="teamImgBox">
-                              <img :src="getImageTeam(post.awayId)" class="w-100">
+                              <img :src="getImageTeam(post.awayTeamId)" class="w-100">
                             </div>
-                            <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.awayCht }}</div>
-                            <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.awayChs }}</div>
-                            <div v-else>{{ post.awayEn }}</div>
+                            <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.awayTeamCht }}</div>
+                            <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.awayTeamChs }}</div>
+                            <div v-else>{{ post.awayTeamEn }}</div>
                           </div>
                         </div>
-                        <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(post.state)">
+                        <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(post.matchState)">
                           <div class="bodyRouterBox rightBox">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
                               <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
@@ -197,7 +197,7 @@ export default {
   setup() {
 
     const dataStore = useDataStore()
-    const leagueData = computed(() => dataStore.leagueData)
+    const leagueData = computed(() => dataStore.bkleagueData || { leagueList: [] })
       
     let posts = ref([]);
     let leagues = ref(null);
@@ -209,7 +209,7 @@ export default {
     let leagueIds  = ref([]);
     const leagueCache = ref(null);
 
-    const urlMatch = ref('https://befenscore.net/api/get-data')
+    const urlMatch = ref('http://127.0.0.1:4999/bk/get-data')
 
     const newTime = ref('');
 
@@ -236,17 +236,19 @@ export default {
     // 比賽狀態
     const stateMap = {
       0: 'Schedule',
-      1: 'first_half',
-      2: 'midfield',
-      3: 'second_half',
-      4: 'overtime',
-      5: 'penalty_kick',
-      '-10': 'cancel',
-      '-11': 'tbd',
-      '-12': 'cut_in_half',
-      '-13': 'discontinue',
-      '-14': 'postpone',
-      '-1': 'Finished'
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'one_ot',
+      6: 'two_ot',
+      7: 'three_ot',
+      50:'midfield',
+      '-1': 'Finished',
+      '-2': 'tbd',
+      '-3': 'discontinue',
+      '-4': 'cancel',
+      '-5': 'postpone',
     };
 
     const getMatchState = (state) => {
@@ -263,7 +265,7 @@ export default {
 
         loading.value = true;
 
-        urlMatch.value = "https://befenscore.net/api/get-data"
+        urlMatch.value = "http://127.0.0.1:4999/bk/get-data"
         const data = await fetchPosts(urlMatch.value);
         posts.value = data
         timeList(posts.value)
@@ -279,7 +281,7 @@ export default {
 
         loading.value = true;
 
-        urlMatch.value = "https://befenscore.net/api/get-data"
+        urlMatch.value = "http://127.0.0.1:4999/bk/get-data"
         const data = await fetchAllPosts(urlMatch.value, selectButtonValue.value);
         posts.value = data;
         posts.value.matchList.sort((a, b) => new Date(a.matchTime) - new Date(b.matchTime));
@@ -318,9 +320,8 @@ export default {
       loading.value = true;
 
       leagueCache.value = leagueData.value;
-      urlMatch.value = "https://befenscore.net/api/get-data";
-      const data = await fetchPosts(urlMatch.value);
-      posts.value = data
+      urlMatch.value = "http://127.0.0.1:4999/bk/get-data";
+      posts.value = await fetchPosts(urlMatch.value);
       newTime.value = formatDate(new Date());
       console.log(newTime.value)
       timeList(posts.value)
@@ -335,6 +336,14 @@ export default {
           autoUpdate();
         }
       },30000)
+    });
+
+    //監聽快取聯賽資料
+    watch(() => dataStore.leagueData, (newData) => {
+      if (newData) {
+        leagueData.value = newData;
+        autoUpdate();  // 或其他初始化函數
+      }
     });
 
     // 自動更新函數
@@ -396,7 +405,7 @@ export default {
 
     // 抓出有在比賽的排列
     const timeList = (data) =>{
-      posts.value.matchList = data.matchList.filter(match => match.state >= 1 && match.state <= 5);
+      posts.value.matchList = data.matchList.filter(match => match.matchState >= 1 && match.matchState <= 7);
     }
 
     // 按照聯賽排列
@@ -421,7 +430,7 @@ export default {
       selectedDates.setDate(parts[1].split(' ')[0]);
       const formattedDate = selectmatDate(selectedDates);
       newTime.value = formattedDate
-      urlMatch.value = `https://befenscore.net/api/get-days/${formattedDate}`;
+      urlMatch.value = `http://127.0.0.1:4999/bk/get-days/${formattedDate}`;
       // urlMatch.value = `/api/football/schedule.aspx?date=${formattedDate}&key=4F85B2B3E6B54006`;
       posts.value = await fetchPosts(urlMatch.value);
 
