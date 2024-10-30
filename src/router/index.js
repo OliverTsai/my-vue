@@ -12,6 +12,10 @@ import BasketballView from '@/views/BasketballView.vue';
 import mBasketballView from '@/views/m/mBasketballView.vue';
 import mLeagueView from '@/views/m/mLeagueView.vue';
 import LeagueView from '@/views/LeagueView.vue';
+import mBkLeagueView from '@/views/m/mBkLeagueView.vue';
+import BkLeagueView from '@/views/BkLeagueView.vue';
+import mBkLiveView from '@/views/m/mBkLiveView.vue';
+import BkLiveView from '@/views/BkLiveView.vue';
 
 import LineUp from '@/components/Soccer_LineUpView.vue';
 import mLineUp from '@/components/m/mSoccer_LineUpView.vue';
@@ -35,6 +39,11 @@ const routes = [
     component: store.isMobile ? mLiveView : LiveView,
   },
   {
+    path: '/bk_live/:date/:id',
+    name: 'bk_live',
+    component: store.isMobile ? mBkLiveView : BkLiveView,
+  },
+  {
     path: '/soccer',
     name: 'soccer',
     component: store.isMobile ? mSoccerView : SoccerView,
@@ -48,6 +57,11 @@ const routes = [
     path: '/league/:id',
     name: 'league',
     component: store.isMobile ? mLeagueView : LeagueView,
+  },
+  {
+    path: '/bk_league/:id',
+    name: 'bk_league',
+    component: store.isMobile ? mBkLeagueView : BkLeagueView,
   },
   {
     path: '/LineUp',

@@ -46,7 +46,7 @@
                   <div class="teamImgBox">
                     <img :src="getImageCountry(league.countryId)" class="rounded-circle w-100 h-100">
                   </div>
-                  <router-link :to="{ name: 'league', params: { id: league.leagueId } }" class="bodyRouterBox nowrap">
+                  <router-link :to="{ name: 'bk_league', params: { id: league.leagueId } }" class="bodyRouterBox nowrap">
                     <div class="ColumnW52 bodyListTitle-fontSize ms-2">{{ getLeagueName(league,'name') }}</div>
                   </router-link>
                 </div>
@@ -100,73 +100,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <div v-for="post in posts.matchList" :key="post.matchId">
-                <div class="mbodyLiveTitle">
-                  <div class="teamImgBox">
-                    <img :src="getImageCountry(post.countryId)" class="rounded-circle w-100 h-100">
-                  </div>
-                  <div v-if="this.$i18n.locale === 'zh_hk'" class="ml-2">{{ post.leagueNameCht }}</div>
-                  <div v-if="this.$i18n.locale === 'zh_cn'" class="ml-2">{{ post.leagueNameChs }}</div>
-                  <div v-if="this.$i18n.locale === 'en'" class="ml-2">{{ post.leagueNameEn }}</div>
-                </div>
-                <router-link :to="{ name: 'live', params: { id: post.matchId } }" class="bodyRouterBox">
-                  <div class="mbodyListBox mbodyListLine">
-                    <div class="mColumnW18">
-                      <div v-if="selectButtonValue === 'live'">
-                        <div>{{ formatTime(post.matchTime) }}</div>
-                        <div v-if="post.state === 3">{{ proTime(post.startTime)+45 }}</div>
-                        <div v-else-if="post.state === 2">{{ $t('halftime') }}</div>
-                        <div v-else>{{ proTime(post.startTime) }}</div>
-                      </div>
-                      <div v-else>
-                        <div>{{ formatTime(post.matchTime) }}</div>
-                        <div v-if="post.state === 0">{{ $t('Schedule') }}</div>
-                        <div v-if="post.state === 1">{{ $t('first_half') }}</div>
-                        <div v-if="post.state === 2">{{ $t('midfield') }}</div>
-                        <div v-if="post.state === 3">{{ $t('second_half') }}</div>
-                        <div v-if="post.state === 4">{{ $t('overtime') }}</div>
-                        <div v-if="post.state === 5">{{ $t('penalty_kick') }}</div>
-                        <div v-if="post.state === -10">{{ $t('cancel') }}</div>
-                        <div v-if="post.state === -11">{{ $t('tbd') }}</div>
-                        <div v-if="post.state === -12">{{ $t('cut_in_half') }}</div>
-                        <div v-if="post.state === -13">{{ $t('discontinue') }}</div>
-                        <div v-if="post.state === -14">{{ $t('postpone') }}</div>
-                        <div v-if="post.state === -1">{{ $t('Finished') }}</div>
-                      </div>
-                      
-                    </div>
-                    <div class="mColumnW62 leftBox">
-                      <div class="teamBd">
-                        <div class="teamImgBox">
-                          <img :src="getImageTeam(post.homeId)" class="w-100">
-                        </div>
-                        <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.homeCht }}</div>
-                        <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.homeChs }}</div>
-                        <div v-else>{{ post.homeEn }}</div>
-                      </div>
-                      <div class="teamBd">
-                        <div class="teamImgBox">
-                          <img :src="getImageTeam(post.awayId)" class="w-100">
-                        </div>
-                        <div v-if="this.$i18n.locale === 'zh_hk'">{{ post.awayCht }}</div>
-                        <div v-else-if="this.$i18n.locale === 'zh_cn'">{{ post.awayChs }}</div>
-                        <div v-else>{{ post.awayEn }}</div>
-                      </div>
-                    </div>
-                    <div class="mColumnW10 rightBox" v-if="[1, 2, 3, 4, 5].includes(post.state)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
-                        <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1m2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848z" />
-                        <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5z" />
-                      </svg>
-                    </div>
-                    <div class="mColumnW10 rightBox" v-else></div>
-                    <div class="mColumnW10 mrightBox">
-                      <div>{{ post.homeScore }}</div>
-                      <div>{{ post.awayScore }}</div>
-                    </div>
-                  </div>
-                </router-link>
-              </div> -->
             </div>
           </div>
         </div>
@@ -187,7 +120,7 @@ import headView from '@/components/m/mHeadView.vue';
 // import { ref, onMounted ,watch ,computed, reactive } from 'vue'
 import { ref, onMounted ,watch ,computed } from 'vue';
 import { getImageTeam,getImageCountry  } from '@/composables/useImage.js';
-import { fetchPosts ,fetchAllPosts } from '@/composables/useApi.js';
+import { fetchPosts ,bkFetchAllPosts } from '@/composables/useApi.js';
 import { useI18n } from 'vue-i18n';
 import { useDataStore } from '@/store/dataStore'
 // import axios from 'axios';
@@ -282,7 +215,7 @@ export default {
         loading.value = true;
 
         urlMatch.value = "https://befenscore.net/bk/get-data"
-        const data = await fetchAllPosts(urlMatch.value, selectButtonValue.value);
+        const data = await bkFetchAllPosts(urlMatch.value, selectButtonValue.value);
         posts.value = data;
         posts.value.matchList.sort((a, b) => new Date(a.matchTime) - new Date(b.matchTime));
         newTime.value = formatDate(new Date())
