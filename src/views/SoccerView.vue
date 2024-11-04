@@ -164,7 +164,7 @@ export default {
     const matchesByLeague = ref({}); //照聯賽區分的數據
 
     const dataStore = useDataStore()
-    const leagueData = computed(() => dataStore.leagueData)
+    const leagueData = computed(() => dataStore.leagueData || { leagueList: [] })
 
     // 右側傳來訊息
     const handleValue = async(receivedValue) => {

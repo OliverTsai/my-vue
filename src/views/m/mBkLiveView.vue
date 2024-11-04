@@ -12,8 +12,8 @@
             <div class="scoreBox">
               <div class="">
                 <div class="titleImgBox">
-                  <img :src="getImageTeam(posts?.homeId)"><br>
-                  <a class="">{{ getLeagueName(posts,'home') }}</a>
+                  <img :src="getImageTeam(posts?.homeTeamId)"><br>
+                  <a class="">{{ getLeagueName(posts,'homeTeam') }}</a>
                   <!-- <a class="">{{ posts?.homeCht }}</a> -->
                 </div>
               </div>
@@ -29,8 +29,8 @@
               
               <div class="">
                 <div class="titleImgBox">
-                  <img :src="getImageTeam(posts?.awayId)"><br>
-                  <a class="">{{ getLeagueName(posts,'away') }}</a>
+                  <img :src="getImageTeam(posts?.awayTeamId)"><br>
+                  <a class="">{{ getLeagueName(posts,'awayTeam') }}</a>
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@
   
     <!-- 技術分析資料 -->
     <div v-if="pag == 0 || pag == 2">
-      <div v-if="detail_date.length == 0">
+      <div v-if="!detail_date">
         <div id="">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
@@ -112,8 +112,8 @@
             </svg>&nbsp;{{ $t('analysis') }}
           </div>
           <div class="">
-            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'homeTeam') }}</a></div>
+            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'awayTeam') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
           <div class="" style="clear: both;"></div>
         </div>
@@ -134,21 +134,30 @@
             </svg>&nbsp;{{ $t('analysis') }}
           </div>
           <div class="">
-            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'homeTeam') }}</a></div>
+            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'awayTeam') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
           <div class="" style="clear: both;"></div>
         </div>
-  
-        <div v-for="(data,index) in detail_date" :key="index">
-          <div class="detailBox">
-            <div style="width: 20%; text-align: left; text-decoration:none;">
-              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': data.homeValue > data.awayValue }">{{ data.homeValue }}</a>
-            </div>
-            <div style="width: 60%; text-align: center; text-decoration:none;">{{ $t(data.parameter) }}</div>
-            <div style="width: 20%; text-align: right; text-decoration:none;">
-              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': data.awayValue > data.homeValue }">{{ data.awayValue }}</a>
-            </div>
+
+        <div>
+          <div v-if="detail_date.homeScore && detail_date.awayScore ">
+            {{ detail_date.homeScore }} 得分 {{ detail_date.awayScore }}
+          </div>
+          <div v-if="detail_date.homeFast && detail_date.awayFast">
+            {{ detail_date.homeFast }} 快攻得分 {{ detail_date.awayFast }}
+          </div>
+          <div v-if= "detail_date.homeInside && detail_date.awayInside ">
+            {{ detail_date.homeInside }} 内线得分 {{ detail_date.awayInside }}
+          </div>
+          <div v-if="detail_date.homeTotalmis && detail_date.awayTotalmis ">
+            {{ detail_date.homeTotalmis }} 总失误 {{ detail_date.awayTotalmis }}
+          </div>
+          <div v-if="detail_date.homeSecTimeout && detail_date.awaySecTimeout">
+            {{ detail_date.homeSecTimeout }} 剩余暂停次数 {{ detail_date.awaySecTimeout }}
+          </div>
+          <div v-if="detail_date.homeSecFouls && detail_date.awaySecFouls ">
+            {{ detail_date.homeSecFouls }} 犯规次数 {{ detail_date.awaySecFouls }}
           </div>
         </div>
       </div>
@@ -165,8 +174,8 @@
             </svg>&nbsp;{{ $t('text_live') }}
           </div>
           <div class="">
-            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'homeTeam') }}</a></div>
+            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'awayTeam') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
           <div class="" style="clear: both;"></div>
         </div>
@@ -187,8 +196,8 @@
             </svg>&nbsp;{{ $t('text_live') }}
           </div>
           <div class="">
-            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'homeTeam') }}</a></div>
+            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'awayTeam') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
           <div class="" style="clear: both;"></div>
         </div>
@@ -292,7 +301,7 @@
     </div>
     <!-- 陣容資料 -->
     <div v-if="pag == 0 || pag == 3">
-      <div v-if="dataLine.length == 0">
+      <div v-if="!detail_date">
         <div id="">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
@@ -300,12 +309,12 @@
             </svg>&nbsp;{{ $t('line') }}
           </div>
           <div class="">
-            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'homeTeam') }}</a></div>
+            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'awayTeam') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
           <div class="" style="clear: both;"></div>
         </div>
-  
+
         <div class="NoValueFrame">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
             <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
@@ -314,7 +323,7 @@
       </div>
       
       <div v-else>
-  
+
         <div id="">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
@@ -322,86 +331,31 @@
             </svg>&nbsp;{{ $t('line') }}
           </div>
           <div class="">
-            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+            <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'homeTeam') }}</a></div>
+            <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'awayTeam') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
           </div>
           <div class="" style="clear: both;"></div>
         </div>
-  
-  
-  
-  
-        <div class="LineupFrame">
-          <div v-for="line in dataLine" :key="line.matchId" class="lineBd">
-            <div class="VSLineup1st-Title">首發陣容</div>
-            <div class="mlineBox">
-  
-              <div class="VSLineup1st-col">
-                
-                <!-- <div>主隊陣行{{ line.homeArray }}</div> -->
-                <!--<div class="VSLineup1st-TitleSub">主隊首發</div>-->
-                <div class="">
-                  <div v-for="home in line.homeLineup" :key="home.positionId" class="VSLineup1st-col">
-                    <a class="NumberBgHome">{{ home.number }}</a>&nbsp;
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill ColorHome" viewBox="0 0 16 16">
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>&nbsp;{{ getLeagueName(home,'name') }}
-                  </div>
-                </div>
-                <!--<div class="straight-line"></div>-->
+
+
+
+
+        <div class="bkLineBox">
+          <div v-for="line in detail_date.homePlayerList" :key="line.matchId" class="">
+            <div class="">
+
+              <div class="">
+                {{ line.playerCht }}
               </div>
-  
-              <div class="VSLineup1st-col">
-                
-                <!-- <div class="">客隊陣行{{ line.awayArray }}</div> -->
-                <!--<div class="VSLineup1st-TitleSub">客隊首發</div>-->
-                <div v-for="away in line.awayLineup" :key="away.positionId" class="VSLineup1st-col">
-                  <a class="NumberBgAway">{{ away.number }}</a>&nbsp;
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill ColorAway" viewBox="0 0 16 16">
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>&nbsp;{{ getLeagueName(away,'name') }}
-                </div>
-                <!--<div class="straight-line"></div>-->
-              </div>
-  
-  
+
             </div>
-            
           </div>
-  
-  
-  
-  
-          <div v-for="line in dataLine" :key="line.matchId" class="lineBd">
-            <div class="VSLineup1st-Title">替補陣容</div>
-            <div class="mlineBox">
-  
-              <div class="VSLineup1st-col">
-                
-                <!-- <div>主隊陣行{{ line.homeArray }}</div> -->
-                <!--<div class="VSLineup1st-TitleSub">主隊替補</div>-->
-                <div class="">
-                  <div v-for="home in line.homeBackup" :key="home.positionId" class="VSLineup1st-col">
-                    <a class="NumberBgHome">{{ home.number }}</a>&nbsp;
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill ColorHome" viewBox="0 0 16 16">
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>&nbsp;{{ getLeagueName(home,'name') }}
-                  </div>
-                </div>
-                <!--<div class="straight-line"></div>-->
-              </div>
-  
-              <div class="VSLineup1st-col">
-                
-                <!-- <div class="">客隊陣行{{ line.awayArray }}</div> -->
-                <!--<div class="VSLineup1st-TitleSub">客隊替補</div>-->
-                <div v-for="away in line.homeBackup" :key="away.positionId" class="VSLineup1st-col">
-                  <a class="NumberBgAway">{{ away.number }}</a>&nbsp;
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill ColorAway" viewBox="0 0 16 16">
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>&nbsp;{{ getLeagueName(away,'name') }}
-                </div>
-                <!--<div class="straight-line"></div>-->
+        </div>
+        <div class="bkLineBox">
+          <div v-for="line in detail_date.awayPlayerList" :key="line.matchId" class="">
+            <div class="">
+              <div class="">
+                {{ line.playerCht }}
               </div>
             </div>
           </div>
@@ -456,7 +410,7 @@
       // 動畫畫面
       const updateUrl  = () => {
         auth.value = md5(accessKey.value + ts.value + secret.value).toUpperCase();
-        url.value = `https://zhibo.feijing88.com/football/detail.html?matchId=${matchId.value}&accessKey=${accessKey.value}&ts=${ts.value}&auth=${auth.value}&statsPanel=HIDE`;
+        url.value = `https://zhibo.feijing88.com/basketball/detail.html?matchId=${matchId.value}&accessKey=${accessKey.value}&ts=${ts.value}&auth=${auth.value}&statsPanel=HIDE`;
       }
   
       // 翻譯
@@ -476,7 +430,7 @@
       // 抓不同日期資料
       const dateUrl = async() => {
         try {
-          const response = await fetchPosts(`https://befenscore.net/api/get-data`);
+          const response = await fetchPosts(`https://befenscore.net/bk/get-data`);
           const matchIdNum = Number(matchId.value);
           const data = response.matchList.filter(post => post.matchId === matchIdNum);
   
@@ -486,7 +440,7 @@
             homeId.value = data[0].homeId
           }else{
             //非當日資料
-            const response = await fetchPosts(`https://befenscore.net/api/get-days/${specity_date.value}`);
+            const response = await fetchPosts(`https://befenscore.net/bk/get-days/${specity_date.value}`);
             const matchIdNum = Number(matchId.value);
             const data = response.matchList.filter(post => post.matchId === matchIdNum);
             posts.value = data[0];
@@ -526,24 +480,24 @@
       // 抓取技術分析資料
       const detail = async() => {
         try {
-          const response = await fetchPosts(`https://befenscore.net/api/detail`);
+          const response = await fetchPosts(`https://befenscore.net/bk/detail`);
           const matchIdNum = Number(matchId.value);
-          const data = response.technic.filter(data => Number(data.matchId) === matchIdNum);
+          const data = response.matchList.filter(data => Number(data.matchId) === matchIdNum);
+          console.log('111')
+          console.log(data[0])
           if (data.length > 0) {
-            // 將 technicCount 分析並存儲到 detail_date
-            const allData = parseTechnicData(data[0]['technicCount']);
-            detail_date.value = allData.filter(data => data !== null);
-            console.log(detail_date.value);
+            // 將資料儲存到 detail_date
+            detail_date.value = data[0];
+            console.log(detail_date)
           } else {
             // 假如今日無
             try{
-              const response = await fetchPosts(`https://befenscore.net/api/all_detail/${specity_date.value}`);
+              const response = await fetchPosts(`https://befenscore.net/bk/all_detail/${specity_date.value}`);
               const matchIdNum = Number(matchId.value);
-              const data = response.technic.filter(data => Number(data.matchId) === matchIdNum);
+              const data = response.matchList.filter(data => Number(data.matchId) === matchIdNum);
               if (data.length > 0) {
-              // 將 technicCount 分析並存儲到 detail_date
-              const allData = parseTechnicData(data[0]['technicCount']);
-              detail_date.value = allData.filter(data => data !== null);
+              // 將資料儲存到 detail_date
+              detail_date.value = data[0];
               }else{
                 console.warn('找不到匹配的比賽數據');
               }
@@ -556,57 +510,7 @@
           console.error('搜索當日比賽數據錯誤:', error);
         }
       }
-  
-      // 參數映射表
-      const parameterMap = {
-        14: 'possession',       //控球率
-        3: 'shoot',             //射門
-        34: 'miss_shot',        //射門不中
-        4: 'shot_on',           //射正
-        6: 'corner_kick',       //角球
-        45: 'half_corner_kick', //半場角球
-        11: 'yellow_card',      //黃牌
-        43: 'attack',           //進攻
-        44: 'dangerous_attack', //危險進攻
-        37: 'shot_blocked',     //射門被擋
-        8: 'free_kick',         //任意球
-        41: 'pass_the_ball',    //傳球
-        42: 'pass_success_rate',  //傳球成功率
-        5: 'foul',               //犯規
-        9: 'offside',               //越位
-        16: 'save',               //救球
-        38: 'tackle',               //鏟球
-        39: 'extraordinary',               //過人
-        40: 'throw_in',               //界外球
-        35: 'center_column',               //中柱
-        19: 'successful_steal',               //成功搶斷
-        20: 'intercept',               //阻截
-        21: 'long_pass',               //長傳
-      };
-  
-      // 分析字串並更新 detail_date
-      const parseTechnicData = (technicString) => {
-        const result = technicString.split(';').map(item => {
-          const [parameter, homeValueRaw, awayValueRaw] = item.split(',');
-  
-          // 檢查參數是否在映射表中
-          if (!parameterMap[parameter]) {
-            return null; // 不在映射表中的參數返回 null
-          }
-  
-          // 嘗試將數值轉換為數字，如果轉換失敗則保持原本的字串
-          const homeValue = isNaN(Number(homeValueRaw)) ? homeValueRaw : Number(homeValueRaw);
-          const awayValue = isNaN(Number(awayValueRaw)) ? awayValueRaw : Number(awayValueRaw);
-          return {
-            parameter: parameterMap[parameter],
-            homeValue,
-            awayValue
-          };
-        });
-        return result;
-      };
-  
-  
+
       // 比賽進行時間
       const proTime = (time) =>{
         const newTime = new Date();
@@ -694,7 +598,9 @@
     justify-content: space-between;
   }
   
-  
+  .bkLineBox{
+    width: 30%;
+  }
   
   .mlineBox{
     display: flex;

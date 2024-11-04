@@ -52,7 +52,7 @@
                 </div>
                 <div v-if="matchesByLeague[league.leagueId]">
                   <div v-for="post in matchesByLeague[league.leagueId]" :key="post.matchId" class="mbodyListBox mbodyListLine">
-                    <router-link :to="{ name: 'live', params: { date:newTime,id: post.matchId } }" class="bodyRouterBox w-100">
+                    <router-link :to="{ name: 'bk_live', params: { date:newTime,id: post.matchId } }" class="bodyRouterBox w-100">
                       <div class="bodyListBox w-100">
                         <div v-if="selectButtonValue === 'live'" class="mColumnW18">
                           <div>{{ formatTime(post.matchTime) }}</div>
