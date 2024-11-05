@@ -339,8 +339,8 @@
 
 
 
-
-        <div class="bkLineBox">
+        <!-- 主隊 -->
+        <div class="HomeNameTitle">
           <div v-for="line in detail_date.homePlayerList" :key="line.matchId" class="">
             <div class="">
 
@@ -351,7 +351,9 @@
             </div>
           </div>
         </div>
-        <div class="bkLineBox">
+
+        <!-- 客隊 -->
+        <div class="AwayNameTitle">
           <div v-for="line in detail_date.awayPlayerList" :key="line.matchId" class="">
             <div class="">
               <div class="">
