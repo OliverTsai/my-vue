@@ -74,6 +74,12 @@ const messages = {
     one_ot: "1'OT",
     two_ot: "2'OT",
     three_ot: "3'OT",
+    bk_score: 'Score',
+    bk_fast_score: 'Fast Break Scoring',
+    bk_inside_score: 'Inside Score',
+    all_errors: 'Total Errors',
+    bk_pauses: 'Number of pauses remaining',
+    bk_fouls: 'Number of fouls',
   },
   zh_hk: {
     home: '首頁',
@@ -148,6 +154,12 @@ const messages = {
     one_ot: "1'OT",
     two_ot: "2'OT",
     three_ot: "3'OT",
+    bk_score: '得分',
+    bk_fast_score: '快攻得分',
+    bk_inside_score: '內線得分',
+    all_errors: '總失誤',
+    bk_pauses: '剩餘暫停次數',
+    bk_fouls: '犯規次數',
   },
   zh_cn: {
     home: '首页',
@@ -222,6 +234,12 @@ const messages = {
     one_ot: "1'OT",
     two_ot: "2'OT",
     three_ot: "3'OT",
+    bk_score: '得分',
+    bk_fast_score: '快攻得分',
+    bk_inside_score: '内线得分',
+    all_errors: '总失误',
+    bk_pauses: '剩余暂停次数',
+    bk_fouls: '犯规次数',
   },
   thai: {
     home: 'หน้าแรก',
@@ -296,12 +314,18 @@ const messages = {
     one_ot: "1'OT",
     two_ot: "2'OT",
     three_ot: "3'OT",
+    bk_score: 'คะแนน',
+    bk_fast_score: 'จุดพักที่รวดเร็ว',
+    bk_inside_score: 'คะแนนภายใน',
+    all_errors: 'ข้อผิดพลาดทั้งหมด',
+    bk_pauses: 'จำนวนการหยุดชั่วคราวที่เหลือ',
+    bk_fouls: 'จำนวนครั้งของฟาวล์',
   }
 }
 
 const i18n = createI18n({
-  locale: 'zh_hk', // 设置默认语言
+  locale: 'en', // 设置默认语言
   messages
 })
 
-export default i18n
+export default i18n;

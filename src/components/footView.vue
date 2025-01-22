@@ -1,5 +1,5 @@
 <template>
-  <div class="counter mt-5 mb-3">
+  <div class="counter mt-5 mb-3" style="">
     <div>
       <!--<span class="warning">
         <div>注意:网上有诈骗.所有在本站刊登广告的网站和内容，一概与本站无关，请各位网友密切注意</div>
@@ -22,6 +22,10 @@ export default {
 </script>
 
 <style lang="scss">
+body{
+  background: #f5f5f5;
+}
+
 .footer {
     width: 100%;
     text-align: center;

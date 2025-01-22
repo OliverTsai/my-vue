@@ -29,7 +29,8 @@ const isActive = (path) => {
 .bodyBd{
   display: flex;
 	justify-content: center;
-  padding: 20px 10px 0px 10px;
+  //padding: 20px 10px 0px 10px;
+  padding: 0px !important; /*K*/
 }
 
 .bodyBox{
@@ -48,7 +49,7 @@ const isActive = (path) => {
   align-items: center;
   white-space: nowrap;
   font-size: 0.9rem;
-  margin: 5px 0px 5px 0px;
+  margin: 5px 5px 5px 5px;
 
   .btnBox{
     color: #222;
@@ -86,11 +87,6 @@ const isActive = (path) => {
     .mbodyListTitleLeft{
       display: flex;
       gap:1rem;
-
-      .leftBox{
-        display: flex;
-        align-items: center;
-      }
     }
 
     .mbodyListTitleright{
@@ -164,7 +160,6 @@ const isActive = (path) => {
   padding: 2px 1px 2px 1px;
   
 
-
   .leftBox{
     display: flex;
     flex-direction:column;
@@ -179,13 +174,22 @@ const isActive = (path) => {
     color: red;
   }
   
+  .mleftBox{
+    display: flex;
+    flex-direction:column;
+    align-items: start;
+  }
+  
   .mrightBox{
     display: flex;
     flex-direction:column;
     align-items: end;
     justify-content: center;
     padding-right: 0.5rem;
+    justify-content: center;
+    color: red;
   }
+  
 
   .lineBox{
     box-shadow: -5px 0 6px -5px rgba(0, 0, 0, .2);
@@ -213,5 +217,7 @@ const isActive = (path) => {
 
 
 }
+
+
 
 </style>

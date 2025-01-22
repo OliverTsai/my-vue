@@ -126,17 +126,19 @@ export default {
         // 比賽狀態
         const stateMap = {
             0: 'Schedule',
-            1: 'first_half',
-            2: 'midfield',
-            3: 'second_half',
-            4: 'overtime',
-            5: 'penalty_kick',
-            '-10': 'cancel',
-            '-11': 'tbd',
-            '-12': 'cut_in_half',
-            '-13': 'discontinue',
-            '-14': 'postpone',
-            '-1': 'Finished'
+            1: 'one',
+            2: 'two',
+            3: 'three',
+            4: 'four',
+            5: 'one_ot',
+            6: 'two_ot',
+            7: 'three_ot',
+            50:'midfield',
+            '-1': 'Finished',
+            '-2': 'tbd',
+            '-3': 'discontinue',
+            '-4': 'cancel',
+            '-5': 'postpone',
         };
 
         const getMatchState = (state) => {
@@ -189,15 +191,27 @@ export default {
 }
 
 .mrightBox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.mleftBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.rightBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .leftBox {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .teamBd{
@@ -233,8 +247,17 @@ export default {
   width: 2rem;
   height: 2rem;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 
 
+#footer {
+    text-align: center;
+    color: #ffffff;
+    background: #003e5d;
+    padding: 30px 5px 5px 5px;
+    height: 80px;
+    font-size: 0.8rem;
+}
 </style>

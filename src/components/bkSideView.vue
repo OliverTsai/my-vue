@@ -1,29 +1,29 @@
 <template>
-    <div class="msisdeBd">
-        <div class="msideBox head">
-            <div class="mb-2"> {{ $t('Popular') }} </div>
+    <div class="sisdeBd">
+        <div class="sideBox">
+            <div class="sideText"> {{ $t('Popular') }} </div>
         </div>
         <div class="sideLine"></div>
         <!-- 迴圈顯示熱門賽事資料 -->
         <div v-if="leagues.length">
-            <div v-for="league in matchData" :key="league.leagueId" class="msideBox body mbtnTM" @click="selectLeagues(league.leagueId)">
+            <div v-for="league in leagues" :key="league.leagueId" class="sideBox body" @click="selectLeagues(league.leagueId)">
                 <div class="sideImg">
-                    <img :src="getImageLeague(league.leagueId)" class="h-100">
+                    <img :src="getImageLeague(league.leagueId)" class="h-100" loading="lazy">
                 </div>
-                <div v-if="this.$i18n.locale === 'zh_hk'" class="sideText">{{ league.leagueCht }}</div>
-                <div v-else-if="this.$i18n.locale === 'zh_cn'" class="sideText">{{ league.leagueChs }}</div>
-                <div v-else-if="this.$i18n.locale === 'en'" class="sideText">{{ league.leagueEn }}</div>
-                <div v-else class="sideText">{{ league.leagueEn }}</div>
+                <div v-if="this.$i18n.locale === 'zh_hk'" class="sideText">{{ league.nameCht }}</div>
+                <div v-else-if="this.$i18n.locale === 'zh_cn'" class="sideText">{{ league.nameChs }}</div>
+                <div v-else-if="this.$i18n.locale === 'en'" class="sideText">{{ league.nameEn }}</div>
+                <div v-else class="sideText">{{ league.nameEn }}</div>
             </div>
         </div>
         <!-- 迴圈顯示國家資料 -->
-        <div class="msideBox head">
-            <div class="mb-2"> {{ $t('National') }}</div>
+        <div class="sideBox head">
+            <div class="sideText"> {{ $t('National') }}</div>
         </div>
         <div class="sideLine"></div>
         <!-- 熱門國家下拉選單 -->
         <div v-for="(country, index) in topItems" :key="index" class="countryBox">
-            <div class="msideBox body mbtnTM" @click="clickCountry(country.id)">
+            <div class="sideBox body" @click="clickCountry(country.id)">
                 <div class="sideImg">
                     <img :src="getImageCountry(country.id)" class="w-100">
                 </div>
@@ -34,10 +34,10 @@
             </div>
             <div v-show="selectedCountry === country.id" class="matchList mbtnTM">
                 <div v-for="match in countryLeagues" :key="match.leagueId" @click="selectLeagues(match.leagueId)">
-                    <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.leagueCht }}</a>
-                    <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.leagueChs }}</a>
-                    <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.leagueEn }}</a>
-                    <div v-else class="K-dropdown-item text-start">{{  match.leagueEn}}</div>
+                    <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.nameCht }}</a>
+                    <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.nameChs }}</a>
+                    <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.nameEn }}</a>
+                    <div v-else class="K-dropdown-item text-start">{{  match.nameEn}}</div>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
         <!-- 其他國家 -->
         <div v-if="showMore == true">
             <div v-for="(country, index) in countList" :key="index" class="countryBox">
-                <div class="msideBox body mbtnTM" @click="clickCountry(country.id)">
+                <div class="sideBox body" @click="clickCountry(country.id)">
                     <div class="sideImg">
                         <img :src="getImageCountry(country.id)" class="w-100">
                     </div>
@@ -62,7 +62,7 @@
                         <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.nameCht }}</a>
                         <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.nameChs }}</a>
                         <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.nameEn }}</a>
-                        <a v-else class="K-dropdown-item text-start">{{ match.leagueEn }}</a>
+                        <a v-else class="K-dropdown-item text-start">{{ match.nameEn }}</a>
                     </div>
                 </div>
             </div>
@@ -72,16 +72,19 @@
 
 <script>
 import countList from '@/countryList.json'
-// import { ref, onMounted, computed,watch } from 'vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router';
 import { getImageCountry ,getImageLeague } from '@/composables/useImage.js';
 import { fetchPosts } from '@/composables/useApi.js';
-// import { useDataStore } from '@/store/dataStore'
+import { useDataStore } from '@/store/dataStore'
 
 export default {
     setup(){
 
+        const dataStore = useDataStore()
+        const leagueData = computed(() => dataStore.bkleagueData || { leagueList: [] })
+
+        const leaguesId = ref([]);
         const leagues = ref([]);
         const router = useRouter();
         const showMore = ref(false)
@@ -90,6 +93,7 @@ export default {
         const countryLeagues = ref([]);
         const selectedCountry = ref(null);
 
+        const countriesData = ref([])
         const matchData = ref([])
 
         const topItems = ref([
@@ -100,21 +104,33 @@ export default {
             { id: 5, en: 'France', zh_hk: '法國', zh_cn: "法国" }
         ]);
 
-        //監聽快取聯賽資料
-        // watch(() => dataStore.leagueData, (newData) => {
-        //     if (newData && newData.matchList) {
-        //         leagues.value = newData.matchList; // 將新數據的 matchList 賦值給 posts
-        //         fetchData()
-        //     } else {
-        //         leagues.value = []; // 沒有數據時設置為空數組
-        //     }
-        // });
-
         const fetchData = async () => {
             try {
                 // 使用 Promise.all 並行請求
-                const data = await fetchPosts(`https://befenscore.net/football/today-data/0`);
-                leagues.value = data.matchList
+                const matchDataResponse = await fetchPosts(`https://befenscore.net/api/get-data`);
+
+                // matchList 的處理
+                matchData.value = matchDataResponse.matchList;
+                for (const raw of matchData.value) {
+                    const leagueId = Number(raw.leagueId);
+                    if (!leaguesId.value.includes(leagueId)) {
+                        leaguesId.value.push(leagueId);
+                    }
+                }
+
+                // leaguesList 的處理
+                if (!countriesData.value || countriesData.value.length === 0) {
+                    countriesData.value = leagueData.value.leagueList;
+
+                    if (leagueData.value && leagueData.value.leagueList) {
+                        leagues.value = leagueData.value.leagueList
+                            .filter(league => leaguesId.value.includes(Number(league.leagueId)))
+                            .slice(0, 10); // 限制為前 10 條聯賽資料
+                        console.log('Filtered Leagues:', leagues.value);
+                    } else {
+                        console.error('Invalid data format:', leagueData.value);
+                    }
+                }
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -124,23 +140,21 @@ export default {
         // 國家搜尋
         const selectCountryasync = async(countryId) =>{
             try{
-                const data = leagues.value
-
-                const id = String(countryId)
+                const data = countriesData.value
 
                 if (data){
                     countryLeagues.value = data.filter(league => 
-                    league.countryId === id);
+                        league.countryId === String(countryId) && leaguesId.value.includes(league.leagueId));
+                    console.log('Filtered country:', countryLeagues.value);
                 }
                 else if (data.leagueList) {
-                    countryLeagues.value = data.matchList.filter(league => 
-                        league.countryId === id);
+                    countryLeagues.value = data.leagueList.filter(league => 
+                        league.countryId === String(countryId) && leaguesId.value.includes(league.leagueId));
                     console.log('Filtered country:', countryLeagues.value);
                 } else {
                     console.error('Invalid data format:', data);
                 }
-
-                console.log(data)
+                console.log(countryLeagues)
 
             }catch(error){
                 console.error('Error fetching country:', error);
@@ -149,7 +163,7 @@ export default {
 
         // 賽事點擊
         const selectLeagues = async (leagueId) =>{
-            router.push({ name: 'league', params: { league_id: leagueId }, query: { t: Date.now() } });
+            router.push({ name: 'league', params: { bk_league_id: leagueId }, query: { t: Date.now() } });
         }
 
         // 國家點擊
@@ -159,8 +173,9 @@ export default {
         };
 
         onMounted(async () => {
+            // await matchList();
+            // await leaguesList();
             fetchData();
-            matchData.value = await fetchPosts(`https://befenscore.net/football/hot`);
         });
 
         return{
@@ -175,7 +190,6 @@ export default {
             topItems,
             countryLeagues,
             showMore,
-            matchData,
             selectedCountry
         }
     },
@@ -183,65 +197,58 @@ export default {
 </script>
 
 <style lang="scss">
-
-
-.msisdeBd{
+.sisdeBd{
     display: flex;
     flex-direction:column;
-    // gap:0.3rem;
-    padding: 0rem 0rem 0rem 0rem; /*K*/
-    width: 100%; /*K*/
+    gap:0.3rem;
+    padding: 0rem 1rem 0rem 0rem; /*K*/
+    width: 22%; /*K*/
 }
-.msideBox{
+.sideBox{
     display: flex;
     gap:0.3rem;
     align-items: center;
-    // height: 1.3rem; /*K*/
+    height: 1.3rem; /*K*/
+    margin: 3px 0px 3px 0px; /*K*/
 }
-.msideBox.head{
+.sideBox.head{
     margin-top: 2rem;
 }
-.msideBox.body{
+.sideBox.body{
 
 }
-.msideBox.body:hover {
-    // background-color: #d3d3d3; /* 灰色背景 */
+.sideBox.body:hover {
+    background-color: #d3d3d3; /* 灰色背景 */
     cursor: pointer;
 }
-.msideBox.up{
+.sideBox.up{
     flex-direction:column;
     align-items:start;
 }
-.msideLine{
+.sideLine{
     width: 100%;
     height: 1px; 
     background-color: #e0e1e2; 
     margin: 3px 0 3px 0; /*K*/
 }
-.msideImg{
+.sideImg{
     display: flex;
     align-items: center;
     width: 20px;
     height: 20px;
 }
-.msideTitle{
+.sideTitle{
     white-space: nowrap;
     font-size: 0.9rem; /*K*/
     font-weight: bold; /*K*/
     padding: 2px 0px 2px 0px; /*K*/
 }
 
-.msideText{
+.sideText{
     white-space: nowrap;
-    font-size: 0.9rem; /*K*/
-    // padding: 2px 0px 2px 0px; /*K*/
-    text-decoration:none; /*K*/
-    background-color: #ffffff;
-    border: 0px #ffffff;
+    font-size: 0.8rem; /*K*/
+    padding: 2px 0px 2px 0px; /*K*/
 }
-
-
-
 
 .dropdownContainer {
     margin-bottom: 1rem;

@@ -6,14 +6,14 @@
         <div class="sideLine"></div>
         <!-- 迴圈顯示熱門賽事資料 -->
         <div v-if="leagues.length">
-            <div v-for="league in leagues" :key="league.leagueId" class="sideBox body" @click="selectLeagues(league.leagueId)">
+            <div v-for="league in matchData" :key="league.leagueId" class="sideBox body" @click="selectLeagues(league.leagueId)">
                 <div class="sideImg">
                     <img :src="getImageLeague(league.leagueId)" class="h-100" loading="lazy">
                 </div>
-                <div v-if="this.$i18n.locale === 'zh_hk'" class="sideText">{{ league.nameCht }}</div>
-                <div v-else-if="this.$i18n.locale === 'zh_cn'" class="sideText">{{ league.nameChs }}</div>
-                <div v-else-if="this.$i18n.locale === 'en'" class="sideText">{{ league.nameEn }}</div>
-                <div v-else class="sideText">{{ league.nameEn }}</div>
+                <div v-if="this.$i18n.locale === 'zh_hk'" class="sideText">{{ league.leagueCht }}</div>
+                <div v-else-if="this.$i18n.locale === 'zh_cn'" class="sideText">{{ league.leagueChs }}</div>
+                <div v-else-if="this.$i18n.locale === 'en'" class="sideText">{{ league.leagueEn }}</div>
+                <div v-else class="sideText">{{ league.leagueEn }}</div>
             </div>
         </div>
         <!-- 迴圈顯示國家資料 -->
@@ -34,10 +34,10 @@
             </div>
             <div v-show="selectedCountry === country.id" class="matchList mbtnTM">
                 <div v-for="match in countryLeagues" :key="match.leagueId" @click="selectLeagues(match.leagueId)">
-                    <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.nameCht }}</a>
-                    <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.nameChs }}</a>
-                    <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.nameEn }}</a>
-                    <div v-else class="K-dropdown-item text-start">{{  match.nameEn}}</div>
+                    <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.leagueCht }}</a>
+                    <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.leagueChs }}</a>
+                    <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.leagueEn }}</a>
+                    <div v-else class="K-dropdown-item text-start">{{  match.leagueEn}}</div>
                 </div>
             </div>
         </div>
@@ -59,10 +59,10 @@
                 </div>
                 <div v-show="selectedCountry === country.id" class="matchList mbtnTM">
                     <div v-for="match in countryLeagues" :key="match.leagueId" @click="selectLeagues(match.leagueId)">
-                        <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.nameCht }}</a>
-                        <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.nameChs }}</a>
-                        <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.nameEn }}</a>
-                        <a v-else class="K-dropdown-item text-start">{{ match.nameEn }}</a>
+                        <a v-if="this.$i18n.locale === 'zh_hk'" class="K-dropdown-item text-start">{{ match.leagueCht }}</a>
+                        <a v-else-if="this.$i18n.locale === 'zh_cn'" class="K-dropdown-item text-start">{{ match.leagueChs }}</a>
+                        <a v-else-if="this.$i18n.locale === 'en'" class="K-dropdown-item text-start">{{ match.leagueEn }}</a>
+                        <a v-else class="K-dropdown-item text-start">{{ match.leagueEn }}</a>
                     </div>
                 </div>
             </div>
@@ -72,19 +72,16 @@
 
 <script>
 import countList from '@/countryList.json'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
+// import { ref, onMounted, computed,watch } from 'vue'
 import { useRouter } from 'vue-router';
 import { getImageCountry ,getImageLeague } from '@/composables/useImage.js';
 import { fetchPosts } from '@/composables/useApi.js';
-import { useDataStore } from '@/store/dataStore'
+// import { useDataStore } from '@/store/dataStore'
 
 export default {
     setup(){
 
-        const dataStore = useDataStore()
-        const leagueData = computed(() => dataStore.leagueData)
-
-        const leaguesId = ref([]);
         const leagues = ref([]);
         const router = useRouter();
         const showMore = ref(false)
@@ -93,7 +90,6 @@ export default {
         const countryLeagues = ref([]);
         const selectedCountry = ref(null);
 
-        const countriesData = ref([])
         const matchData = ref([])
 
         const topItems = ref([
@@ -104,33 +100,12 @@ export default {
             { id: 5, en: 'France', zh_hk: '法國', zh_cn: "法国" }
         ]);
 
+
         const fetchData = async () => {
             try {
                 // 使用 Promise.all 並行請求
-                const matchDataResponse = await fetchPosts(`https://befenscore.net/api/get-data`);
-
-                // matchList 的處理
-                matchData.value = matchDataResponse.matchList;
-                for (const raw of matchData.value) {
-                    const leagueId = Number(raw.leagueId);
-                    if (!leaguesId.value.includes(leagueId)) {
-                        leaguesId.value.push(leagueId);
-                    }
-                }
-
-                // leaguesList 的處理
-                if (!countriesData.value || countriesData.value.length === 0) {
-                    countriesData.value = leagueData.value.leagueList;
-
-                    if (leagueData.value && leagueData.value.leagueList) {
-                        leagues.value = leagueData.value.leagueList
-                            .filter(league => leaguesId.value.includes(Number(league.leagueId)))
-                            .slice(0, 10); // 限制為前 10 條聯賽資料
-                        console.log('Filtered Leagues:', leagues.value);
-                    } else {
-                        console.error('Invalid data format:', leagueData.value);
-                    }
-                }
+                const data = await fetchPosts(`https://befenscore.net/football/today-data/0`);
+                leagues.value = data.matchList
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -140,21 +115,23 @@ export default {
         // 國家搜尋
         const selectCountryasync = async(countryId) =>{
             try{
-                const data = countriesData.value
+                const data = leagues.value
+
+                const id = String(countryId)
 
                 if (data){
                     countryLeagues.value = data.filter(league => 
-                        league.countryId === String(countryId) && leaguesId.value.includes(league.leagueId));
-                    console.log('Filtered country:', countryLeagues.value);
+                    league.countryId === id);
                 }
                 else if (data.leagueList) {
-                    countryLeagues.value = data.leagueList.filter(league => 
-                        league.countryId === String(countryId) && leaguesId.value.includes(league.leagueId));
+                    countryLeagues.value = data.matchList.filter(league => 
+                        league.countryId === id);
                     console.log('Filtered country:', countryLeagues.value);
                 } else {
                     console.error('Invalid data format:', data);
                 }
-                console.log(countryLeagues)
+
+                console.log(data)
 
             }catch(error){
                 console.error('Error fetching country:', error);
@@ -163,7 +140,7 @@ export default {
 
         // 賽事點擊
         const selectLeagues = async (leagueId) =>{
-            router.push({ name: 'league', params: { id: leagueId }, query: { t: Date.now() } });
+            router.push({ name: 'league', params: { league_id: leagueId }, query: { t: Date.now() } });
         }
 
         // 國家點擊
@@ -173,9 +150,8 @@ export default {
         };
 
         onMounted(async () => {
-            // await matchList();
-            // await leaguesList();
             fetchData();
+            matchData.value = await fetchPosts(`https://befenscore.net/football/hot`); 
         });
 
         return{
@@ -190,6 +166,7 @@ export default {
             topItems,
             countryLeagues,
             showMore,
+            matchData,
             selectedCountry
         }
     },

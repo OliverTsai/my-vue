@@ -17,7 +17,7 @@
             
             <div class="scoreBox">
               <div class="textBox titleImgBox left">{{ posts?.homeScore }}</div>
-              -
+              <div class="textBox titleImgBox left">-</div>
               <div class="textBox titleImgBox right">{{ posts?.awayScore }}</div>
             </div>
             <!-- Time Parts -->
@@ -33,7 +33,7 @@
             {{ getLeagueName(posts,'away') }}<!--<br>{{ posts?.awayCht }}-->
           </div>
         </div>
-        <div class="straight-line mt-3"></div>
+        <div class="straight-line"></div>
         <!-- 分頁 CODE START -->
         <div class="w100 contentBox">
           <div itemscope="itemscope" itemtype="http://schema.org/SportsEvent" class="innerMatchInfo">
@@ -42,17 +42,21 @@
               <div class="van-tabs van-tabs--line">
                 <div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
                   <div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color:#0F80DA;background:#FFFFFF;">
+                    
                     <div role="tab" class="van-tab van-tab--active van-tab--complete" style="color: rgb(15, 128, 218);" aria-selected="true">
                       <span class="van-tab__text Navbutton" @click="pag = 0">{{ $t('overview') }}</span>
                     </div>
+
                     <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
                       <span class="van-tab__text Navbutton" @click="pag = 2">{{ $t('analysis') }}</span>
                     </div>
-                    <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-                      <span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
-                    </div>
+                    
                     <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
                       <span class="van-tab__text Navbutton" @click="pag = 4">{{ $t('text_live') }}</span>
+                    </div>
+
+                    <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                      <span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
                     </div>
                     <!--<div class="van-tabs__line" style="">
                       <div role="tabpanel" class="van-tab__pane" style=""></div>
@@ -75,15 +79,17 @@
 
 
       <!--1st frame-->
-      <div class="flex">
+      <div class="flex" v-if="pag == 0 ">
         <div class="live left-box">
-          <div class="" style="width:784px;">
-            <div style="width: 100%; height: 500px;" class=""  v-if="pag == 0">
+
+          <div style="width:784px;">
+            <div style="" class="LoadingGifBg">
               <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 100%;"></iframe>
             </div>
-            <div v-if="pag == 0 ">
-              <!-- 比賽資料 start -->
-              <div v-if="beforeTXT.length == 0" class="" style="margin-top: 10px;">
+
+            <div>
+              <!-- 文字直播 start -->
+              <div v-if="beforeTXT.length == 0" class="KDp-3">
                 <div id="" class="">
                   <div class="VSOptionTitle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
@@ -107,7 +113,7 @@
 
 
 
-              <div v-else class="" style="margin-top: 10px;">
+              <div v-else class="KDp-3">
                 
                 <div id="" class="">
                   <div class="VSOptionTitle">
@@ -129,39 +135,35 @@
                       <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
                         <div class="teamBox">
                           
-                          <div class="LiveTimeHome divFloatL2">
-                              <div class="routerImg divFloatL1">
+                          <div class="divFloatL2">{{ data.content }}</div>
+                          <div class="LiveTimeHome divFloatL1">
                               <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
                                 <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
                                 <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
                                 <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
                               </svg>-->
                               {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorHome">&nbsp;'</a>&nbsp;
-                              </div>
-                              {{ data.content }}
                           </div>
 
-                          <div style="clear: both;"></div>
+                          <div class="clear"></div>
                         </div>
                       </div>
                       <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
                         <div class="teamBox">
-                            <div class="LiveTimeAway divFloatR2">{{ data.content }}&nbsp;
 
-                              <div class="routerImg divFloatR1">
+                            <div class="LiveTimeAway divFloatR2">{{ data.content }}</div>
+                            
+                            <div class="routerImg divFloatR1">
                                 &nbsp;{{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorAway">&nbsp;'</a>
                                 <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
                                   <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
                                   <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
                                   <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
                                 </svg>-->
-                              </div> 
-
-                            </div>
-                            
+                            </div> 
                             
 
-                            <div style="clear: both;"></div>
+                            <div class="clear"></div>
                         </div>
                       </div>
                     </div>
@@ -182,7 +184,7 @@
                             </div>
 
                           </div>
-                          <div style="clear: both;"></div>
+                          <div class="clear"></div>
                         </div>
                       </div>
                       <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
@@ -202,7 +204,8 @@
                           &nbsp;{{ data.content }}</div>
                           
 
-                          <div style="clear: both;"></div>
+                          <div class="clear"></div>
+                          
                         </div>
                       </div>
 
@@ -220,152 +223,31 @@
                     </div>
                 </div>
               </div>
-              <!-- 比賽資料 end -->
+              <!-- 文字直播 end -->
             </div>
-            <div v-if="pag == 4">
-              文字直播單頁
-              <!-- 比賽資料 start -->
-              <div v-if="beforeTXT.length == 0" class="" style="margin-top: 10px;">
-                <div id="" class="">
-                  <div class="VSOptionTitle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
-                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-                      <path d="M9 7.5a.5.5 0 0 1 .5-.5H15v2H9.5a.5.5 0 0 1-.5-.5zm-2 3v1a.5.5 0 0 1-.5.5H1v-2h5.5a.5.5 0 0 1 .5.5"/>
-                    </svg>&nbsp;{{ $t('text_live') }}
-                  </div>
-                  <div class="">
-                    <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-                    <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
-                  </div>
-                  <div class="clear"></div>
-                </div>
 
-                <div class="NoValueFrame">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
-                    <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                  </svg><br>尚無比賽資料
-                </div>
-              </div>
-
-
-
-              <div v-else class="" style="margin-top: 10px;">
-                
-                <div id="" class="">
-                  <div class="VSOptionTitle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
-                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-                      <path d="M9 7.5a.5.5 0 0 1 .5-.5H15v2H9.5a.5.5 0 0 1-.5-.5zm-2 3v1a.5.5 0 0 1-.5.5H1v-2h5.5a.5.5 0 0 1 .5.5"/>
-                    </svg>&nbsp;{{ $t('text_live') }}
-                  </div>
-                  <div class="">
-                    <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-                    <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-
-                <div class="LiveTextFrame">
-                    <div><a class="LiveTitleTHFT">FT</a><div class="textBox">{{ posts?.homeScore }} - {{ posts?.awayScore }}</div></div>
-                    <div v-for="data in afterTXT" :key="data.id">
-                      <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
-                        <div class="teamBox">
-                          
-                          <div class="LiveTimeHome divFloatL2">
-                              <div class="routerImg divFloatL1">
-                              <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
-                                <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-                                <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-                                <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-                              </svg>-->
-                              {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorHome">&nbsp;'</a>&nbsp;
-                              </div>
-                              {{ data.content }}
-                          </div>
-
-                          <div style="clear: both;"></div>
-                        </div>
-                      </div>
-                      <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
-                        <div class="teamBox">
-                            <div class="LiveTimeAway divFloatR2">{{ data.content }}&nbsp;
-
-                              <div class="routerImg divFloatR1">
-                                &nbsp;{{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorAway">&nbsp;'</a>
-                                <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
-                                  <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-                                  <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-                                  <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-                                </svg>-->
-                              </div> 
-
-                            </div>
-                            
-                            
-
-                            <div style="clear: both;"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div><a class="LiveTitleTHFT">HT</a></div>
-                    <div v-for="data in beforeTXT" :key="data.id">
-                      <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
-                        <div class="teamBox">
-                          
-                          <div class="LiveTimeHome divFloatL2">{{ data.content }}
-
-                            <div class="routerImg divFloatL1">
-                            <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
-                              <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-                              <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-                              <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-                            </svg>-->
-                            {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorHome">&nbsp;'</a>&nbsp;
-                            </div>
-
-                          </div>
-                          <div style="clear: both;"></div>
-                        </div>
-                      </div>
-                      <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
-                        <div class="teamBox">
-                          <div class="LiveTimeAway divFloatR2">
-                            <div class="divFloatR1">
-                            <div class="routerImg">
-                              &nbsp;&nbsp;{{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorAway">&nbsp;'</a>
-                            <!--<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
-                              <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-                              <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-                              <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-                            </svg>-->
-                            </div>
-                          </div>
-                          
-                          &nbsp;{{ data.content }}</div>
-                          
-
-                          <div style="clear: both;"></div>
-                        </div>
-                      </div>
-
-                      <!-- 比賽開始 start -->
-                      <div v-if="distinguish(data.teamID) == 3">
-                        <svg data-v-509583f2="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16" style="color: #79c32c;">
-                          <path data-v-509583f2="" d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"></path>
-                        </svg>
-                        <br>
-                        <!--比赛开始-->
-                        <div class="divCenter">{{ data.content }}</div>
-                        <!-- 比賽開始 end -->
-                      </div>
-                      <!-- 比賽開始 end -->
-                    </div>
-                </div>
-              </div>
-              <!-- 比賽資料 end -->
-            </div>
           </div>
         </div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         <div class="live right-box">
             <div class="">
@@ -386,17 +268,9 @@
 
 
 
-
-
-
-
-
-
-
-
-                <div v-if="pag == 0">
+                <div v-if="pag == 0" class="">
                   <!-- 技術分析 Start -->
-                  <div v-if="detail_date.length == 0" class="" style="margin-top: 10px;">
+                  <div v-if="detail_date.length == 0" class="KDp-3">
                     <div id="" class="">
                       <div class="VSOptionTitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
@@ -422,7 +296,7 @@
                   </div>
 
                   
-                  <div v-else class="" style="margin-top: 10px;">
+                  <div v-else class="KDp-3">
                     
                     <div id="">
                       <div class="VSOptionTitle">
@@ -451,65 +325,7 @@
                     </div>
                   </div>
                 </div>
-                <div v-if="pag == 2">
-                  技術分析單頁
-                  <!-- 技術分析 Start -->
-                  <div v-if="detail_date.length == 0" class="" style="margin-top: 10px;">
-                    <div id="" class="">
-                      <div class="VSOptionTitle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
-                          <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
-                          <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1"/>
-                        </svg>&nbsp;{{ $t('analysis') }}
-                      </div>
-                      <div class="">
-                        <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-                        <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
-                      </div>
-                      <div class="clear"></div>
-                    </div>
-
-                    <div class="NoValueFrame">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
-                        <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                      </svg><br>尚無技術分析資料
-                    </div>
-                  
-
-
-                  </div>
-
-                  
-                  <div v-else class="" style="margin-top: 10px;">
-                    
-                    <div id="">
-                      <div class="VSOptionTitle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
-                          <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
-                          <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1"/>
-                        </svg>&nbsp;{{ $t('analysis') }}
-                      </div>
-                      <div class="w-100">
-                        <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
-                        <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
-                      </div>
-                      <div class="clear"></div>
-                    </div>
-
-                    <div v-for="(data,index) in detail_date" :key="index">
-                      <div class="detailBox">
-                        <div style="width: 25%; text-align: left; text-decoration:none;">
-                          <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': data.homeValue > data.awayValue }">{{ data.homeValue }}</a>
-                        </div>
-                        <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t(data.parameter) }}</div>
-                        <div style="width: 25%; text-align: right; text-decoration:none;">
-                          <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': data.awayValue > data.homeValue }">{{ data.awayValue }}</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--技術分析END-->
-                </div>
+                
               </div>
             </div>
 
@@ -522,6 +338,300 @@
         </div>
       </div>
       <div class="clear"></div>
+
+
+
+
+      <div v-if="pag == 4">
+          
+          <div class="flex">
+            <div class="live">
+              <div class="" style="width:1200px;">
+                   
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- 分頁 - 文字直播 start -->
+                <div v-if="beforeTXT.length == 0" class="liveTitleBox" style="">
+                  <div id="" class="w-100">
+                    <div class="VSOptionTitle">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                        <path d="M9 7.5a.5.5 0 0 1 .5-.5H15v2H9.5a.5.5 0 0 1-.5-.5zm-2 3v1a.5.5 0 0 1-.5.5H1v-2h5.5a.5.5 0 0 1 .5.5"/>
+                      </svg>&nbsp;{{ $t('text_live') }}
+                    </div>
+                    <div class="">
+                      <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
+                      <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+
+                  <div class="NoValueFrame">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+                      <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg><br>尚無比賽資料
+                  </div>
+                </div>
+
+
+
+                <div v-else class="liveTitleBox">
+                  
+                  <div id="" class="w-100">
+                    <div class="VSOptionTitle">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4-range" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                        <path d="M9 7.5a.5.5 0 0 1 .5-.5H15v2H9.5a.5.5 0 0 1-.5-.5zm-2 3v1a.5.5 0 0 1-.5.5H1v-2h5.5a.5.5 0 0 1 .5.5"/>
+                      </svg>&nbsp;{{ $t('text_live') }}
+                    </div>
+                    <div class="">
+                      <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
+                      <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+
+                  <div class="LiveTextFrame">
+                      <div><a class="LiveTitleTHFT">FT&nbsp;&nbsp;&nbsp;&nbsp;<a class="textBox TextNoLine">{{ posts?.homeScore }} - {{ posts?.awayScore }}</a></a></div>
+                      <div v-for="data in afterTXT" :key="data.id">
+                        <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
+
+                          <div class="teamBox">
+
+
+                            <div class="clear"></div>
+                            <div id="WRAPPER">
+                                
+                                <div id="BOX_A">
+                                  {{ data.content }}
+                                </div>
+                                
+                                <div id="BOX_C_Home">
+                                  {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorHome">&nbsp;'</a>
+                                </div>
+                                
+                                <div id="BOX_E">
+                                  &nbsp;
+                                </div>
+                                
+                            </div>
+                            <div class="clear"></div>
+                                                          
+                          </div>
+                        </div>
+                        
+
+                        <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
+                          <div class="teamBox">
+                              
+                            <div class="clear"></div>
+                            <div id="WRAPPER">
+                                
+                                <div id="BOX_A">
+                                  &nbsp;
+                                </div>
+                                
+                                <div id="BOX_C_Away">
+                                  {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorAway">&nbsp;'</a>
+                                </div>
+                                
+                                <div id="BOX_E">
+                                  {{ data.content }}
+                                </div>
+
+                            </div>
+                            <div class="clear"></div>
+
+                          </div>
+
+                        </div>
+                        
+                        <div id="BOX_C">|</div>
+
+                      </div>
+
+                      <div class="HT_top"><a class="LiveTitleTHFT">HT</a></div>
+
+                      <div v-for="data in beforeTXT" :key="data.id">
+                        <div v-if="distinguish(data.teamID) == 2" class="homeFlex">
+                          <div class="teamBox">
+                            
+
+                            <div class="clear"></div>
+                            <div id="WRAPPER">
+                                
+                                <div id="BOX_A">
+                                  {{ data.content }}
+                                </div>
+                                
+                                <div id="BOX_C_Home">
+                                  {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorHome">&nbsp;'</a>
+                                </div>
+                                
+                                <div id="BOX_E">
+                                  &nbsp;
+                                </div>
+
+                            </div>
+                            <div class="clear"></div>
+
+                          </div>
+
+                        </div>
+
+                        <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
+                          <div class="teamBox">
+
+                            
+                            <div class="clear"></div>
+                            <div id="WRAPPER">
+                                
+                                <div id="BOX_A">
+                                  &nbsp;
+                                </div>
+                                
+                                <div id="BOX_C_Away">
+                                  {{ data.happenTime }}<a class="TimeAnimation TimeAnimationColorAway">&nbsp;'</a>
+                                </div>
+                                
+                                <div id="BOX_E">
+                                  {{ data.content }}
+                                </div>
+
+                            </div>
+                            <div class="clear"></div>
+
+                          </div>
+
+                        </div>
+                        <div id="BOX_C">||</div>
+
+                        <!-- 比賽開始 start -->
+                        <div v-if="distinguish(data.teamID) == 3" class="HT_top">
+                          <svg data-v-509583f2="" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16" style="color: #79c32c;">
+                            <path data-v-509583f2="" d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"></path>
+                          </svg>
+                          <br>
+                          <div class="divCenter">{{ data.content }}</div>
+                        </div>
+                        <!-- 比賽開始 end -->
+                      </div>
+                  </div>
+                </div>
+
+                <!-- 分頁 - 文字直播 end -->
+                        
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+      <!-- 分頁 - 技術分析 Start -->
+
+      <div class="flex" v-if="pag == 2">
+        
+        <div class="left-box">
+          <div class="KDp-3" style="width:634px;">
+            <div style="" class="LoadingGifBg">
+              <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="">
+
+          <div class="">
+            <div style="width: 550px;">
+
+              <div v-if="detail_date.length == 0" class="KDp-3">
+                <div id="" class="">
+                  <div class="VSOptionTitle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
+                      <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
+                      <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1"/>
+                    </svg>&nbsp;{{ $t('analysis') }}
+                  </div>
+                  <div class="">
+                    <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
+                    <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+
+                <div class="NoValueFrame">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+                    <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                  </svg><br>尚無技術分析資料
+                </div>
+              
+
+
+              </div>
+
+              
+              <div v-else class="KDp-3" style="">
+                
+                <div id="">
+                  <div class="VSOptionTitle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
+                      <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
+                      <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1"/>
+                    </svg>&nbsp;{{ $t('analysis') }}
+                  </div>
+                  <div class="w-100">
+                    <div class="HomeNameTitle"><img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.homeId)"> <a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'home') }}</a></div>
+                    <div class="AwayNameTitle"><a style="color: 333333; text-decoration:none;" class="">{{ getLeagueName(posts,'away') }}</a> <img style="width: 1.1rem; height: 1.1rem;" :src="getImageTeam(posts?.awayId)"></div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+
+                <div v-for="(data,index) in detail_date" :key="index">
+                  <div class="detailBox">
+                    <div style="width: 25%; text-align: left; text-decoration:none;">
+                      <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': data.homeValue > data.awayValue }">{{ data.homeValue }}</a>
+                    </div>
+                    <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t(data.parameter) }}</div>
+                    <div style="width: 25%; text-align: right; text-decoration:none;">
+                      <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': data.awayValue > data.homeValue }">{{ data.awayValue }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      
+      <!-- 分頁 - 技術分析 END -->
+
 
 
       <!--聊天室-->
@@ -549,7 +659,7 @@
 
       <div v-if="pag == 0 || pag == 3">
         <!-- 陣容資料 -->
-        <div v-if="dataLine.length == 0" class="liveTitleBox KDp-3" style="margin-top: 10px; margin-bottom: 10px;">
+        <div v-if="dataLine.length == 0" class="liveTitleBox KDp-3" style="">
           <div id="" class="w-100">
             <div class="VSOptionTitle">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
@@ -570,7 +680,7 @@
           </div>
         </div>
         
-        <div v-else class="liveTitleBox KDp-3" style="margin-top: 10px; margin-bottom: 10px;">
+        <div v-else class="liveTitleBox KDp-3">
 
           <div id="" class="w-100">
             <div class="VSOptionTitle">
@@ -623,7 +733,7 @@
                   <!--<div class="straight-line"></div>-->
                 </div>
 
-                <div style="clear: both;"></div>
+                <div class="clear"></div>
 
 
               </div>
@@ -665,7 +775,7 @@
                   <!--<div class="straight-line"></div>-->
                 </div>
 
-                <div style="clear: both;"></div>
+                <div class="clear"></div>
               </div>
               
             </div>
@@ -719,7 +829,14 @@
         </div>
       </div>
     </div> -->
-  <footView/>
+
+    
+    <div style="background: #f5f5f5;">
+      <div style="height: 13px;"><p>&nbsp;</p></div>
+      <footView/>
+      <div style="height: 13px;"><p>&nbsp;</p></div>
+    </div>
+    
   </template>
   
   <script>
@@ -796,7 +913,7 @@
             homeId.value = data[0].homeId
           }else{
             //非當日資料
-            const response = await fetchPosts(`https://befenscore.net/api/get-days/${specity_date.value}`);
+            const response = await fetchPosts(`https://befenscore.net/football/get-data`);
             const matchIdNum = Number(matchId.value);
             const data = response.matchList.filter(post => post.matchId === matchIdNum);
             posts.value = data[0];
@@ -1061,7 +1178,7 @@
   }
   .btnBox.active {
     padding: 5px 15px 5px 15px;
-    background-color: #eda100;
+    background-color: #eda100 !important;
     color: #ffffff !important;
     height: 2rem;
     font-size: 0.9rem;
@@ -1083,17 +1200,23 @@
     flex-direction: column;
     align-items: flex-end;
   }
-  
-  .leftBox {
+
+  .mleftBox {
     display: flex;
     justify-content: center;
     flex-direction: column;
   }
-  
+
   .rightBox {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .leftBox {
+    display: flex;
     justify-content: center;
+    flex-direction: column;
   }
   
   .banner {
@@ -1176,6 +1299,7 @@
   width: 2rem;
   height: 2rem;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 
@@ -1204,7 +1328,7 @@
 }
 .live {
     display: flex;
-    padding-top: 13px;
+    padding-top: 1rem;
 }
 .live .left-box {
     position: relative;
@@ -1288,6 +1412,7 @@
 
 
 .HomeNameTitle{
+  font-size: .85rem;
   color: 333333 !important;
 	border-left: 5px solid #3a7ed3;
   padding: .5rem 0 .5rem .5rem;
@@ -1297,9 +1422,14 @@
 	width: 50%;
 	float: left;
   background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+  line-height: 1rem;
+  height: 44px;
+  /*display: flex;*/
+  align-items: center;
 }
 	
 .AwayNameTitle{
+  font-size: .85rem;
   color: 333333 !important;
   border-right: 5px solid #f3b140;
   padding: .5rem .5rem .5rem 0rem;
@@ -1309,18 +1439,19 @@
 	width: 50%;
 	float: left;
   background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+  line-height: 1rem;
+  height: 44px;
+  /*display: flex;*/
+  align-items: center;
 }
 	
+.routerImg{
+}	
 .LiveTimeHome{
-  border-radius: 8px;
-  padding: 5px;
-  margin: 4px;
+  
 }
 
 .LiveTimeAway{
-  border-radius: 8px;
-  padding: 5px;
-  margin: 4px;
 }
 
 .LiveTextFrame{
@@ -1332,19 +1463,27 @@
 }
 
 
+.TextNoLine{
+  text-decoration:none;
+}
 
 .LiveTitleTHFT{
-    color: rgb(121, 195, 44);
-    font-size: 1.2rem;
-    font-weight: bold;
     text-decoration:none;
-    margin: .5rem;
+    background-color: #e1e6ea;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 2px;
+    padding: 0 25px;
+    line-height: 28px;
+    font-size: 14px;
+    color: #333;
+    margin: .5rem 0;
 }
 
 
 
 .TimeAnimation {
-    color: rgb(88, 88, 88);
+    color: rgb(255, 255, 255);
     text-decoration:none;
     animation-duration: 1s;
     animation-name: blink;
@@ -1367,49 +1506,222 @@
 
 
 
-.divFloatL1{
-  color: #3a7ed3;
+#WRAPPER {
+  margin: 0px -13px 0 13px;
+  width: 1184px;
+  /*overflow: auto;*/
+  display: flex;
+} 
+#BOX_A { 
+  line-height: 1.1rem;
+  font-size: .825rem;
+  color: #333;
+  width:550px; /*<div>一定要先設定寬度之後才能使用 float 做水平排列 */ 
+  float:left; /* 使用 float 做水平排列 */ 
+  text-align: right;
+  clear: both;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  padding: 0 15px 0 0px;
+} 
+#BOX_B { 
+ width:10px; /*<div>一定要先設定寬度之後才能使用 float 做水平排列 */ 
+ float:left; /* 使用 float 做水平排列 */ 
+ margin-left: 1rem; /* 設定欄位的左邊外間距 */ 
+ text-align: right;
+}
+#BOX_C_Home { 
+    font-size: 0.9rem;
+    color: #ffffff;
+    width: 60px;
+    height: 20px;
+    line-height: 16px;
+    float: left;
+    text-align: center;
+    clear: both;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    border-radius: 10px;
+    background-color: #3a7ed3;
+    border: 3px solid #3a7ed3;
+} 
+
+#BOX_C_Away { 
+    font-size: 0.9rem;
+    color: #ffffff;
+    width: 60px;
+    height: 20px;
+    line-height: 16px;
+    float: left;
+    text-align: center;
+    clear: both;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    border-radius: 10px;
+    background-color: #f3b140;
+    border: 3px solid #f3b140;
+} 
+
+#BOX_C { 
+    font-size: 1rem;
+    color: #333333;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    float: none;
+    text-align: center;
+    clear: both;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    /*border-bottom: 1px solid #333333 !important;*/
+} 
+
+
+/*#BOX_C:last-child{
+  border-bottom: none;
+}*/
+
+
+#BOX_D { 
+  width:10px; /*<div>一定要先設定寬度之後才能使用 float 做水平排列 */ 
+  float:left; /* 使用 float 做水平排列 */ 
+  margin-left: 1rem; /* 設定欄位的左邊外間距 */ 
   text-align: left;
-  float:left;
-  margin: 0px 10px 0px 0px;
+}
+
+#BOX_E { 
+  line-height: 1.1rem;
+  font-size: .825rem;
+  color: #333;
+  width:550px; /*<div>一定要先設定寬度之後才能使用 float 做水平排列 */ 
+  float:left; /* 使用 float 做水平排列 */ 
+  text-align: left;
+  clear: both;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  padding: 0 0px 0 15px;
+}
+
+
+
+.divFloat_L{
+  width: 35%;
   line-height: .95rem;
   font-size: .95rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  float:left;
+  flex: 1;
+  position: relative;
+}
+.divFloat_CL{
+  width: 16%;
+  line-height: .95rem;
+  font-size: .95rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  color: #3a7ed3;
+  float:left;
+  flex: 1;
+  position: relative;
+}
+.divFloat_C{
+  width: 8%;
+  line-height: .95rem;
+  font-size: .95rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  float:left;
+  flex: 1;
+  position: relative;
+}
+.divFloat_CR{
+  width: 16%;
+  line-height: .95rem;
+  font-size: .95rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  color: #f3b140;
+  float:left;
+  flex: 1;
+  position: relative;
+}
+.divFloat_R{
+  width: 35%;
+  line-height: .95rem;
+  font-size: .95rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  float:left;
+  flex: 1;
+  position: relative;
+}
+
+
+.divFloatL1{
+  float:left;
+  flex: 1;
+  /*color: #3a7ed3;*/
+  text-align: left;
+  margin: 0px 10px 0px 10px;
+  line-height: .95rem;
+  font-size: .95rem;
+  position: relative;
 }
 .divFloatL2{
-  text-align: left;
   float:left;
-  margin: 0px 0px 0px 0px;
+  flex: 1;
+  text-align: left;
+  margin: 0px 10px 0px 10px;
   line-height: .95rem;
   font-size: .95rem;
+  position: relative;
 }
 .divFloatR1{
-  color: #f3b140;
-  text-align: right;
   float:right;
-  margin: 0px 0px 0px 10px;
+  flex: 1;
+  /*color: #f3b140;*/
+  text-align: right;
+  margin: 0px 10px 0px 10px;
   line-height: .95rem;
   font-size: .95rem;
+  position: relative;
 }
 .divFloatR2{
-  text-align: right;
   float:right;
-  margin: 0px 0px 0px 0px;
+  flex: 1;
+  text-align: right;
+  margin: 0px 10px 0px 10px;
   line-height: .95rem;
   font-size: .95rem;
+  position: relative;
 }
+
+
+
 .divCenter{
   text-align: center;
   margin: 5px 0px 5px 0px;
-  line-height: .95rem;
-  font-size: .95rem;
+  line-height: .825rem;
+  font-size: .825rem;
 }
 
 
 .TimeAnimationColorHome{
-  color: #3a7ed3 !important;
+  /**color: #3a7ed3 !important;**/
 }
 .TimeAnimationColorAway{
-  color: #f3b140 !important;
+  /**color: #f3b140 !important;**/
 }
 
 .ColorHome{
@@ -1461,18 +1773,12 @@
   /***background-image: linear-gradient(to top, rgb(255 255 255) 0%, rgb(196, 196, 196) 50%, #5e5e5e 100%);***/
 }
 
-.NoValueFrame svg{
-  color: #999999;
-  width: 2rem;
-  height: 2rem;
-  text-align: center;
-}
 
 
 .VSOptionTitle{
   color: #ffffff;
   background-color: #ababab;
-  margin: .2rem 0 0 0;
+  margin: 0 0 0 0;
   padding: .3rem;
   font-size: 1rem;
   text-align: left;
@@ -1496,11 +1802,10 @@
 }
 
 .VSLineup1st-col{
-  font-size: small !important;
+  font-size: .5rem;
   padding: .3rem 0rem .3rem 0rem;
   text-align: left;
   color: #333333;
-  font-size: .5rem;
   border-bottom: 1px solid #dddddd;
   width: 50%;
   float: left;
@@ -1751,6 +2056,231 @@
 /***********  Nav menu button - End  ************/	
 
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********** 文字直播 Start ***********/
+
+.justify-between {
+    justify-content: space-between !important;
+}
+
+.flex {
+    display: flex;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
+.h-18 {
+    height: 18px;
+}
+
+.w-18 {
+    width: 18px;
+}
+.ml-3 {
+    margin-left: 3px;
+}
+.display-i-l {
+    display: inline-block;
+}
+.v-a-m {
+    vertical-align: middle;
+}
+
+.overview-panel .overview .list {
+    position: relative;
+    min-height: 650px;
+    flex: 1;
+}
+.overview-panel .overview .list .child-box {
+    overflow-x: hidden;
+    position: absolute;
+    overflow-y: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+.time-status-list-title {
+    clear: both;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+}
+.time-status-list-title .text {
+    background-color: #e1e6ea;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 2px;
+    padding: 0 15px;
+    line-height: 28px;
+    font-size: 14px;
+    color: #333;
+}
+.time-status-list-title:after, .time-status-list-title:before {
+    content: "";
+    display: table;
+}
+.time-status-list-title {
+    clear: both;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+}
+.time-status-list-item {
+    clear: both;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    position: relative;
+    line-height: 18px;
+    padding: 10px 0;
+    font-size: 0;
+    color: #333;
+}
+.time-status-list-item .line {
+    margin-left: -1px;
+    width: 1px;
+    bottom: 0;
+    top: 0;
+}
+.time-status-list-item .line, .time-status-list-item:after {
+    background: #0f80da;
+    position: absolute;
+    content: "";
+    left: 50%;
+}
+.time-status-list-item .match-time {
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    background-color: #0f80da;
+    text-align: center;
+    border-radius: 14px;
+    position: absolute;
+    line-height: 28px;
+    min-width: 20px;
+    font-size: 12px;
+    padding: 0 4px;
+    z-index: 2;
+    color: #fff;
+    left: 50%;
+    top: 10px;
+}
+.time-status-list-item .data-right {
+    text-align: left;
+    float: right;
+}
+
+.time-status-list-item .data-left, .time-status-list-item .data-right {
+    display: inline-block;
+    width: 50%;
+}
+.time-status-list-item .data-right .text-box {
+    margin-left: 35px;
+}
+
+.time-status-list-item .data-left .text-box .text, .time-status-list-item .data-right .text-box .text {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.time-status-list-item .data-left {
+    text-align: right;
+    float: left;
+}
+	
+.display-block {
+    display: block;
+}
+
+.time-status-list-item .data-left .text-box {
+    margin-right: 35px;
+}
+.time-status-list-item .data-left .text-box, .time-status-list-item .data-right .text-box {
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    padding: 8px 15px;
+}
+	
+.time-status-list-item .data-right .text-box:before {
+    border-color: transparent #eee transparent transparent;
+    margin-right: 1px;
+}
+
+.time-status-list-item .data-right .text-box:after, .time-status-list-item .data-right .text-box:before {
+    right: 100%;
+}
+.time-status-list-item .data-left .text-box:before, .time-status-list-item .data-right .text-box:before {
+    border-width: 5px 4px;
+    top: 8px;
+}
+.time-status-list-item .data-left .text-box:after {
+    border-color: transparent transparent transparent #fcfcfc;
+    margin-left: -1px;
+}
+.time-status-list-item .data-left .text-box:after, .time-status-list-item .data-left .text-box:before {
+    left: 100%;
+}
+
+.time-status-list-item .data-left .text-box:after, .time-status-list-item .data-right .text-box:after {
+    border-width: 4px 3px;
+    top: 9px;
+}
+/*********** 文字直播 End ***********/
+
+.LoadingGifBg {
+    width: 100%;
+    height: 500px;
+    background-image: url("../assets/loading01.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: none;
+    background-color: #333333;
+}
+
+.HT_top{
+  margin: 15px 0 0 0;
+}
+
+
+
+
+
+
+
+
+
 
 
 

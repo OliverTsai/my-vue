@@ -1,6 +1,7 @@
 <template>
   <headView />
-  <!-- 聯賽比分 -->
+  
+  <!-- 聯賽比分 START -->
   <div class="innerMatchInfo">
     <div class="mliveTitleBox">
       <div v-if="this.$i18n.locale === 'zh_hk'" class="mGameTitleName">{{ posts?.leagueChtShort }}{{ posts?.subLeagueCht }}</div>
@@ -39,54 +40,62 @@
       </div>
     </div>
   </div>
-  <div style="height: 100%;" class="LiveMTop">
-    <div style="margin-top: 0px;">
-      <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 280px;">
-        
-      </iframe>
+  <!-- 聯賽比分 END -->
+  
+    <!-- 飛鯨動畫 START -->
+    <div style="height: 100%;" class="LiveMTop">
+      <div style="margin-top: 0px; width: 100%; height: 280px; background-image: url('../assets/loading01.gif'); background-repeat: no-repeat; background-position: center;
+      object-fit: none; background-color: #333333;" >
+        <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 280px;">
+          
+        </iframe>
+      </div>
     </div>
-  </div>
+    <!-- 飛鯨動畫 END -->
 
-<!-- 分頁 CODE START -->
-  <div class="w100 contentBox">
-	<div itemscope="itemscope" itemtype="http://schema.org/SportsEvent" class="innerMatchInfo">
-		<div>
-		<div class="van-sticky">
-			<div class="van-tabs van-tabs--line">
-				<div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
-					<div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color:#0F80DA;background:#FFFFFF;">
-						<div role="tab" class="van-tab van-tab--active van-tab--complete" style="color: rgb(15, 128, 218);" aria-selected="true">
-							<span class="van-tab__text Navbutton" @click="pag = 0">{{ $t('overview') }}</span>
-						</div>
-						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-              <span class="van-tab__text Navbutton" @click="pag = 1">{{ $t('chat') }}</span>
-						</div>
-						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-							<span class="van-tab__text Navbutton" @click="pag = 2">{{ $t('analysis') }}</span>
-						</div>
-						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-							<span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
-						</div>
-						<div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-							<span class="van-tab__text Navbutton" @click="pag = 4">{{ $t('text_live') }}</span>
-						</div>
-						<!--<div class="van-tabs__line" style="">
-							<div role="tabpanel" class="van-tab__pane" style=""></div>
-							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-							<div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-						</div>-->
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</div>
-</div>
-<!-- 分頁 CODE End -->
+
+
+
+    <!-- 分頁 CODE START -->
+      <div class="w100 contentBox">
+      <div itemscope="itemscope" itemtype="http://schema.org/SportsEvent" class="innerMatchInfo">
+        <div>
+        <div class="van-sticky">
+          <div class="van-tabs van-tabs--line">
+            <div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
+              <div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color:#0F80DA;background:#FFFFFF;">
+                <div role="tab" class="van-tab van-tab--active van-tab--complete" style="color: rgb(15, 128, 218);" aria-selected="true">
+                  <span class="van-tab__text Navbutton" @click="pag = 0">{{ $t('overview') }}</span>
+                </div>
+                <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                  <span class="van-tab__text Navbutton" @click="pag = 1">{{ $t('chat') }}</span>
+                </div>
+                <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                  <span class="van-tab__text Navbutton" @click="pag = 2">{{ $t('analysis') }}</span>
+                </div>
+                <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                  <span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
+                </div>
+                <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                  <span class="van-tab__text Navbutton" @click="pag = 4">{{ $t('text_live') }}</span>
+                </div>
+                <!--<div class="van-tabs__line" style="">
+                  <div role="tabpanel" class="van-tab__pane" style=""></div>
+                  <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                  <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                  <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                  <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                  <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                  <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- 分頁 CODE End -->
 
 
   <!--聊天室-->
@@ -154,7 +163,7 @@
     </div>
   </div>
 
-  <!-- 比賽資料 -->
+  <!-- 文字直播 Start -->
   <div v-if="pag == 0 || pag == 4">
     <div v-if="beforeTXT.length == 0">
       <div id="">
@@ -211,7 +220,7 @@
                     {{ data.content }}
                 </div>
 
-                <div style="clear: both;"></div>
+                <div class="clear"></div>
               </div>
             </div>
             <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
@@ -231,7 +240,7 @@
                   
                   
 
-                  <div style="clear: both;"></div>
+                  <div class="clear"></div>
               </div>
             </div>
           </div>
@@ -252,7 +261,7 @@
                   </div>
 
                 </div>
-                <div style="clear: both;"></div>
+                <div class="clear"></div>
               </div>
             </div>
             <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
@@ -272,7 +281,7 @@
                 &nbsp;{{ data.content }}</div>
                 
 
-                <div style="clear: both;"></div>
+                <div class="clear"></div>
               </div>
             </div>
             <!-- 比賽開始 start -->
@@ -290,6 +299,10 @@
       </div>
     </div>
   </div>
+  <!-- 文字直播 End -->
+
+
+
   <!-- 陣容資料 -->
   <div v-if="pag == 0 || pag == 3">
     <div v-if="dataLine.length == 0">
@@ -486,7 +499,7 @@ export default {
           homeId.value = data[0].homeId
         }else{
           //非當日資料
-          const response = await fetchPosts(`https://befenscore.net/api/get-days/${specity_date.value}`);
+          const response = await fetchPosts(`https://befenscore.net/football/get-data`);
           const matchIdNum = Number(matchId.value);
           const data = response.matchList.filter(post => post.matchId === matchIdNum);
           posts.value = data[0];
@@ -675,7 +688,7 @@ export default {
 <style scoped>
 .btnBox.active {
   padding: 5px 15px 5px 15px;
-  background-color: #eda100;
+  background-color: #eda100 !important;
   color: #ffffff !important;
   height: 2rem;
   font-size: 0.9rem;
@@ -711,6 +724,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+
+.mleftBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .leftBox {
@@ -836,6 +856,8 @@ export default {
 .titleImgBox{
     width: 8.5rem;
     height: 5rem;
+    font-size: 0.8rem;
+    line-height: .95rem;
 }
 .titleImgBox img{
     width: 5rem;
@@ -856,10 +878,11 @@ export default {
     justify-content: space-around;
     align-items: center;*/
     color: #555555 !important;
+    
 }
 .scoreBox .textBox {
     /*font-weight: 700;*/
-    font-size: 3.5rem !important;
+    font-size: 2.2rem !important;
 }
 
 .vs_{
@@ -871,6 +894,7 @@ export default {
 
 
 .HomeNameTitle{
+  font-size: .85rem;
   color: 333333 !important;
 	border-left: 5px solid #3a7ed3;
   padding: .5rem 0 .5rem .5rem;
@@ -880,9 +904,14 @@ export default {
 	width: 50%;
 	float: left;
   background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+  line-height: 1rem;
+  height: 44px;
+  /*display: flex;*/
+  align-items: center;
 }
 	
 .AwayNameTitle{
+  font-size: .85rem;
   color: 333333 !important;
   border-right: 5px solid #f3b140;
   padding: .5rem .5rem .5rem 0rem;
@@ -892,6 +921,10 @@ export default {
 	width: 50%;
 	float: left;
   background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+  line-height: 1rem;
+  height: 44px;
+  /*display: flex;*/
+  align-items: center;
 }
 	
 .LiveTimeHome{
@@ -1042,12 +1075,13 @@ export default {
   width: 2rem;
   height: 2rem;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 
 .VSOptionTitle{
   color: #ffffff;
-  background-color: #0b998d;
+  background-color: #003e5d;
   margin: .2rem 0 0 0;
   padding: .3rem;
   font-size: 1rem;
@@ -1072,11 +1106,10 @@ export default {
 }
 
 .VSLineup1st-col{
-  font-size: small !important;
+  font-size: .74rem;
   padding: .3rem 0rem .3rem 0rem;
   text-align: left;
   color: #333333;
-  font-size: .74rem !important;
   width: 100%;
   border-bottom: 1px solid #dddddd;
 }
@@ -1284,5 +1317,13 @@ export default {
 
 
 
+#footer {
+    text-align: center;
+    color: #ffffff;
+    background: #003e5d;
+    padding: 30px 5px 5px 5px;
+    height: 80px;
+    font-size: 0.8rem;
+}
 
 </style>

@@ -66,7 +66,7 @@ nav a {
 
 nav a.router-link-exact-active {
   // color: #42b983;
-  color: #0b998d;
+  color: #003e5d;
   background-color: #f5f5f5;
   border-radius: 5px 5px 0px 0px;
   margin-bottom: -11px;
@@ -82,8 +82,9 @@ nav .mMenu-link{
 
 .area_score{
   background-color: #ffffff;
-  border-radius: 5px;
-  padding: 0px 10px 0px 10px;
+  line-height: 1.25rem;
+  //border-radius: 5px;
+  //padding: 0px 10px 0px 10px;
 }
 
 .area_btn{
@@ -136,10 +137,10 @@ nav .mMenu-link{
 
 
 .input-search {
-  background-color: #238b8f;
   // border-top-right-radius: 5px;
   // border-end-end-radius: 5px;
-  border:1px solid #ffffff;
+  // background-color: #238b8f;
+  // border:1px solid #dddddd;
   border-radius: 5px;
   height: 2rem;
   color: #ffffff;
@@ -171,15 +172,17 @@ nav .mMenu-link{
   margin: 4px 0px 0px 0px;
 }
 
-.mimgLogo{
-    width: 13rem;
+.mimgLogo {
+    width: 15rem;
     text-align: left;
-    // vertical-align: middle;
     display: block;
+    margin-top: -4px;
+    // vertical-align: middle;
 }
 
 .header-area1 {
     padding: 5px !important;
+    background: #ffffff;
 }
 
 .K-dropdown-item{
@@ -216,6 +219,15 @@ nav .mMenu-link{
 }
 
 
+.input-group .btn {
+    position: relative;
+    z-index: 2;
+    background: #236e93 !important;
+    margin: -0.05rem 0 0 0 !important;
+}
+
+
+
 /************ Kdesign END ************/
 
 
@@ -227,5 +239,25 @@ nav .mMenu-link{
 .mbodyListLine:last-child {
   border-bottom: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </style>

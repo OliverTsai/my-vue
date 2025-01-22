@@ -14,6 +14,27 @@ import 'element-plus/dist/index.css'
 import { createPinia } from 'pinia'
 
 const app = createApp(App);
+
+// 設定映射表
+const languageMap = {
+    en: 'en',
+    'en-US': 'en',
+    'en-GB': 'en',
+    'zh-HK': 'zh_hk',
+    'zh-TW': 'zh_hk',
+    'zh-CN': 'zh_cn',
+    'zh-SG': 'zh_cn',
+    th: 'thai',
+    'th-TH': 'thai',
+};
+
+// 自動偵測使用者語言
+const userLanguage = navigator.language || 'en';
+
+// 設定 i18n 語言，若無支援則回退至預設
+const i18nLanguage = languageMap[userLanguage] || 'en';
+i18n.global.locale = i18nLanguage;
+
 const pinia = createPinia();
 
 app.use(router).use(BootstrapVue3).use(i18n).use(ElementPlus).use(pinia).mount('#app')

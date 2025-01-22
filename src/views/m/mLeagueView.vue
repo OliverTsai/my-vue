@@ -10,32 +10,6 @@
                 <img src="../../assets/banner/scoreBanner_01s_990x102.jpg" class="banner" data-v-d4c6fef0=""><i class="iconfont icon-guanbi close" data-v-d4c6fef0=""></i>
             </div>
             <div class="area_score">
-                
-                <!--- Start 賽事 filter | copy code from mSoccer page --->
-                <!--<div class="w-100">
-                    <div class="mbodyTitle">
-                    <div class="bodyTitleBox">
-                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'allEvents' }" @click="selectPost('allEvents')">{{$t('AllEvents')}}</button>
-                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'live' }" @click="selectPost('live')">{{$t('Live')}}</button>
-                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'finished' }" @click="selectPost('finished')">{{$t('Finished')}}</button>
-                        <button type="button" class="btn btnBox" :class="{ active: selectButtonValue === 'schedule' }" @click="selectPost('schedule')">{{$t('Schedule')}}</button>
-                    </div>
-                    <div class="bodyTitleBox">
-                        <div v-if="selectButtonValue === 'allEvents'" class="btn-group">
-                        <button type="button" class="btn btnBox" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ formatDate(selectedDate) }}
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li v-for="date in selectableDates" :key="date" @click="handleDateChange(date)">
-                            <a class="dropdown-item">{{ date }}</a>
-                            </li>
-                        </ul>
-                        </div>
-                    </div>
-                    </div>
-                </div>-->    
-                <!--- End 賽事 filter | copy code from mSoccer page --->
-
 
                 <div v-if="leagues.length === 0">
                     <div class="NoValueFrame">
@@ -93,25 +67,27 @@
 
         
     </div>
-    <div id="footer"> Copyright @ 2024 BeFun Score </div>
-    
+   
+    <mFootView/>
 </template>
 
 <script>
+import headView from '@/components/m/mHeadView.vue';
+import mFootView from '@/components/m/mFootView.vue';
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router';
-import headView from '@/components/m/mHeadView.vue';
 import { getImageTeam } from '@/composables/useImage.js';
 import { fetchPosts } from '@/composables/useApi.js';
 
 export default {
     name:'mleagueView',
     components: {
-        headView
+        headView,
+        mFootView
     },
     setup(){
         const route = useRoute();
-        const leagueId = ref(String(route.params.id));
+        const leagueId = ref(String(route.params.league_id));
 
         const matchData = ref(null)
 
@@ -180,7 +156,7 @@ export default {
         }
 
         // 監聽 leagueId 變化
-        watch(() => route.params.id, (newId) => {
+        watch(() => route.params.league_id, (newId) => {
             leagueId.value = String(newId);  // 更新 leagueId
             leaguesList();  // 重新篩選資料
         });
@@ -260,8 +236,17 @@ export default {
   width: 2rem;
   height: 2rem;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 
 
+#footer {
+    text-align: center;
+    color: #ffffff;
+    background: #003e5d;
+    padding: 30px 5px 5px 5px;
+    height: 80px;
+    font-size: 0.8rem;
+}
 </style>

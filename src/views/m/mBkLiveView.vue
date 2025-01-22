@@ -1,6 +1,7 @@
-<template>
+  <template>
     <headView />
-    <!-- 聯賽比分 -->
+
+    <!-- 聯賽比分 START -->
     <div class="innerMatchInfo">
       <div class="mliveTitleBox">
         <div v-if="this.$i18n.locale === 'zh_hk'" class="mGameTitleName">{{ posts?.leagueChtShort }}{{ posts?.subLeagueCht }}</div>
@@ -39,6 +40,10 @@
         </div>
       </div>
     </div>
+    <!-- 聯賽比分 END -->
+  
+
+    <!-- 飛鯨動畫 START -->
     <div style="height: 100%;" class="LiveMTop">
       <div style="margin-top: 0px;">
         <iframe id="testIframe" :src="url" frameborder="0" style="width: 100%; height: 280px;">
@@ -46,50 +51,57 @@
         </iframe>
       </div>
     </div>
+    <!-- 飛鯨動畫 END -->
   
-  <!-- 分頁 CODE START -->
+    <!-- 分頁 CODE START -->
     <div class="w100 contentBox">
       <div itemscope="itemscope" itemtype="http://schema.org/SportsEvent" class="innerMatchInfo">
-          <div>
+        <div>
           <div class="van-sticky">
-              <div class="van-tabs van-tabs--line">
-                  <div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
-                      <div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color:#0F80DA;background:#FFFFFF;">
-                          <div role="tab" class="van-tab van-tab--active van-tab--complete" style="color: rgb(15, 128, 218);" aria-selected="true">
-                              <span class="van-tab__text Navbutton" @click="pag = 0">{{ $t('overview') }}</span>
-                          </div>
-                          <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-                <span class="van-tab__text Navbutton" @click="pag = 1">{{ $t('chat') }}</span>
-                          </div>
-                          <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-                              <span class="van-tab__text Navbutton" @click="pag = 2">{{ $t('analysis') }}</span>
-                          </div>
-                          <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-                              <span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
-                          </div>
-                          <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
-                              <span class="van-tab__text Navbutton" @click="pag = 4">{{ $t('text_live') }}</span>
-                          </div>
-                          <!--<div class="van-tabs__line" style="">
-                              <div role="tabpanel" class="van-tab__pane" style=""></div>
-                              <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-                              <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-                              <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-                              <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-                              <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-                              <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
-                          </div>-->
-                      </div>
+            <div class="van-tabs van-tabs--line">
+              <div class="van-tabs__wrap van-tabs__wrap--scrollable van-hairline--top-bottom">
+                <div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color:#0F80DA;background:#FFFFFF;">
+                  
+                  <div role="tab" class="van-tab van-tab--active van-tab--complete" style="color: rgb(15, 128, 218);" aria-selected="true">
+                    <span class="van-tab__text Navbutton" @click="pag = 0">{{ $t('overview') }}</span>
                   </div>
+                  
+                  <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                    <span class="van-tab__text Navbutton" @click="pag = 1">{{ $t('chat') }}</span>
+                  </div>
+                    
+                  <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                    <span class="van-tab__text Navbutton" @click="pag = 2">{{ $t('analysis') }}</span>
+                  </div>
+                  
+                  <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                    <span class="van-tab__text Navbutton" @click="pag = 4">{{ $t('text_live') }}</span>
+                  </div>
+
+                  <div role="tab" class="van-tab van-tab--complete" style="color: rgb(89, 97, 107);">
+                    <span class="van-tab__text Navbutton" @click="pag = 3">{{ $t('line') }}</span>
+                  </div>
+
+                  <!--<div class="van-tabs__line" style="">
+                    <div role="tabpanel" class="van-tab__pane" style=""></div>
+                    <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                    <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                    <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                    <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                    <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                    <div role="tabpanel" class="van-tab__pane" style="display: none;"></div>
+                  </div>-->
+                </div>
               </div>
+            </div>
           </div>
-          </div>
+        </div>
       </div>
-  </div>
-  <!-- 分頁 CODE End -->
+    </div>
+    <!-- 分頁 CODE End -->
   
-  
-    <!--聊天室-->
+
+    <!-- 聊天室 start -->
     <div v-if="pag == 0 || pag == 1">
       <div data-v-d37f9274="" class="VSOptionTitle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
         <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
@@ -100,8 +112,10 @@
       <iframe src="https://befunscore.com/livemessage/message.html" width="100%" height="450px" frameborder="0" scrolling="no">
       </iframe>
     </div>
+    <!-- 聊天室 End -->
+    
   
-    <!-- 技術分析資料 -->
+    <!-- 技術分析資料 Start -->
     <div v-if="pag == 0 || pag == 2">
       <div v-if="!detail_date">
         <div id="">
@@ -124,8 +138,9 @@
           </svg><br>尚無技術分析資料
         </div>
       </div>
+
       <div v-else>
-        
+
         <div id="">
           <div class="VSOptionTitle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
@@ -141,29 +156,71 @@
         </div>
 
         <div>
-          <div v-if="detail_date.homeScore && detail_date.awayScore ">
-            {{ detail_date.homeScore }} 得分 {{ detail_date.awayScore }}
+          <div v-if="detail_date.homeScore && detail_date.awayScore " class="detailBox">
+            <div style="width: 25%; text-align: left; text-decoration:none;">
+              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': detail_date.homeScore > detail_date.awayScore }">{{ detail_date.homeScore }}</a>
+            </div>
+            <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t('bk_score') }}</div>
+            <div style="width: 25%; text-align: right; text-decoration:none;">
+              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': detail_date.awayScore > detail_date.homeScore }">{{ detail_date.awayScore }}</a>
+            </div>
           </div>
-          <div v-if="detail_date.homeFast && detail_date.awayFast">
-            {{ detail_date.homeFast }} 快攻得分 {{ detail_date.awayFast }}
+          <div v-if="detail_date.homeFast && detail_date.awayFast" class="detailBox">
+            <div style="width: 25%; text-align: left; text-decoration:none;">
+              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': detail_date.homeFast > detail_date.awayFast }">{{ detail_date.homeFast }}</a>
+            </div>
+            <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t('bk_fast_score') }}</div>
+            <div style="width: 25%; text-align: right; text-decoration:none;">
+              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': detail_date.awayFast > detail_date.homeFast }">{{ detail_date.awayFast }}</a>
+            </div>
           </div>
-          <div v-if= "detail_date.homeInside && detail_date.awayInside ">
-            {{ detail_date.homeInside }} 内线得分 {{ detail_date.awayInside }}
+          <div v-if= "detail_date.homeInside && detail_date.awayInside " class="detailBox">
+            <div style="width: 25%; text-align: left; text-decoration:none;">
+              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': detail_date.homeInside > detail_date.awayInside }">{{ detail_date.homeInside }}</a>
+            </div>
+            <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t('bk_inside_score') }}</div>
+            <div style="width: 25%; text-align: right; text-decoration:none;">
+              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': detail_date.awayInside > detail_date.homeInside }">{{ detail_date.awayInside }}</a>
+            </div>
           </div>
-          <div v-if="detail_date.homeTotalmis && detail_date.awayTotalmis ">
-            {{ detail_date.homeTotalmis }} 总失误 {{ detail_date.awayTotalmis }}
+          <div v-if="detail_date.homeTotalmis && detail_date.awayTotalmis " class="detailBox">
+            <div style="width: 25%; text-align: left; text-decoration:none;">
+              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': detail_date.homeTotalmis > detail_date.awayTotalmis }">{{ detail_date.homeTotalmis }}</a>
+            </div>
+            <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t('all_errors') }}</div>
+            <div style="width: 25%; text-align: right; text-decoration:none;">
+              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': detail_date.awayTotalmis > detail_date.homeTotalmis }">{{ detail_date.awayTotalmis }}</a>
+            </div>
           </div>
-          <div v-if="detail_date.homeSecTimeout && detail_date.awaySecTimeout">
-            {{ detail_date.homeSecTimeout }} 剩余暂停次数 {{ detail_date.awaySecTimeout }}
+          <div v-if="detail_date.homeSecTimeout && detail_date.awaySecTimeout" class="detailBox">
+            <div style="width: 25%; text-align: left; text-decoration:none;">
+              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': detail_date.homeSecTimeout > detail_date.awaySecTimeout }">{{ detail_date.homeSecTimeout }}</a>
+            </div>
+            <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t('bk_pauses') }}</div>
+            <div style="width: 25%; text-align: right; text-decoration:none;">
+              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': detail_date.awaySecTimeout > detail_date.homeSecTimeout }">{{ detail_date.awaySecTimeout }}</a>
+            </div>
           </div>
-          <div v-if="detail_date.homeSecFouls && detail_date.awaySecFouls ">
-            {{ detail_date.homeSecFouls }} 犯规次数 {{ detail_date.awaySecFouls }}
+          <div v-if="detail_date.homeSecFouls && detail_date.awaySecFouls " class="detailBox">
+            <div style="width: 25%; text-align: left; text-decoration:none;">
+              <!--主隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_blue': detail_date.homeSecFouls > detail_date.awaySecFouls }">{{ detail_date.homeSecFouls }}</a>
+            </div>
+            <div style="width: 50%; text-align: center; text-decoration:none;">{{ $t('bk_fouls') }}</div>
+            <div style="width: 25%; text-align: right; text-decoration:none;">
+              <!--客隊：--><a style="color: #333333; text-decoration:none;" :class="{ 'highlight_yellow': detail_date.awaySecFouls > detail_date.homeSecFouls }">{{ detail_date.awaySecFouls }}</a>
+            </div>
           </div>
         </div>
+
+
       </div>
     </div>
+    <!-- 技術分析資料 End -->
   
-    <!-- 比賽資料 -->
+
+    
+
+    <!-- 文字直播 Start -->
     <div v-if="pag == 0 || pag == 4">
       <div v-if="beforeTXT.length == 0">
         <div id="">
@@ -186,6 +243,7 @@
           </svg><br>尚無比賽資料
         </div>
       </div>
+
       <div v-else>
         
         <div id="">
@@ -220,7 +278,7 @@
                       {{ data.content }}
                   </div>
   
-                  <div style="clear: both;"></div>
+                  <div class="clear"></div>
                 </div>
               </div>
               <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
@@ -240,7 +298,7 @@
                     
                     
   
-                    <div style="clear: both;"></div>
+                    <div class="clear"></div>
                 </div>
               </div>
             </div>
@@ -261,7 +319,7 @@
                     </div>
   
                   </div>
-                  <div style="clear: both;"></div>
+                  <div class="clear"></div>
                 </div>
               </div>
               <div v-if="distinguish(data.teamID) == 1" class="awayFlex">
@@ -281,7 +339,7 @@
                   &nbsp;{{ data.content }}</div>
                   
   
-                  <div style="clear: both;"></div>
+                  <div class="clear"></div>
                 </div>
               </div>
               <!-- 比賽開始 start -->
@@ -296,10 +354,14 @@
               </div>
               <!-- 比賽開始 end -->
             </div>
+          
         </div>
       </div>
     </div>
-    <!-- 陣容資料 -->
+    <!-- 文字直播 End -->
+
+
+    <!-- 陣容資料 start -->
     <div v-if="pag == 0 || pag == 3">
       <div v-if="!detail_date">
         <div id="">
@@ -337,35 +399,53 @@
           <div class="" style="clear: both;"></div>
         </div>
 
-
-
         <!-- 主隊 -->
-        <div class="HomeNameTitle">
+        <div class="HomeTableDetail">
           <div v-for="line in detail_date.homePlayerList" :key="line.matchId" class="">
-            <div class="">
+            <div v-if="!line.positionCn" class="">
 
-              <div class="">
-                {{ line.playerCht }}
+              <div class="HomeNameDetail">
+                候補：{{ getLeagueName(line,'player') }}
+              </div>
+
+            </div>
+            <div v-else class="">
+
+              <div class="HomeNameDetail">
+                首发：{{ getLeagueName(line,'player') }}
               </div>
 
             </div>
           </div>
         </div>
-
         <!-- 客隊 -->
-        <div class="AwayNameTitle">
+        <div class="AwayTableDetail">
           <div v-for="line in detail_date.awayPlayerList" :key="line.matchId" class="">
-            <div class="">
-              <div class="">
-                {{ line.playerCht }}
+            <div v-if="!line.positionCn" class="">
+
+              <div class="AwayNameDetail">
+                候補：{{ getLeagueName(line,'player') }}
               </div>
+
+            </div>
+            <div v-else class="">
+
+              <div class="AwayNameDetail">
+              首发：{{ getLeagueName(line,'player') }}
+              </div>
+
             </div>
           </div>
         </div>
+        <div class="clear"></div>
       </div>
+
     </div>
-  
-    <mFootView/>
+    
+    <!-- 陣容資料 start -->
+
+
+    <div class="Kfooter"><mFootView/></div>
   </template>
   
   <script>
@@ -455,25 +535,23 @@
         }
       }
   
-      //抓取文字
+      //抓取文字(待修改)
       const txtData = async() => {
         try {
           const response = await fetchPosts(`https://befenscore.net/api/matchTXT/${matchId.value}`);
           beforeTXT.value = response.list.sort((a, b) => b.id - a.id).filter(data=> Number(data.state) == 1);
           afterTXT.value = response.list.sort((a, b) => b.id - a.id).filter(data=> Number(data.state) == 3);
-          console.log(response)
         } catch (error) {
           console.error('Error fetching posts:', error);
         }
       }
   
-      //抓取陣容
+      //抓取陣容(待修改)
       const line = async() => {
         try {
           const response = await fetchPosts(`https://befenscore.net/api/lines/${specity_date.value}`);
           const matchIdNum = Number(matchId.value);
           dataLine.value = response.filter(data => Number(data.matchId) === matchIdNum);
-          console.log(dataLine)
         } catch (error) {
           console.error('Error fetching posts:', error);
         }
@@ -485,18 +563,18 @@
           const response = await fetchPosts(`https://befenscore.net/bk/detail`);
           const matchIdNum = Number(matchId.value);
           const data = response.matchList.filter(data => Number(data.matchId) === matchIdNum);
-          console.log('111')
-          console.log(data[0])
+          console.log('123')
+          console.log(data)
           if (data.length > 0) {
             // 將資料儲存到 detail_date
             detail_date.value = data[0];
-            console.log(detail_date)
           } else {
             // 假如今日無
             try{
               const response = await fetchPosts(`https://befenscore.net/bk/all_detail/${specity_date.value}`);
               const matchIdNum = Number(matchId.value);
               const data = response.matchList.filter(data => Number(data.matchId) === matchIdNum);
+              console.log(data)
               if (data.length > 0) {
               // 將資料儲存到 detail_date
               detail_date.value = data[0];
@@ -579,9 +657,11 @@
   </script>
   
   <style scoped>
+
+
   .btnBox.active {
     padding: 5px 15px 5px 15px;
-    background-color: #eda100;
+    background-color: #eda100 !important;
     color: #ffffff !important;
     height: 2rem;
     font-size: 0.9rem;
@@ -621,17 +701,24 @@
     align-items: flex-end;
   }
   
+  .mleftBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .rightBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .leftBox {
     display: flex;
     justify-content: center;
     flex-direction: column;
   }
   
-  .rightBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   
   .banner {
     width: 100%;
@@ -744,6 +831,8 @@
   .titleImgBox{
       width: 8.5rem;
       height: 5rem;
+      font-size: 0.8rem;
+      line-height: .95rem;
   }
   .titleImgBox img{
       width: 5rem;
@@ -764,10 +853,11 @@
       justify-content: space-around;
       align-items: center;*/
       color: #555555 !important;
+      
   }
   .scoreBox .textBox {
       /*font-weight: 700;*/
-      font-size: 3.5rem !important;
+      font-size: 2.2rem !important;
   }
   
   .vs_{
@@ -779,28 +869,80 @@
   
   
   .HomeNameTitle{
+    font-size: .85rem;
     color: 333333 !important;
-      border-left: 5px solid #3a7ed3;
+    border-left: 5px solid #3a7ed3;
     padding: .5rem 0 .5rem .5rem;
     /*margin: .5rem 0 .5rem 0;*/
-      background-color: #ffffff;
-      text-align: left;
-      width: 50%;
-      float: left;
+    background-color: #ffffff;
+    text-align: left;
+    width: 50%;
+    float: left;
     background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+    line-height: 1rem;
+    height: 44px;
+    /*display: flex;*/
+    align-items: center;
   }
       
   .AwayNameTitle{
+    font-size: .85rem;
     color: 333333 !important;
     border-right: 5px solid #f3b140;
     padding: .5rem .5rem .5rem 0rem;
     /*margin: .5rem 0 .5rem 0;*/
-      background-color: #ffffff;
-      text-align: right;
-      width: 50%;
-      float: left;
+    background-color: #ffffff;
+    text-align: right;
+    width: 50%;
+    float: left;
     background-image: linear-gradient(to bottom, rgb(255 255 255) 0%, rgb(255 255 255) 50%, #f0f0f0 100%);
+    line-height: 1rem;
+    height: 44px;
+    /*display: flex;*/
+    align-items: center;
   }
+
+  
+  
+  .HomeTableDetail{
+    text-align: left;
+    background-color: #ffffff;
+    line-height: 1rem;
+    width: 50%;
+    float: left;
+  }
+    
+  .AwayTableDetail{
+    text-align: left;
+    background-color: #ffffff;
+    line-height: 1rem;
+    width: 50%;
+    float: left;
+  }
+
+  .HomeNameDetail{
+    font-size: .8rem;
+    color: #3a7ed3;
+    padding: 5px;
+    border-left: 1px solid #f5f5f5;
+    border-right: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .HomeNameDetail:last-child{
+  /*border-bottom: none;*/
+  }
+    
+  .AwayNameDetail{
+    font-size: .8rem;
+    color: #f3b140;
+    padding: 5px;
+    border-right: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .AwayNameDetail:last-child{
+  /*border-bottom: none;*/
+  }
+
       
   .LiveTimeHome{
     border-radius: 8px;
@@ -847,6 +989,7 @@
   
   .LineupFrame{
     /*padding: .2rem .5rem .2rem .5rem;*/
+    background: #f5f5f5;
   }
   
   
@@ -950,12 +1093,13 @@
     width: 2rem;
     height: 2rem;
     text-align: center;
+    margin-bottom: 5px;
   }
   
   
   .VSOptionTitle{
     color: #ffffff;
-    background-color: #0b998d;
+    background-color: #003e5d;
     margin: .2rem 0 0 0;
     padding: .3rem;
     font-size: 1rem;
@@ -980,11 +1124,10 @@
   }
   
   .VSLineup1st-col{
-    font-size: small !important;
+    font-size: .74rem;
     padding: .3rem 0rem .3rem 0rem;
     text-align: left;
     color: #333333;
-    font-size: .74rem !important;
     width: 100%;
     border-bottom: 1px solid #dddddd;
   }
@@ -1027,6 +1170,12 @@
   .clear{
     clear: both;
   }
+
+  
+  .Kfooter{
+    /*margin-top: 300px;*/
+  }
+
   /********** New K design end ***********/
   
   
@@ -1191,6 +1340,14 @@
   
   
   
+#footer {
+    text-align: center;
+    color: #ffffff;
+    background: #003e5d;
+    padding: 30px 5px 5px 5px;
+    height: 80px;
+    font-size: 0.8rem;
+}
   
   
   </style>

@@ -17,14 +17,8 @@ import BkLeagueView from '@/views/BkLeagueView.vue';
 import mBkLiveView from '@/views/m/mBkLiveView.vue';
 import BkLiveView from '@/views/BkLiveView.vue';
 
-import LineUp from '@/components/Soccer_LineUpView.vue';
-import mLineUp from '@/components/m/mSoccer_LineUpView.vue';
+import testView from '@/views/test2View.vue';
 
-import Overview from '@/components/Soccer_OverviewView.vue';
-import mOverview from '@/components/m/mSoccer_OverviewView.vue';
-
-import Technical from '@/components/Soccer_TechnicalStatisticsView.vue';
-import mTechnical from '@/components/m/mSoccer_TechnicalStatisticsView.vue';
 
 const routes = [
   // 電腦網頁
@@ -54,29 +48,19 @@ const routes = [
     component: store.isMobile ? mBasketballView : BasketballView,
   },
   {
-    path: '/league/:id',
+    path: '/league/:league_id',
     name: 'league',
     component: store.isMobile ? mLeagueView : LeagueView,
   },
   {
-    path: '/bk_league/:id',
+    path: '/bk_league/:bk_league_id',
     name: 'bk_league',
     component: store.isMobile ? mBkLeagueView : BkLeagueView,
   },
   {
-    path: '/LineUp',
-    name: 'LineUp',
-    component: store.isMobile ? mLineUp : LineUp,
-  },
-  {
-    path: '/Overview',
-    name: 'Overview',
-    component: store.isMobile ? mOverview : Overview,
-  },
-  {
-    path: '/Technical',
-    name: 'Technical',
-    component: store.isMobile ? mTechnical : Technical,
+    path: '/test',
+    name: 'test',
+    component: store.isMobile ? testView : testView,
   },
 
 ]
