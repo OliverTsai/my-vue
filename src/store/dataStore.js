@@ -10,7 +10,7 @@ export const useDataStore = defineStore('dataStore', {
         async fetchLeagueData() {
             if (!this.leagueData) {  // 檢查快取中是否已有數據
                 try {
-                    this.leagueData = await fetchPosts('https://befenscore.net/football/get-data')
+                    this.leagueData = await fetchPosts('https://befenscore.net/football/today-data/0')
                 } catch (error) {
                     console.error('Failed to fetch league data:', error)
                 }
@@ -19,7 +19,7 @@ export const useDataStore = defineStore('dataStore', {
         async bkLeagueData() {
             if (!this.bkleagueData) {  // 檢查快取中是否已有數據
                 try {
-                    this.bkleagueData = await fetchPosts('https://befenscore.net/bk/league-data')
+                    this.bkleagueData = await fetchPosts('https://befenscore.net/basketball/today-data')
                 } catch (error) {
                     console.error('Failed to fetch league data:', error)
                 }
